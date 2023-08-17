@@ -1,0 +1,13 @@
+*~
+/transient
+/elpa
+/custom.el
+/.cache
+/recentf
+/tree-sitter
+/projects
+/history
+/tutorial
+/.lsp*
+/eln-cache
+/local/
