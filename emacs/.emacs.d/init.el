@@ -13,12 +13,10 @@
 (add-hook 'after-init-hook (lambda ()
 			                       (setq gc-cons-threshold (* 2 1000 1000))))
 
-(dolist (dir '("local" "site-lisp" "lisp"))
+(dolist (dir '("site-lisp" "lisp"))
   (push (expand-file-name dir user-emacs-directory) load-path))
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
-
-(require 'local-variables)
 
 (require 'init-const)
 (require 'init-funcs)
