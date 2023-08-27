@@ -41,5 +41,6 @@
 (require 'init-prog)
 (require 'init-elixir)
 (require 'init-elm)
+(require 'init-haskell)
 
 (provide 'init)
