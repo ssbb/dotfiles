@@ -34,5 +34,6 @@ xkb_symbols "ssbb_colemak_dh_wide" {
     key <AB09> { [        comma,         less,         dead_cedilla,           asciitilde ] };
     key <AB10> { [       period,      greater,        dead_abovedot,           asciitilde ] };
     key <AB11> { [        slash,     question,         questiondown,           asciitilde ] };
+    key <RALT> { [ Alt_L ] };
 };
 
