@@ -86,7 +86,8 @@
 (setq custom-safe-themes t)
 
 ;; Use Iosevka font
-(add-to-list 'default-frame-alist '(font . "Iosevka-12"))
+(set-frame-font "Iosevka 12" nil t)
+(add-to-list 'default-frame-alist '(font . "Iosevka 12"))
 
 (provide 'init-ui)
 
