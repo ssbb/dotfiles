@@ -75,7 +75,7 @@
 (use-package posframe)
 
 (use-package doom-modeline
-  :config
+  :init
   (doom-modeline-mode 1))
 
 (use-package nerd-icons)
