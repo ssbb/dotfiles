@@ -1,0 +1,6 @@
+*~
+
+/emacs/.emacs.d/*
+!/emacs/.emacs.d/init.el
+!/emacs/.emacs.d/early-init.d
+!/emacs/.emacs.d/lisp

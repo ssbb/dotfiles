@@ -21,6 +21,9 @@
 (when (fboundp 'set-scroll-bar-mode)
   (set-scroll-bar-mode nil))
 
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+
 ;; Smooth scroll
 (pixel-scroll-precision-mode t)
 
@@ -59,7 +62,7 @@
           (bg-mode-line-inactive bg-dim)
           (border-mode-line-inactive bg-inactive)))
 
-  (load-theme 'modus-operandi t)
+  (load-theme 'modus-vivendi t)
   
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
@@ -72,7 +75,7 @@
 (use-package posframe)
 
 (use-package doom-modeline
-  :config
+  :init
   (doom-modeline-mode 1))
 
 (use-package nerd-icons)
@@ -83,7 +86,8 @@
 (setq custom-safe-themes t)
 
 ;; Use Iosevka font
-(add-to-list 'default-frame-alist '(font . "Iosevka-13"))
+(set-frame-font "Iosevka 12" nil t)
+(add-to-list 'default-frame-alist '(font . "Iosevka 12"))
 
 (provide 'init-ui)
 

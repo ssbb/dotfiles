@@ -41,5 +41,8 @@
 (require 'init-prog)
 (require 'init-elixir)
 (require 'init-elm)
+(require 'init-haskell)
+
+(require 'init-modus-exporter)
 
 (provide 'init)
