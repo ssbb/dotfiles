@@ -29,6 +29,23 @@
   :ensure nil
   :hook (prog-mode . subword-mode))
 
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+         ("C->"           . mc/mark-next-like-this)
+         ("C-<"           . mc/mark-previous-like-this)
+         ("C-c C-<"       . mc/mark-all-like-this)))
+
+
+
+(use-package simple
+  :ensure nil
+  :hook (((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
+  :init
+  (defun enable-trailing-whitespace ()
+    "Show trailing spaces and delete on saving."
+    (setq show-trailing-whitespace t)
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
+
 (provide 'init-edit)
 
 ;;; init-edit.el ends here
