@@ -41,17 +41,17 @@
 
   (setq corfu-popupinfo-delay 0.5
         corfu-popupinfo-max-height 32)
-  
+
   (global-corfu-mode)
   (corfu-popupinfo-mode)
   (corfu-history-mode))
 
 (use-package kind-icon
   :after corfu
-  
+
   :custom
   (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-  
+
   :init
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
@@ -137,17 +137,17 @@
   ;;        ("C-c m" . consult-man)
   ;;        ("C-c i" . consult-info)
   ;;        ([remap Info-search] . consult-info)
-	 
+
   ;;        ;; C-x bindings in `ctl-x-map'
   ;;        ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
   ;;        ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
   ;;        ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-	 
+
   ;;        ;; Custom M-# bindings for fast register access
   ;;        ("M-#" . consult-register-load)
   ;;        ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
   ;;        ("C-M-#" . consult-register)
-	 
+
   ;;        ;; M-g bindings in `goto-map'
   ;;        ("M-g e" . consult-compile-error)
   ;;        ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
@@ -156,7 +156,7 @@
   ;;        ("M-g k" . consult-global-mark)
   ;;        ("M-g i" . consult-imenu)
   ;;        ("M-g I" . consult-imenu-multi)
-	 
+
   ;;        ;; M-s bindings in `search-map'
   ;;        ("M-s d" . consult-find)
   ;;        ("M-s D" . consult-locate)
@@ -167,7 +167,7 @@
   ;;        ("M-s L" . consult-line-multi)
   ;;        ("M-s k" . consult-keep-lines)
   ;;        ("M-s u" . consult-focus-lines)
-	 
+
   ;;        ;; Isearch integration
   ;;        ("M-s e" . consult-isearch-history)
   ;;        :map isearch-mode-map
@@ -175,7 +175,7 @@
   ;;        ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
   ;;        ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
   ;;        ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-	 
+
   ;;        ;; Minibuffer history
   ;;        :map minibuffer-local-map
   ;;        ("M-s" . consult-history)                 ;; orig. next-matching-history-element
