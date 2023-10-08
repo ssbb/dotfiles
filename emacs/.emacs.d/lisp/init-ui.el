@@ -40,30 +40,43 @@
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts nil)
 
-  (setq modus-themes-common-palette-overrides
-        '((fringe unspecified)
-          ;; Make line numbers less intense and add a shade of cyan
-          ;; for the current line number.
-          (fg-line-number-inactive "gray50")
-          (fg-line-number-active cyan-cooler)
-          (bg-line-number-inactive unspecified)
-          (bg-line-number-active unspecified)
-          
-          ;; Make the current line of `hl-line-mode' a fine shade of
-          ;; gray (though also see my `lin' package).
-          (bg-hl-line bg-dim)
+  ;; (setq modus-themes-common-palette-overrides
+  ;;       '((fringe unspecified)
+  ;;         ;; Make line numbers less intense and add a shade of cyan
+  ;;         ;; for the current line number.
+  ;;         (fg-line-number-inactive "gray50")
+  ;;         (fg-line-number-active cyan-cooler)
+  ;;         (bg-line-number-inactive unspecified)
+  ;;         (bg-line-number-active unspecified)
 
-          ;; Make the active mode line a fine shade of lavender
-          ;; (purple) and tone down the gray of the inactive mode
-          ;; lines.
-          (bg-mode-line-active bg-cyan-nuanced)
-          (border-mode-line-active bg-cyan-nuanced)
+  ;;         ;; Make the current line of `hl-line-mode' a fine shade of
+  ;;         ;; gray (though also see my `lin' package).
+  ;;         (bg-hl-line bg-dim)
 
-          (bg-mode-line-inactive bg-dim)
-          (border-mode-line-inactive bg-inactive)))
+  ;;         ;; Make the active mode line a fine shade of lavender
+  ;;         ;; (purple) and tone down the gray of the inactive mode
+  ;;         ;; lines.
+  ;;         (bg-mode-line-active bg-cyan-nuanced)
+  ;;         (border-mode-line-active bg-cyan-nuanced)
+
+  ;;         (bg-mode-line-inactive bg-dim)
+  ;;         (border-mode-line-inactive bg-inactive)))
+
+  ;; (setq modus-themes-common-palette-overrides
+  ;;     '((builtin magenta-faint)
+  ;;       (comment yellow-faint)
+  ;;       (constant red-cooler)
+  ;;       (fnname yellow-warmer)
+  ;;       (keyword olive)
+  ;;       (preprocessor green-warmer)
+  ;;       (docstring cyan-faint)
+  ;;       (string yellow-warmer)
+  ;;       (type slate)
+  ;;       (variable yellow-warmer)))
+
 
   (load-theme 'modus-vivendi t)
-  
+
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 (use-package doom-themes)
@@ -86,8 +99,8 @@
 (setq custom-safe-themes t)
 
 ;; Use Iosevka font
-(set-frame-font "Iosevka 12" nil t)
-(add-to-list 'default-frame-alist '(font . "Iosevka 12"))
+(set-frame-font "Iosevka 13" nil t)
+(add-to-list 'default-frame-alist '(font . "Iosevka 13"))
 
 (provide 'init-ui)
 

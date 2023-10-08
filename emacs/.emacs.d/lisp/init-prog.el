@@ -4,7 +4,7 @@
 (use-package treesit-auto
   :init
   (setq treesit-auto-install 'prompt)
-  
+
   :config
   (global-treesit-auto-mode))
 
@@ -43,7 +43,7 @@
       (apply orig-fn old-buffer new-buffer rest)))
 
   (advice-add 'apheleia--create-rcs-patch :around #'ssbb/fix-apheleia-accidental-deletion))
-  
+
 ;; (use-package eldoc-box
 ;;   :hook ((emacs-lisp-mode . eldoc-box-hover-at-point-mode)
 ;;          (eglot-managed-mode . eldoc-box-hover-at-point-mode)))
@@ -56,7 +56,7 @@
 ;;   :vc (:fetcher github :repo "mickeynp/combobulate")
 ;;   :preface
 ;;   (setq combobulate-key-prefix "C-c o")
-  
+
 ;;   :hook ((python-ts-mode . combobulate-mode)
 ;;          (js-ts-mode . combobulate-mode)
 ;;          (css-ts-mode . combobulate-mode)
@@ -72,7 +72,7 @@
   :after (consult flycheck)
   :defer nil
   :bind (("C-c e" . consult-flycheck)))
-  
+
 (provide 'init-prog)
 
 ;;; init-prog.el ends here

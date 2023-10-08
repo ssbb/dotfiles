@@ -4,6 +4,10 @@
 (setq user-full-name ssbb/full-name
       user-mail-address ssbb/email)
 
+(when (eq system-type 'darwin)
+  (setq ns-right-command-modifier 'control)
+)
+
 ;; Garbage collector hack
 (use-package gcmh
   :hook (emacs-startup . gcmh-mode))
@@ -52,6 +56,9 @@
 ;; Global keybindings
 (global-set-key (kbd "M-<up>") 'ssbb/move-line-up)
 (global-set-key (kbd "M-<down>") 'ssbb/move-line-down)
+
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
 
 (provide 'init-base)
 

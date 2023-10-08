@@ -25,6 +25,12 @@
   ;;     (auth-source-pass-get 'secret "openai-key")))))
   )
 
+(use-package dts-mode
+  :mode ("\\.keymap\\'" "\\.dtsi\\'"))
+
+(use-package kconfig-mode
+  :mode ("\\.defconfig\\'" "Kconfig" "Kconfig.board"))
+
 (provide 'init-utils)
 
 ;;; init-utils.el ends here

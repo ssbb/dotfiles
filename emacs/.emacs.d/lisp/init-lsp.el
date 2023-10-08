@@ -12,7 +12,7 @@
         lsp-enable-file-watchers nil
         lsp-lens-enable nil
         lsp-headerline-breadcrumb-enable nil)
-  
+
   (defun ssbb/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless)))
@@ -31,7 +31,7 @@
 
          (elixir-ts-mode . lsp)
          (elixir-ts-mode . ssbb/lsp-format-setup)
-         
+
          (heex-ts-mode . lsp)
          (heex-ts-mode . ssbb/lsp-format-setup)
 
@@ -56,7 +56,7 @@
   :config
   (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)
   (add-to-list 'lsp-tailwindcss-major-modes 'heex-ts-mode))
-  
+
 (provide 'init-lsp)
 
 ;;; init-lsp.el ends here
