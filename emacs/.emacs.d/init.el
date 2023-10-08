@@ -42,7 +42,9 @@
 (require 'init-elixir)
 (require 'init-elm)
 (require 'init-haskell)
-
 (require 'init-modus-exporter)
+
+(require 'init-wm)
+(require 'init-term)
 
 (provide 'init)

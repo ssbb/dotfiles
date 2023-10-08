@@ -40,15 +40,6 @@
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts nil)
 
-  ;; (setq modus-themes-common-palette-overrides
-  ;;       '((fringe unspecified)
-  ;;         ;; Make line numbers less intense and add a shade of cyan
-  ;;         ;; for the current line number.
-  ;;         (fg-line-number-inactive "gray50")
-  ;;         (fg-line-number-active cyan-cooler)
-  ;;         (bg-line-number-inactive unspecified)
-  ;;         (bg-line-number-active unspecified)
-
   ;;         ;; Make the current line of `hl-line-mode' a fine shade of
   ;;         ;; gray (though also see my `lin' package).
   ;;         (bg-hl-line bg-dim)
