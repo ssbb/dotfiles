@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package exwm
+  :if (memq window-system '(x))
   :config
   (require 'exwm)
   (require 'exwm-config)

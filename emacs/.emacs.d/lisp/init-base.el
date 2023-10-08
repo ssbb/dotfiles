@@ -4,9 +4,10 @@
 (setq user-full-name ssbb/full-name
       user-mail-address ssbb/email)
 
-(when (eq system-type 'darwin)
-  (setq ns-right-command-modifier 'control)
-)
+(define-key key-translation-map (kbd "s-z") (kbd "C-z"))
+(define-key key-translation-map (kbd "s-x") (kbd "C-x"))
+(define-key key-translation-map (kbd "s-c") (kbd "C-c"))
+(define-key key-translation-map (kbd "s-v") (kbd "C-v"))
 
 ;; Garbage collector hack
 (use-package gcmh
