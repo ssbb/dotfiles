@@ -82,14 +82,7 @@
 	       ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
 	       ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
          ([remap project-switch-to-buffer] . consult-project-buffer)
-                  ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-)
+         )
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.

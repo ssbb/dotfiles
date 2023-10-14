@@ -2,7 +2,8 @@
 
 ;;; Code:
 
-(use-package magit)
+(use-package magit
+  :bind ("C-c v" . magit-status))
 
 ;; (use-package magit-todos
 ;;   :config
