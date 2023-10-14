@@ -64,6 +64,14 @@
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
+(use-package helpful
+  :bind
+  (("C-c h f" . helpful-callable)
+   ("C-c h v" . helpful-variable)
+   ("C-c h x" . helpful-command)
+   ("C-c h F" . helpful-function)))
+
+
 (provide 'init-base)
 
 ;;; init-base.el ends here

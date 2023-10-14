@@ -1,9 +1,10 @@
 ;;; init-meow.el -*- lexical-binding: t -*-
 ;;; Code:
+
 (use-package meow
   :config
-  ;; round/square/curly/angle things maps to my keyboard SYM layer
   (setq meow-char-thing-table
+        ;; round/square/curly/angle things maps to my keyboard SYM layer
         '((?t . round)
           (?g . square)
           (?s . curly)
@@ -14,15 +15,19 @@
           (?l . line)
           (?b . buffer)))
 
-  (setq
-   meow--kbd-backward-line  "<up>"
-   meow--kbd-forward-line   "<down>"
-   meow--kbd-backward-char  "<left>"
-   meow--kbd-forward-char   "<right>")
+  (setq meow--kbd-backward-line  "<up>"
+        meow--kbd-forward-line   "<down>"
+        meow--kbd-backward-char  "<left>"
+        meow--kbd-forward-char  "<right>")
+
+  (setq meow-visit-sanitize-completion t
+        meow-keypad-self-insert-undefined nil
+        meow-keypad-start-keys '((?c . ?c) (?x . ?x)))
 
   (meow-define-keys 'leader
-    (cons "h" help-map)
-    (cons "p" project-prefix-map))
+    (cons "p" project-prefix-map)
+    '("b" . switch-to-buffer)
+    '("o" . ace-window))
 
   (meow-define-keys 'motion
     '("n" . meow-left)
@@ -45,10 +50,12 @@
 
     '("a" . meow-mark-word)
     '("A" . meow-mark-symbol)
-    '("b" . meow-block)
-    '("B" . meow-to-block)
+    '("b" . er/expand-region)
+    '("B" . (lambda ()
+              (interactive)
+              (er/expand-region -1)))
     '("c" . meow-save)
-    '("d" . meow-kill)
+    '("d" . meow-indent)
     '("e" . meow-next)
     '("E" . meow-next-expand)
     '("f" . meow-search)
@@ -59,7 +66,7 @@
     '("i" . meow-right)
     '("I" . meow-right-expand)
     '("j" . meow-join)
-    ;; '("k" . meow-)
+    '("k" . meow-kill-whole-line)
     '("l" . meow-back-word)
     '("L" . meow-back-symbol)
     '("m" . meow-line)
@@ -67,7 +74,7 @@
     '("n" . meow-left)
     '("N" . meow-left-expand)
     '("o" . meow-delete)
-    '("p" . meow-yank)
+    '("p" . meow-till)
     '("P" . meow-yank-pop)
     '("q" . meow-quit)
     '("r" . meow-insert)
@@ -77,13 +84,13 @@
     '("T" . meow-open-below)
     '("u" . meow-prev)
     '("U" . meow-prev-expand)
-    ;; '("v" . meow-)
-    ;; '("w" . meow-)
-    ;; '("W" . meow-)
-    '("x" . meow-till)
+    '("v" . meow-yank)
+    '("V" . meow-yank-pop)
+    '("w" . meow-find)
+    '("x" . meow-kill)
     '("y" . meow-next-word)
     '("Y" . meow-next-symbol)
-    '("z" . meow-find)
+    '("z" . meow-replace)
 
     '("'" . meow-reverse)
     '("/" . meow-visit)

@@ -31,7 +31,13 @@
 (use-package sudo-edit)
 
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/expand-region)
+  :config
+  (setq er/try-expand-list
+        '(er/mark-inside-quotes
+          er/mark-outside-quotes
+          er/mark-inside-pairs
+          er/mark-outside-pairs)))
 
 (use-package subword
   :ensure nil
