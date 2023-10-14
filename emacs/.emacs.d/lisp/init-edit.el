@@ -2,7 +2,15 @@
 ;;; Code:
 
 (use-package vundo
-  :bind ("C-x u" . vundo)
+  :bind (("C-x u" . vundo)
+         :map vundo-mode-map
+         ("n" . vundo-backward)
+         ("i" . vundo-forward)
+         ("u" . vundo-previous)
+         ("e" . vundo-next)
+         ("q" . vundo-quit)
+         ("SPC" . vundo-confirm))
+
   :config (setq vundo-glyph-alist vundo-unicode-symbols))
 
 (use-package evil-nerd-commenter

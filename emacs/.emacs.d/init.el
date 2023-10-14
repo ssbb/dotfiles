@@ -32,7 +32,7 @@
 (require 'init-window)
 (require 'init-dashboard)
 (require 'init-utils)
-
+(require 'init-meow)
 (require 'init-markdown)
 
 ;; Programming
@@ -42,6 +42,7 @@
 (require 'init-elixir)
 (require 'init-elm)
 (require 'init-haskell)
+(require 'init-cad)
 (require 'init-modus-exporter)
 
 (require 'init-wm)
