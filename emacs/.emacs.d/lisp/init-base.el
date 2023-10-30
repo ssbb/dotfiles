@@ -69,8 +69,8 @@
   (("C-c h f" . helpful-callable)
    ("C-c h v" . helpful-variable)
    ("C-c h x" . helpful-command)
-   ("C-c h F" . helpful-function)))
-
+   ("C-c h F" . helpful-function)
+   ("C-c h k" . helpful-key)))
 
 (provide 'init-base)
 

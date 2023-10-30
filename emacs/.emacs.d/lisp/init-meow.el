@@ -22,7 +22,8 @@
 
   (setq meow-visit-sanitize-completion t
         meow-keypad-self-insert-undefined nil
-        meow-keypad-start-keys '((?c . ?c) (?x . ?x)))
+        meow-keypad-start-keys '((?c . ?c) (?x . ?x))
+        meow-keypad-leader-dispatch "C-c")
 
   (meow-define-keys 'leader
     (cons "p" project-prefix-map)
@@ -104,6 +105,8 @@
 
     '("<escape>" . ignore)
     )
+
+  ;; (add-to-list 'meow-mode-state-list '(git-commit-mode . insert))
 
   (defun ssbb/meow-hide-cursor ()
     (progn

@@ -33,6 +33,7 @@
 (require 'init-dashboard)
 (require 'init-utils)
 (require 'init-meow)
+(require 'init-org)
 (require 'init-markdown)
 
 ;; Programming

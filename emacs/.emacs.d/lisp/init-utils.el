@@ -15,6 +15,13 @@
   :config
   (asdf-enable))
 
+(use-package rg)
+
+(use-package wgrep
+  :config
+  (setq wgrep-auto-save-buffer t))
+
+
 (use-package disk-usage)
 (use-package memory-usage)
 

@@ -45,6 +45,15 @@
   )
 (use-package switch-window)
 
+;; (use-package popper
+;;   :ensure t
+;;   :hook ((emacs-startup . popper-mode)
+;;          (popper-mode . popper-echo-mode))
+
+;;   :init
+;;   (setq popper-reference-buffers
+;;         '("\\*Embark \\(Collect\\|Export\\):.*\\*")))
+
 (provide 'init-window)
 
 ;;; init-window.el ends here

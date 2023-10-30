@@ -4,6 +4,10 @@
 ;; Increase idle delay
 (setq idle-update-delay 1.0)
 
+
+(setq split-width-threshold 160
+      split-height-threshold nil)
+
 ;; Increase default frame size
 (add-to-list 'initial-frame-alist '(height . 48))
 (add-to-list 'initial-frame-alist '(width . 128))

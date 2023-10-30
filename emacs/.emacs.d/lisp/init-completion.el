@@ -227,10 +227,6 @@
   :bind (([remap project-find-file] . consult-project-extra-find)
          ("C-x p o" . consult-project-extra-find-other-window)))
 
-(use-package wgrep
-  :config
-  (setq wgrep-auto-save-buffer t))
-
 (provide 'init-completion)
 
 ;;; init-completion.el ends here
