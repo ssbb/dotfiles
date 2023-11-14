@@ -57,6 +57,10 @@
   (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)
   (add-to-list 'lsp-tailwindcss-major-modes 'heex-ts-mode))
 
+(use-package lsp-treemacs
+  :config
+  (lsp-treemacs-sync-mode 1))
+
 (provide 'init-lsp)
 
 ;;; init-lsp.el ends here

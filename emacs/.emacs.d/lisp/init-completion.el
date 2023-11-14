@@ -46,14 +46,9 @@
   (corfu-popupinfo-mode)
   (corfu-history-mode))
 
-(use-package kind-icon
+(use-package nerd-icons-corfu
   :after corfu
-
-  :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-
-  :init
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (use-package cape
   :init

@@ -1,5 +1,4 @@
 ;;; init-ui.el -*- lexical-binding: t -*-
-;;; Code:
 
 ;; Increase idle delay
 (setq idle-update-delay 1.0)
@@ -70,7 +69,7 @@
   ;;       (variable yellow-warmer)))
 
 
-  (load-theme 'modus-vivendi t)
+  (load-theme 'modus-operandi t)
 
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 

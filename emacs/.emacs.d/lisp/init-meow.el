@@ -11,7 +11,7 @@
           (?a . angle)
 
           (?r . string)
-          (?p . paragraph)
+
           (?l . line)
           (?b . buffer)))
 
@@ -94,7 +94,8 @@
     '("z" . meow-replace)
 
     '("'" . meow-reverse)
-    '("/" . meow-visit)
+    '("/" . consult-line)
+    '("?" . meow-visit)
 
     '(";" . evilnc-comment-or-uncomment-lines)
 

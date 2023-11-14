@@ -26,6 +26,7 @@
 
 (require 'init-ui)
 (require 'init-dired)
+(require 'init-treemacs)
 (require 'init-completion)
 (require 'init-edit)
 (require 'init-highlight)
