@@ -39,45 +39,49 @@
   (setq modus-themes-italic-constructs t
         modus-themes-mixed-fonts t
         modus-themes-variable-pitch-ui nil
+        modus-themes-italic-constructs t
         modus-themes-bold-constructs t
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts nil)
 
-  ;;         ;; Make the current line of `hl-line-mode' a fine shade of
-  ;;         ;; gray (though also see my `lin' package).
-  ;;         (bg-hl-line bg-dim)
+  (setq modus-themes-common-palette-overrides
+        '((fringe unspecified)
 
-  ;;         ;; Make the active mode line a fine shade of lavender
-  ;;         ;; (purple) and tone down the gray of the inactive mode
-  ;;         ;; lines.
-  ;;         (bg-mode-line-active bg-cyan-nuanced)
-  ;;         (border-mode-line-active bg-cyan-nuanced)
+          ;; Make line numbers less intense and add a shade of cyan
+          ;; for the current line number.
+          (fg-line-number-inactive "gray50")
+          (fg-line-number-active red-warmer)
+          (bg-line-number-inactive unspecified)
+          (bg-line-number-active unspecified)
 
-  ;;         (bg-mode-line-inactive bg-dim)
-  ;;         (border-mode-line-inactive bg-inactive)))
+          ;; Make the current line of `hl-line-mode' a fine shade of
+          ;; gray (though also see my `lin' package).
+          (bg-hl-line bg-dim)
 
-  ;; (setq modus-themes-common-palette-overrides
-  ;;     '((builtin magenta-faint)
-  ;;       (comment yellow-faint)
-  ;;       (constant red-cooler)
-  ;;       (fnname yellow-warmer)
-  ;;       (keyword olive)
-  ;;       (preprocessor green-warmer)
-  ;;       (docstring cyan-faint)
-  ;;       (string yellow-warmer)
-  ;;       (type slate)
-  ;;       (variable yellow-warmer)))
+          ;; Tomorrow Theme
+          (builtin blue-faint)
+          (comment fg-dim)
+          (constant red-faint)
+          (fnname blue-faint)
+          (keyword magenta-faint)
+          (preprocessor magenta-faint)
+          (docstring fg-dim)
+          (string olive)
+          (type yellow-warmer)
+          (variable red-warmer)))
 
-
-  (load-theme 'modus-operandi t)
-
+  (load-theme 'modus-vivendi)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
-(use-package doom-themes)
-(use-package ef-themes)
-(use-package color-theme-sanityinc-tomorrow)
-(use-package gruvbox-theme)
-(use-package darktooth-theme)
+;; (use-package doom-themes)
+;; (use-package ef-themes)
+
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-night))
+
+;; (use-package gruvbox-theme)
+;; (use-package darktooth-theme)
 
 (use-package posframe)
 

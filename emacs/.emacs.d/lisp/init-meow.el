@@ -118,6 +118,17 @@
                                  (eq major-mode 'vundo-mode)))
                  . ssbb/meow-hide-cursor))
 
+  (with-eval-after-load 'meow
+  (push '(vterm-mode . insert) meow-mode-state-list)
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (add-hook 'meow-insert-enter-hook
+                        (lambda () (vterm-copy-mode -1))
+                        nil t)
+              (add-hook 'meow-insert-exit-hook
+                        (lambda () (vterm-copy-mode 1))
+                        nil t))))
+
   (require 'meow)
   (meow-global-mode 1))
 
