@@ -1,4 +1,4 @@
-;;; init.el -*- lexical-binding: t no-byte-compile: t -*-
+lisp/;;; init.el -*- lexical-binding: t no-byte-compile: t -*-
 
 ;;; Code:
 

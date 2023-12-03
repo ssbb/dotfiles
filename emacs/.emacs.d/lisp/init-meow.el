@@ -4,14 +4,12 @@
 (use-package meow
   :config
   (setq meow-char-thing-table
-        ;; round/square/curly/angle things maps to my keyboard SYM layer
+        ;; rofnd/square/curly/angle things maps to my keyboard SYM layer
         '((?t . round)
           (?g . square)
           (?s . curly)
           (?a . angle)
-
           (?r . string)
-
           (?l . line)
           (?b . buffer)))
 

@@ -3,6 +3,9 @@
 ;; Increase idle delay
 (setq idle-update-delay 1.0)
 
+(when (eq system-type 'darwin)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 (setq split-width-threshold 160
       split-height-threshold nil)
@@ -42,7 +45,7 @@
         modus-themes-italic-constructs t
         modus-themes-bold-constructs t
         modus-themes-completions '((t . (extrabold)))
-        modus-themes-prompts nil)
+        modus-themes-prompts '(bold))
 
   (setq modus-themes-common-palette-overrides
         '((fringe unspecified)
@@ -54,15 +57,23 @@
           (bg-line-number-inactive unspecified)
           (bg-line-number-active unspecified)
 
+          (bg-mode-line-active bg-dim)
+          (fg-mode-line-active fg-dim)
+
+          (bg-mode-line-inactive bg-inactive)
+          (fg-mode-line-inactive fg-inactive)
+
+          (border-mode-line-active bg-dim)
+          (border-mode-line-inactive bg-dim)
+
           ;; Make the current line of `hl-line-mode' a fine shade of
           ;; gray (though also see my `lin' package).
-          (bg-hl-line bg-dim)
+          (bg-hl-line bg-dim)))
 
-          ;; Tomorrow Theme
-          (builtin blue-faint)
-          (comment fg-dim)
+  (setq modus-vivendi-palette-overrides
+        '((comment fg-dim)
           (constant red-faint)
-          (fnname blue-faint)
+          (fnname slate)
           (keyword magenta-faint)
           (preprocessor magenta-faint)
           (docstring fg-dim)
@@ -70,7 +81,7 @@
           (type yellow-warmer)
           (variable red-warmer)))
 
-  (load-theme 'modus-vivendi)
+  (load-theme 'modus-vivendi t)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 ;; (use-package doom-themes)
@@ -86,6 +97,9 @@
 (use-package posframe)
 
 (use-package doom-modeline
+  :config
+  (setq doom-modeline-height 30)
+
   :init
   (doom-modeline-mode 1))
 
@@ -99,6 +113,35 @@
 ;; Use Iosevka font
 (set-frame-font "Iosevka 13" nil t)
 (add-to-list 'default-frame-alist '(font . "Iosevka 13"))
+
+(use-package nyan-mode
+  :config
+  (nyan-mode))
+
+(use-package ligature
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 (provide 'init-ui)
 
