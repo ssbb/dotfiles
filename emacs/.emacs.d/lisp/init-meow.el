@@ -7,8 +7,8 @@
         ;; rofnd/square/curly/angle things maps to my keyboard SYM layer
         '((?t . round)
           (?g . square)
-          (?s . curly)
-          (?a . angle)
+          (?r . curly)
+          (?, . angle)
           (?r . string)
           (?l . line)
           (?b . buffer)))
@@ -96,6 +96,9 @@
     '("?" . meow-visit)
 
     '(";" . evilnc-comment-or-uncomment-lines)
+
+    '("[" . indent-rigidly-left-to-tab-stop)
+    '("]" . indent-rigidly-right-to-tab-stop)
 
     '("," . meow-beginning-of-thing)
     '("." . meow-end-of-thing)

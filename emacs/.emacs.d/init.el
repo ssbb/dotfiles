@@ -10,7 +10,7 @@
                      gcs-done)))
 
 (setq gc-cons-threshold most-positive-fixnum)
-(add-hook 'after-init-hook (lambda ()
+ (add-hook 'after-init-hook (lambda ()
 			                       (setq gc-cons-threshold (* 2 1000 1000))))
 
 (dolist (dir '("site-lisp" "lisp"))
