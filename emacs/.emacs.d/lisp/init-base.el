@@ -43,17 +43,17 @@
 
 ;; History
 (use-package savehist
-  :ensure nil
+  :straight nil
   :config
   (savehist-mode))
 
 (use-package recentf
-  :ensure nil
+  :straight nil
   :config
   (recentf-mode))
 
 (use-package simple
-  :ensure nil
+  :straight nil
   :config
   (setq column-number-mode t))
 

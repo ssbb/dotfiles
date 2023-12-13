@@ -49,7 +49,7 @@
 ;;          (eglot-managed-mode . eldoc-box-hover-at-point-mode)))
 
 (use-package indent-bars
-  :vc (:fetcher github :repo "jdtsmith/indent-bars")
+  :straight (:host github :repo "jdtsmith/indent-bars")
   :hook (prog-mode . indent-bars-mode))
 
 ;; (use-package combobulate

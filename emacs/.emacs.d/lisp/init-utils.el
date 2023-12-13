@@ -11,7 +11,7 @@
 (use-package ag)
 
 (use-package asdf
-  :vc (:fetcher github :repo tabfugnic/asdf.el)
+  :straight (:host github :repo "tabfugnic/asdf.el")
   :config
   (asdf-enable))
 

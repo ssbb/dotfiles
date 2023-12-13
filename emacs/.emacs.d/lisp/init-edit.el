@@ -17,11 +17,7 @@
   :bind ("M-;" . evilnc-comment-or-uncomment-lines))
 
 ;; Display line numbers in prog modes
-(setq-default display-line-numbers-width 3)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
-;; Make minified files viewable
-(use-package so-long
+ (use-package so-long
   :config
   (global-so-long-mode 1))
 
@@ -40,7 +36,7 @@
           er/mark-outside-pairs)))
 
 (use-package subword
-  :ensure nil
+  :straight nil
   :hook (prog-mode . subword-mode))
 
 (use-package multiple-cursors
@@ -52,7 +48,7 @@
 
 
 (use-package simple
-  :ensure nil
+  :straight nil
   :hook (((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
   :init
   (defun enable-trailing-whitespace ()
@@ -62,7 +58,7 @@
 
 
 (use-package elec-pair
-  :ensure nil
+  :straight nil
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 

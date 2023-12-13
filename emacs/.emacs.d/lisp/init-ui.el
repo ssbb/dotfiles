@@ -33,6 +33,13 @@
 ;; Smooth scroll
 (pixel-scroll-precision-mode t)
 
+(use-package display-line-numbers
+  :straight nil
+  :hook ((prog-mode html-mode yaml-mode conf-mode) . display-line-numbers-mode)
+  :init
+  (setq-default display-line-numbers-width 3))
+
+
 ;; Make certain buffers grossly incandescent
 (use-package solaire-mode
   :hook (after-load-theme . solaire-global-mode))
@@ -43,7 +50,7 @@
         modus-themes-mixed-fonts t
         modus-themes-variable-pitch-ui nil
         modus-themes-italic-constructs t
-        modus-themes-bold-constructs t
+        modus-themes-bold-constructs nil
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts '(bold))
 
@@ -112,6 +119,7 @@
 
 ;; Use Iosevka font
 (set-frame-font "Iosevka 13" nil t)
+;; (set-frame-font "Iosevka Comfy 13" nil t)
 (add-to-list 'default-frame-alist '(font . "Iosevka 13"))
 
 (use-package nyan-mode
