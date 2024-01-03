@@ -33,7 +33,7 @@
 (require 'init-window)
 (require 'init-dashboard)
 (require 'init-utils)
-(require 'init-meow)
+;; (require 'init-meow)
 (require 'init-org)
 (require 'init-markdown)
 
@@ -46,7 +46,7 @@
 (require 'init-haskell)
 (require 'init-cad)
 (require 'init-modus-exporter)
-
+;; (require 'init-meow)
 (require 'init-wm)
 (require 'init-term)
 

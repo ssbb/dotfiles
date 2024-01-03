@@ -49,9 +49,11 @@
 (advice-add #'lsp--init-if-visible :around #'my-lsp--init-if-visible)
 
 (use-package lsp-tailwindcss
-  :after lsp-mode
+  :straight (:host github :repo "merrickluo/lsp-tailwindcss")
+  ;; :after lsp-mode
   :init
   (setq lsp-tailwindcss-add-on-mode t)
+        ;; lsp-tailwindcss-skip-config-check t)
 
   :config
   (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)

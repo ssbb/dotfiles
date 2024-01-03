@@ -16,8 +16,7 @@
   (aw-mode-line-face ((t (:inherit mode-line-emphasis :bold t))))
 
   :config
-  (setq aw-dispatch-always t
-        aw-keys '(?a ?r ?s ?t ?g ?h ?j ?k ?l))
+  (setq aw-keys '(?a ?r ?s ?t ?g ?h ?j ?k ?l))
 
   (ace-window-display-mode)
   (ace-window-posframe-mode)

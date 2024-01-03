@@ -91,6 +91,10 @@
   (load-theme 'modus-vivendi t)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
+(use-package doom-themes)
+(use-package gruvbox-theme)
+(use-package color-theme-sanityinc-tomorrow)
+
 ;; (use-package doom-themes)
 ;; (use-package ef-themes)
 

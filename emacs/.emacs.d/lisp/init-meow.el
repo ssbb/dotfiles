@@ -5,13 +5,13 @@
   :config
   (setq meow-char-thing-table
         ;; rofnd/square/curly/angle things maps to my keyboard SYM layer
-        '((?t . round)
-          (?g . square)
-          (?r . curly)
-          (?, . angle)
-          (?r . string)
+        '((?p . round)
+          (?b . square)
+          (?f . curly)
+          (?g . angle)
+          (?s . string)
           (?l . line)
-          (?b . buffer)))
+          (?/ . buffer)))
 
   (setq meow--kbd-backward-line  "<up>"
         meow--kbd-forward-line   "<down>"
