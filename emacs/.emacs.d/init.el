@@ -47,7 +47,7 @@
 (require 'init-cad)
 (require 'init-modus-exporter)
 ;; (require 'init-meow)
-(require 'init-wm)
+;; (require 'init-wm)
 (require 'init-term)
 
 (provide 'init)
