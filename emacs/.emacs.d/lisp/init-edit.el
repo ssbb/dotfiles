@@ -1,4 +1,7 @@
-;;; init-edit.el -*- lexical-binding: t -*-
+;;; init-edit.el --- the -*- lexical-binding: t -*-
+
+;;; Commentary:
+
 ;;; Code:
 
 (use-package vundo
@@ -16,6 +19,9 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
+
 (use-package sudo-edit)
 
 (use-package expand-region
@@ -32,12 +38,10 @@
   :hook (prog-mode . subword-mode))
 
 (use-package multiple-cursors
-  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
-         ("C->"           . mc/mark-next-like-this)
-         ("C-<"           . mc/mark-previous-like-this)
-         ("C-c C-<"       . mc/mark-all-like-this)))
-
-
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->"         . mc/mark-next-like-this)
+         ("C-<"         . mc/mark-previous-like-this)
+         ("C-c C-<"     . mc/mark-all-like-this)))
 
 (use-package simple
   :straight nil

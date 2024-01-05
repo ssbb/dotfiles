@@ -21,7 +21,8 @@
   (setq meow-visit-sanitize-completion t
         meow-keypad-self-insert-undefined nil
         meow-keypad-start-keys '((?c . ?c) (?x . ?x))
-        meow-keypad-leader-dispatch "C-c")
+        meow-keypad-leader-dispatch "C-c"
+        meow-use-clipboard t)
 
   (meow-define-keys 'leader
     (cons "p" project-prefix-map)
@@ -54,7 +55,7 @@
               (interactive)
               (er/expand-region -1)))
     '("c" . meow-save)
-    '("d" . meow-indent)
+    ;; '("d" . meow-indent)
     '("e" . meow-next)
     '("E" . meow-next-expand)
     '("f" . meow-search)
@@ -76,6 +77,7 @@
     '("p" . meow-till)
     '("P" . meow-yank-pop)
     '("q" . meow-quit)
+    '("Q" . kill-current-buffer)
     '("r" . meow-insert)
     '("R" . meow-open-above)
     '("s" . meow-change)
@@ -90,6 +92,10 @@
     '("y" . meow-next-word)
     '("Y" . meow-next-symbol)
     '("z" . meow-replace)
+    ;; '("Z" . meow-swap-grab)
+
+    ;; '("ds" . meow-swap-grab)
+    ;; '("dd" . meow-sync-grab)
 
     '("'" . meow-reverse)
     '("/" . consult-line)

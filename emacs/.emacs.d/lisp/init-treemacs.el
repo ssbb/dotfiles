@@ -2,7 +2,7 @@
 ;;; Code:
 
 (use-package treemacs
-  :bind (("C-x t t" . treemacs))
+  :bind (("C-c /" . treemacs))
   :config
   (setq treemacs-collapse-dirs (if treemacs-python-executable 3 0)
         treemacs-missing-project-action 'remove

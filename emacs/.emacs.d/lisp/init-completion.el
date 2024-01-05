@@ -120,6 +120,8 @@
    ;; :preview-key "M-."
    :preview-key '(:debounce 0.4 any))
 
+  (setq consult-ripgrep-args "rg --hidden --glob=!.git/* --null --line-buffered --color=never --max-columns=1000 --path-separator /   --smart-case --no-heading --with-filename --line-number --search-zip")
+
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; "C-+"

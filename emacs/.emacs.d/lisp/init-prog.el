@@ -1,6 +1,9 @@
 ;;; init-prog.el -*- lexical-binding: t -*-
 ;;; Code:
 
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode))
+
 (use-package treesit-auto
   :init
   (setq treesit-auto-install 'prompt)

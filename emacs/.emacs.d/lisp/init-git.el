@@ -2,8 +2,10 @@
 
 ;;; Code:
 
+(setq vc-follow-symlinks nil)
+
 (use-package magit
-  :bind ("C-x g" . magit-status))
+  :bind ("C-c v" . magit-status))
 
 ;; (use-package magit-todos
 ;;   :config
