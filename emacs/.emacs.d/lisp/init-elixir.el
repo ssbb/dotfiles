@@ -3,11 +3,9 @@
 
 ;; Elixir formatting done via LSP in init-lsp.el
 
-(use-package elixir-ts-mode
-  :straight nil)
+(use-package elixir-ts-mode)
 
-(use-package heex-ts-mode
-  :straight nil)
+(use-package heex-ts-mode)
 
 (provide 'init-elixir)
 
