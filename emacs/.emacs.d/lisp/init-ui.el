@@ -39,7 +39,6 @@
   :init
   (setq-default display-line-numbers-width 3))
 
-
 (use-package modus-themes
   :config
   (setq modus-themes-italic-constructs t
@@ -48,7 +47,8 @@
         modus-themes-italic-constructs t
         modus-themes-bold-constructs nil
         modus-themes-completions '((t . (extrabold)))
-        modus-themes-prompts '(bold))
+        modus-themes-prompts '(bold)
+        modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia))
 
   (setq modus-themes-common-palette-overrides
         '((fringe unspecified)
@@ -69,23 +69,25 @@
           (border-mode-line-active bg-dim)
           (border-mode-line-inactive bg-dim)
 
-          ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
-          (builtin blue)
-          (comment fg-dim)
-          (constant red-faint)
-          (fnname slate)
-          (keyword magenta-faint)
-          (preprocessor magenta-faint)
-          (docstring fg-dim)
-          (string olive)
-          (type yellow-warmer)
-          (variable red-intense)
+          ;; ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
+          ;; (builtin blue-faint)
+          ;; (comment fg-dim)
+          ;; (constant red-faint)
+          ;; (fnname slate)
+          ;; (keyword magenta-faint)
+          ;; (preprocessor magenta-faint)
+          ;; (docstring fg-dim)
+          ;; (string olive)
+          ;; (type yellow-warmer)
+          ;; (variable red)
 
           ;; Make the current line of `hl-line-mode' a fine shade of
           ;; gray (though also see my `lin' package).
           (bg-hl-line bg-dim)))
 
-  (load-theme 'modus-vivendi t)
+  ;; (setq modus-themes-common-palette-overrides modus-themes-preset-overrides-faint)
+
+  (load-theme 'modus-vivendi-tritanopia t)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 (use-package ef-themes)
@@ -111,7 +113,6 @@
 
 ;; Use Iosevka font
 (set-frame-font "Iosevka 13" nil t)
-;; (set-frame-font "Iosevka Comfy 13" nil t)
 (add-to-list 'default-frame-alist '(font . "Iosevka 13"))
 
 (use-package nyan-mode
