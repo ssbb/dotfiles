@@ -40,10 +40,6 @@
   (setq-default display-line-numbers-width 3))
 
 
-;; Make certain buffers grossly incandescent
-(use-package solaire-mode
-  :hook (after-load-theme . solaire-global-mode))
-
 (use-package modus-themes
   :config
   (setq modus-themes-italic-constructs t
@@ -73,12 +69,9 @@
           (border-mode-line-active bg-dim)
           (border-mode-line-inactive bg-dim)
 
-          ;; Make the current line of `hl-line-mode' a fine shade of
-          ;; gray (though also see my `lin' package).
-          (bg-hl-line bg-dim)))
-
-  (setq modus-vivendi-palette-overrides
-        '((comment fg-dim)
+          ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
+          (builtin blue)
+          (comment fg-dim)
           (constant red-faint)
           (fnname slate)
           (keyword magenta-faint)
@@ -86,24 +79,19 @@
           (docstring fg-dim)
           (string olive)
           (type yellow-warmer)
-          (variable red-warmer)))
+          (variable red-intense)
+
+          ;; Make the current line of `hl-line-mode' a fine shade of
+          ;; gray (though also see my `lin' package).
+          (bg-hl-line bg-dim)))
 
   (load-theme 'modus-vivendi t)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
+(use-package ef-themes)
 (use-package doom-themes)
 (use-package gruvbox-theme)
 (use-package color-theme-sanityinc-tomorrow)
-
-;; (use-package doom-themes)
-;; (use-package ef-themes)
-
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-night))
-
-;; (use-package gruvbox-theme)
-;; (use-package darktooth-theme)
 
 (use-package posframe)
 

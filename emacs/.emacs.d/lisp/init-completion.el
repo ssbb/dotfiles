@@ -224,6 +224,9 @@
   :bind (([remap project-find-file] . consult-project-extra-find)
          ("C-x p o" . consult-project-extra-find-other-window)))
 
+(use-package consult-todo
+  :bind (("C-c t" . consult-todo)))
+
 (provide 'init-completion)
 
 ;;; init-completion.el ends here
