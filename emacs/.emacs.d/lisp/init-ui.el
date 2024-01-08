@@ -40,18 +40,19 @@
   (setq-default display-line-numbers-width 3))
 
 (use-package modus-themes
+  :bind (("<f5>" . modus-themes-toggle))
   :config
   (setq modus-themes-italic-constructs t
         modus-themes-mixed-fonts t
         modus-themes-variable-pitch-ui nil
         modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil
+        modus-themes-bold-constructs t
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts '(bold)
-        modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia))
+        modus-themes-to-toggle '(modus-operandi modus-vivendi))
 
   (setq modus-themes-common-palette-overrides
-        '((fringe unspecified)
+        `((fringe unspecified)
 
           ;; Make line numbers less intense and add a shade of cyan
           ;; for the current line number.
@@ -69,6 +70,20 @@
           (border-mode-line-active bg-dim)
           (border-mode-line-inactive bg-dim)
 
+          ;; Mimic Gruvbox
+          (fg-main "#ebdbb2")
+          ;; 282828
+          (builtin red-faint)
+          (comment fg-dim)
+          (constant maroon)
+          (fnname olive)
+          (keyword red)
+          (preprocessor fg-main)
+          (docstring fg-dim)
+          (string olive)
+          (type yellow-warmer)
+          (variable slate)
+
           ;; ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
           ;; (builtin blue-faint)
           ;; (comment fg-dim)
@@ -84,16 +99,46 @@
           ;; Make the current line of `hl-line-mode' a fine shade of
           ;; gray (though also see my `lin' package).
           (bg-hl-line bg-dim)))
+  ;; ,@modus-themes-preset-overrides-faint))
 
-  ;; (setq modus-themes-common-palette-overrides modus-themes-preset-overrides-faint)
+  (load-theme 'modus-vivendi t)
 
-  (load-theme 'modus-vivendi-tritanopia t)
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+  (defun my/apply-theme (appearance)
+    "Load theme, taking current system APPEARANCE into consideration."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'modus-operandi t))
+      ('dark (load-theme 'modus-vivendi t))))
+
+  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme))
+
+;; User themes should live in .emacs.d/themes, not ~/.emacs.d
+(setq custom-theme-directory (concat user-emacs-directory "themes/"))
+
+;; Third party themes add themselves to `custom-theme-load-path', but the themes
+;; living in $DOOMDIR/themes should always have priority.
+(setq custom-theme-load-path
+      (cons 'custom-theme-directory
+            (delq 'custom-theme-directory custom-theme-load-path)))
 
 (use-package ef-themes)
 (use-package doom-themes)
+(use-package doom-themes
+  :config
+  ;; (require 'my-gruvbox-dark-theme)
+
+  (setq doom-themes-padded-modeline -1)
+  ;; (load-theme 'my-gruvbox-dark t)
+
+  ;; (doom-themes-visual-bell-config)
+  ;; (doom-themes-treemacs-config)
+  ;; (doom-themes-org-config))
+  )
 (use-package gruvbox-theme)
-(use-package color-theme-sanityinc-tomorrow)
+
+;; (use-package spacious-padding)
+;; (use-package color-theme-sanityinc-tomorrow)
+
 
 (use-package posframe)
 
