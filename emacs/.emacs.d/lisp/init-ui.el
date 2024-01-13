@@ -71,8 +71,6 @@
           (border-mode-line-inactive bg-dim)
 
           ;; Mimic Gruvbox
-          (fg-main "#ebdbb2")
-          ;; 282828
           (builtin red-faint)
           (comment fg-dim)
           (constant maroon)
@@ -101,16 +99,22 @@
           (bg-hl-line bg-dim)))
   ;; ,@modus-themes-preset-overrides-faint))
 
+  (setq modus-vivendi-palette-overrides
+        '((fg-main "#ebdbb2")))
+  (setq modus-operandi-palette-overrides
+        '((fg-main "#282828")))
+
   (load-theme 'modus-vivendi t)
 
-  (defun my/apply-theme (appearance)
-    "Load theme, taking current system APPEARANCE into consideration."
-    (mapc #'disable-theme custom-enabled-themes)
-    (pcase appearance
-      ('light (load-theme 'modus-operandi t))
-      ('dark (load-theme 'modus-vivendi t))))
+  ;; (defun my/apply-theme (appearance)
+  ;;   "Load theme, taking current system APPEARANCE into consideration."
+  ;;   (mapc #'disable-theme custom-enabled-themes)
+  ;;   (pcase appearance
+  ;;     ('light (load-theme 'modus-operandi t))
+  ;;     ('dark (load-theme 'modus-vivendi t))))
 
-  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme))
+  ;; (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
+  )
 
 ;; User themes should live in .emacs.d/themes, not ~/.emacs.d
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
