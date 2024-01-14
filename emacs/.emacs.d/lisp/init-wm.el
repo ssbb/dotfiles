@@ -16,13 +16,14 @@
         exwm-workspace-number 4
         exwm-workspace-index-map (lambda (i) (number-to-string (1+ i))))
 
-  (add-hook 'exwm-update-class-hook
-            (lambda ()
-              (exwm-workspace-rename-buffer exwm-class-name)))
+  ;; (add-hook 'exwm-update-class-hook
+  ;;           (lambda ()
+  ;;             (exwm-workspace-rename-buffer exwm-class-name)))
 
-  (add-hook 'exwm-update-title-hook
-            (lambda ()
-              (exwm-workspace-rename-buffer exwm-title)))
+
+  ;; (add-hook 'exwm-update-title-hook
+  ;;           (lambda ()
+  ;;             (exwm-workspace-rename-buffer exwm-title)))
 
   (setq exwm-input-global-keys
         `((,(kbd "<XF86Launch9>") . meow-keypad)

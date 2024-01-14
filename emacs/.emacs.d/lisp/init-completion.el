@@ -126,7 +126,6 @@
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; "C-+"
 
-
   (defvar +consult-exwm-filter "\\`\\*EXWM")
   (add-to-list 'consult-buffer-filter +consult-exwm-filter)
 
@@ -147,6 +146,7 @@
                               :exclude (remq +consult-exwm-filter consult-buffer-filter)
                               :mode 'exwm-mode)))
     "EXWM buffer source.")
+  (add-to-list 'consult-buffer-sources '+consult-source-exwm 'append)
   )
 
   ;; Replace bindings. Lazily loaded due by `use-package'.
