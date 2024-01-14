@@ -16,10 +16,16 @@
         exwm-workspace-number 4
         exwm-workspace-index-map (lambda (i) (number-to-string (1+ i))))
 
+  (defun ssbb/exwm-rename-buffer ()
+    (exwm-workspace-rename-buffer
+     (concat "*EXWM* " exwm-class-name)))
+
+  (add-hook 'exwm-update-class-hook 'ssbb/exwm-rename-buffer)
+  (add-hook 'exwm-update-title-hook 'ssbb/exwm-rename-buffer)
+
   ;; (add-hook 'exwm-update-class-hook
   ;;           (lambda ()
   ;;             (exwm-workspace-rename-buffer exwm-class-name)))
-
 
   ;; (add-hook 'exwm-update-title-hook
   ;;           (lambda ()
@@ -43,6 +49,9 @@
 
   ;; (exwm-randr-enable)
   (exwm-enable))
+
+;; (use-package lemon
+;;   :straight (:host codeberg :repo "emacs-weirdware/lemon"))
 
 (provide 'init-wm)
 

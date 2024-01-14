@@ -129,7 +129,7 @@
   (defvar +consult-exwm-filter "\\`\\*EXWM")
   (add-to-list 'consult-buffer-filter +consult-exwm-filter)
 
-  (defvar +consult-source-exwm
+  (defvar consult-source-exwm
     `(:name      "EXWM"
                  :narrow    ?x
                  ;; :hidden t
@@ -146,7 +146,7 @@
                               :exclude (remq +consult-exwm-filter consult-buffer-filter)
                               :mode 'exwm-mode)))
     "EXWM buffer source.")
-  (add-to-list 'consult-buffer-sources '+consult-source-exwm 'append)
+  (add-to-list 'consult-buffer-sources 'consult-source-exwm 'append)
   )
 
   ;; Replace bindings. Lazily loaded due by `use-package'.
