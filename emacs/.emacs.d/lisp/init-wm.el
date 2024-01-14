@@ -12,11 +12,9 @@
   (require 'exwm-config)
   ;; (require 'exwm-randr)
 
-  ;; Initial number of workspaces
-  (setq exwm-workspace-number 4)
-
-  ;; Start workspaces from 1
-  (setq exwm-workspace-index-map (lambda (i) (number-to-string (1+ i))))
+  (setq exwm-manage-configurations '((t char-mode t))
+        exwm-workspace-number 4
+        exwm-workspace-index-map (lambda (i) (number-to-string (1+ i))))
 
   (add-hook 'exwm-update-class-hook
             (lambda ()
@@ -27,7 +25,7 @@
               (exwm-workspace-rename-buffer exwm-title)))
 
   (setq exwm-input-global-keys
-        `(
+        `((,(kbd "<XF86Launch9>") . meow-keypad)
           ([?\s-r] . exwm-reset)
           ([?\s-w] . exwm-workspace-switch)
           ([?\s-&] . (lambda (command)

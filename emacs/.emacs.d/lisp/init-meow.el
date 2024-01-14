@@ -2,6 +2,10 @@
 ;;; Code:
 
 (use-package meow
+  :demand t
+  :bind (:map meow-keypad-state-keymap
+              ("<XF86Launch9>" . meow-keypad-self-insert))
+
   :config
   (setq meow-char-thing-table
         ;; rofnd/square/curly/angle things maps to my keyboard SYM layer
@@ -125,16 +129,24 @@
                                  (eq major-mode 'vundo-mode)))
                  . ssbb/meow-hide-cursor))
 
-  (with-eval-after-load 'meow
-  (push '(vterm-mode . insert) meow-mode-state-list)
-  (add-hook 'vterm-mode-hook
+  ;; Allow meow-keypad to take inputs when it's started.
+  (add-hook 'meow-keypad-mode-hook
             (lambda ()
-              (add-hook 'meow-insert-enter-hook
-                        (lambda () (vterm-copy-mode -1))
-                        nil t)
-              (add-hook 'meow-insert-exit-hook
-                        (lambda () (vterm-copy-mode 1))
-                        nil t))))
+              (when (derived-mode-p 'exwm-mode)
+                (if meow-keypad-mode
+                    (exwm-input-grab-keyboard exwm--id)
+                  (exwm-input-release-keyboard exwm--id)))))
+
+  (with-eval-after-load 'meow
+    (push '(vterm-mode . insert) meow-mode-state-list)
+    (add-hook 'vterm-mode-hook
+              (lambda ()
+                (add-hook 'meow-insert-enter-hook
+                          (lambda () (vterm-copy-mode -1))
+                          nil t)
+                (add-hook 'meow-insert-exit-hook
+                          (lambda () (vterm-copy-mode 1))
+                          nil t))))
 
   (require 'meow)
   (meow-global-mode 1))
