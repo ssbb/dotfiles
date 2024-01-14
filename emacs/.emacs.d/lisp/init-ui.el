@@ -40,6 +40,7 @@
   (setq-default display-line-numbers-width 3))
 
 (use-package modus-themes
+  :straight (:host github :repo "protesilaos/modus-themes")
   :bind (("<f5>" . modus-themes-toggle))
   :config
   (setq modus-themes-italic-constructs t
