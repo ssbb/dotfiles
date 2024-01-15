@@ -126,7 +126,7 @@
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; "C-+"
 
-  (defvar +consult-exwm-filter "\\`\\*EXWM")
+  (defvar +consult-exwm-filter "\\`\\*WM*")
   (add-to-list 'consult-buffer-filter +consult-exwm-filter)
 
   (defvar consult-source-exwm

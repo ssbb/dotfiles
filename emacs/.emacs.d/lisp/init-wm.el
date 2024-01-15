@@ -23,13 +23,13 @@
   (add-hook 'exwm-update-class-hook 'ssbb/exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'ssbb/exwm-rename-buffer)
 
-  ;; (add-hook 'exwm-update-class-hook
-  ;;           (lambda ()
-  ;;             (exwm-workspace-rename-buffer exwm-class-name)))
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer (concat "*WM* " exwm-class-name))))
 
-  ;; (add-hook 'exwm-update-title-hook
-  ;;           (lambda ()
-  ;;             (exwm-workspace-rename-buffer exwm-title)))
+  (add-hook 'exwm-update-title-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer (concat "*WM* " exwm-title))))
 
   (setq exwm-input-global-keys
         `((,(kbd "<XF86Launch9>") . meow-keypad)
