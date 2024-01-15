@@ -4,6 +4,7 @@
 (use-package meow
   :demand t
   :bind (:map meow-keypad-state-keymap
+              ("<F18>" . meow-keypad-self-insert)
               ("<XF86Launch9>" . meow-keypad-self-insert))
 
   :config
@@ -114,6 +115,8 @@
     '("." . meow-end-of-thing)
     '("<" . meow-inner-of-thing)
     '(">" . meow-bounds-of-thing)
+
+    '("<f18>" . meow-keypad)
 
     '("<escape>" . ignore)
     )
