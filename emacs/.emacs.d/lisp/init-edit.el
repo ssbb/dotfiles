@@ -58,6 +58,7 @@
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
+(use-package avy)
 
 (provide 'init-edit)
 

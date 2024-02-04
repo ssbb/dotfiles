@@ -40,7 +40,7 @@
   (setq-default display-line-numbers-width 3))
 
 (use-package modus-themes
-  :straight (:host github :repo "protesilaos/modus-themes")
+  ;; :straight (:host github :repo "protesilaos/modus-themes")
   :bind (("<f5>" . modus-themes-toggle))
   :config
   (setq modus-themes-italic-constructs t
@@ -71,17 +71,17 @@
           (border-mode-line-active bg-dim)
           (border-mode-line-inactive bg-dim)
 
-          ;; Mimic Gruvbox
-          (builtin red-faint)
-          (comment fg-dim)
-          (constant maroon)
-          (fnname olive)
-          (keyword red)
-          (preprocessor fg-main)
-          (docstring fg-dim)
-          (string olive)
-          (type yellow-warmer)
-          (variable slate)
+          ;; ;; Mimic Gruvbox
+          ;; (builtin red-faint)
+          ;; (comment fg-dim)
+          ;; (constant maroon)
+          ;; (fnname olive)
+          ;; (keyword red)
+          ;; (preprocessor fg-main)
+          ;; (docstring fg-dim)
+          ;; (string olive)
+          ;; (type yellow-warmer)
+          ;; (variable slate)
 
           ;; ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
           ;; (builtin blue-faint)
@@ -100,12 +100,12 @@
           (bg-hl-line bg-dim)))
   ;; ,@modus-themes-preset-overrides-faint))
 
-  (setq modus-vivendi-palette-overrides
-        '((fg-main "#ebdbb2")))
-  (setq modus-operandi-palette-overrides
-        '((fg-main "#282828")))
+  ;; (setq modus-vivendi-palette-overrides
+  ;;       '((fg-main "#ebdbb2")))
+  ;; (setq modus-operandi-palette-overrides
+  ;;       '((fg-main "#282828")))
 
-  (load-theme 'modus-vivendi t)
+  (load-theme 'modus-operandi t)
 
   ;; (defun my/apply-theme (appearance)
   ;;   "Load theme, taking current system APPEARANCE into consideration."
@@ -116,6 +116,7 @@
 
   ;; (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
   )
+
 
 ;; User themes should live in .emacs.d/themes, not ~/.emacs.d
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
@@ -162,8 +163,8 @@
 (setq custom-safe-themes t)
 
 ;; Use Iosevka font
-(set-frame-font "Iosevka 13" nil t)
-(add-to-list 'default-frame-alist '(font . "Iosevka 13"))
+(set-frame-font "Iosevka 14" nil t)
+(add-to-list 'default-frame-alist '(font . "Iosevka 14"))
 
 (use-package nyan-mode
   :config

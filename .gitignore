@@ -4,6 +4,7 @@
 !/emacs/.emacs.d/init.el
 !/emacs/.emacs.d/early-init.d
 !/emacs/.emacs.d/lisp
+!/emacs/.emacs.d/templates
 
 /stumpwm/.stumpwm.d/*
 !/stumpwm/.stumpwm.d/init.lisp

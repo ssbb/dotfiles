@@ -76,6 +76,13 @@
   :defer nil
   :bind (("C-c e" . consult-flycheck)))
 
+(use-package outline
+  :straight nil
+  :hook (prog-mode . outline-minor-mode))
+
+(use-package outshine
+  :hook (outline-minor-mode . outshine-mode))
+
 (provide 'init-prog)
 
 ;;; init-prog.el ends here

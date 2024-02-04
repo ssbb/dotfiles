@@ -14,9 +14,9 @@
           (?b . square)
           (?f . curly)
           (?g . angle)
-          (?s . string)
-          (?l . line)
-          (?/ . buffer)))
+          (?t . string)
+          (?s . line)
+          (?r . buffer)))
 
   (setq meow--kbd-backward-line  "<up>"
         meow--kbd-forward-line   "<down>"
@@ -31,6 +31,10 @@
 
   (meow-define-keys 'leader
     (cons "p" project-prefix-map)
+    '(",n" . "H-n")
+    '(",i" . "H-i")
+    '(",u" . "H-j")
+    '(",e" . "H-e")
     '("b" . switch-to-buffer)
     '("o" . ace-window))
 
@@ -63,7 +67,7 @@
     ;; '("d" . meow-indent)
     '("e" . meow-next)
     '("E" . meow-next-expand)
-    '("f" . meow-search)
+    '("f" . avy-goto-word-1)
     '("g" . meow-cancel-selection)
     '("G" . meow-grab)
     '("h" . meow-undo)
@@ -79,7 +83,7 @@
     '("n" . meow-left)
     '("N" . meow-left-expand)
     '("o" . meow-delete)
-    '("p" . meow-till)
+    '("p" . meow-yank)
     '("P" . meow-yank-pop)
     '("q" . meow-quit)
     '("Q" . kill-current-buffer)
@@ -92,11 +96,11 @@
     '("U" . meow-prev-expand)
     '("v" . meow-yank)
     '("V" . meow-yank-pop)
-    '("w" . meow-find)
+    ;; '("w" . meow-find)
     '("x" . meow-kill)
     '("y" . meow-next-word)
     '("Y" . meow-next-symbol)
-    '("z" . meow-replace)
+    ;; '("z" . avy-goto-word-1)
     ;; '("Z" . meow-swap-grab)
 
     ;; '("ds" . meow-swap-grab)
@@ -107,6 +111,7 @@
     '("?" . meow-visit)
 
     '(";" . evilnc-comment-or-uncomment-lines)
+    '(":" . comment-box)
 
     '("[" . indent-rigidly-left-to-tab-stop)
     '("]" . indent-rigidly-right-to-tab-stop)

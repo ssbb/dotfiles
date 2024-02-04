@@ -1,0 +1,21 @@
+elixir-ts-mode
+(pry "require IEx; IEx.pry")
+(fn "fn " p " -> " p " end")
+(del "defdelegate " p "(" p "), to: " p)
+(mod "defmodule " p " do" n> r> n> "end")
+(def "def " p "(" p ") do" n> r> n> "end")
+(defp "defp " p "(" p ") do" n> r> n> "end")
+(i "IO.inspect(" p ")")
+(ok "{:ok, " p "}")
+(err "{:error, " p "}")
+
+prog-mode
+(review (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "REVIEW ")
+(box comment-start (make-string (length str) ?=) comment-start n>
+     comment-start (s str)                     " "  comment-start n>
+     comment-start (make-string (length str) ?=) comment-start n)
+
+;; Local Variables:
+;; mode: lisp-data
+;; outline-regexp: "[a-z]"
+;; End:

@@ -35,6 +35,7 @@
 (require 'init-utils)
 (require 'init-org)
 (require 'init-markdown)
+(require 'init-tempel)
 
 ;; Programming
 (require 'init-git)

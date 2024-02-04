@@ -13,6 +13,8 @@
         lsp-lens-enable nil
         lsp-headerline-breadcrumb-enable nil)
 
+  (setq lsp-elixir-ls-version "v0.19.0")
+
   (defun ssbb/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless)))
@@ -26,13 +28,23 @@
   (defun ssbb/lsp-organize-setup ()
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
+  (defun lsp-after-local-variables ()
+    "Set up lsp after local variables have been loaded."
+    (add-hook 'hack-local-variables-hook #'lsp-deferred nil t))
+
+  (add-hook 'elixir-ts-mode-hook #'lsp-after-local-variables)
+  (add-hook 'heex-ts-mode #'lsp-after-local-variables)
+
+  ;; (add-hook 'hack-local-variables-hook
+  ;;           (lambda () (when (derived-mode-p 'elixir-ts-mode) (lsp))))
+
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-completion-mode . ssbb/lsp-mode-setup-completion)
 
-         (elixir-ts-mode . lsp)
+         ;; (elixir-ts-mode . lsp)
          (elixir-ts-mode . ssbb/lsp-format-setup)
 
-         (heex-ts-mode . lsp)
+         ;; (heex-ts-mode . lsp)
          (heex-ts-mode . ssbb/lsp-format-setup)
 
          (js-ts-mode . lsp))
