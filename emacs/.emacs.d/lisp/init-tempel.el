@@ -6,9 +6,16 @@
 (use-package tempel
   ;; :custom
   ;; (tempel-trigger-prefix "<")
-  :bind (:map tempel-map ("TAB" . tempel-next))
+  :bind (:map tempel-map
+              ("TAB" . tempel-next)
+              ("<escape>" . my/tempel-done))
 
   :init
+  (defun my/tempel-done ()
+    (interactive)
+    (tempel-done)
+    (meow-insert-exit))
+
   ;; Setup completion at point
   (defun my/tempel-setup-capf ()
     ;; Add the Tempel Capf to `completion-at-point-functions'.

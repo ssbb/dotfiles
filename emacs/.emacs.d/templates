@@ -8,12 +8,23 @@ elixir-ts-mode
 (i "IO.inspect(" p ")")
 (ok "{:ok, " p "}")
 (err "{:error, " p "}")
+(doc "@doc \"\"\"" n> r> n> "\"\"\"")
+(cc "# HACK CROSS-CONTEXT")
 
 prog-mode
+(ref (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "TODO refactor ")
 (review (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "REVIEW ")
 (box comment-start (make-string (length str) ?=) comment-start n>
      comment-start (s str)                     " "  comment-start n>
      comment-start (make-string (length str) ?=) comment-start n)
+
+emacs-lisp-mode
+(init ";;; init-" (s name) ".el --- " p " -*- lexical-binding: t -*-" n>
+      ";;; Commentary:" n>
+      ";;; Code: " n> n>
+      r> n> n>
+      "(provide 'init-" name ")" n> n>
+      ";;; init-" name ".el ends here")
 
 ;; Local Variables:
 ;; mode: lisp-data

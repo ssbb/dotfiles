@@ -7,6 +7,10 @@
 
 (use-package heex-ts-mode)
 
+(defun my/elixir-mod-name ()
+  ;; (interactive)
+  (file-name-base (buffer-file-name)))
+
 (provide 'init-elixir)
 
 ;;; init-elixir.el ends here

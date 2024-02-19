@@ -74,14 +74,14 @@
 (use-package consult-flycheck
   :after (consult flycheck)
   :defer nil
-  :bind (("C-c e" . consult-flycheck)))
+  :bind (("C-c !" . consult-flycheck)))
 
-(use-package outline
-  :straight nil
-  :hook (prog-mode . outline-minor-mode))
+;; (use-package outline
+;;   :straight nil
+;;   :hook (prog-mode . outline-minor-mode))
 
-(use-package outshine
-  :hook (outline-minor-mode . outshine-mode))
+;; (use-package outshine
+;;   :hook (outline-minor-mode . outshine-mode))
 
 (provide 'init-prog)
 

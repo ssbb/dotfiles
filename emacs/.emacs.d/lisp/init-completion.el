@@ -71,6 +71,7 @@
 (use-package consult
   :bind (("C-c i" . consult-imenu)
          ("C-x p s" . consult-ripgrep)
+         ;; ("C-x p f" . consult-find)
 	       ([remap goto-line] . consult-goto-line)
 	       ([remap switch-to-buffer] . consult-buffer)
 	       ([remap yank-pop] . consult-yank-pop)

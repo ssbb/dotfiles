@@ -36,6 +36,9 @@
     '(",u" . "H-j")
     '(",e" . "H-e")
     '("b" . switch-to-buffer)
+    ;; '("ol" . org-store-link)
+    ;; '("oa" . org-agenda)
+    ;; '("oc" . org-capture)
     '("o" . ace-window))
 
   (meow-define-keys 'motion
@@ -83,8 +86,8 @@
     '("n" . meow-left)
     '("N" . meow-left-expand)
     '("o" . meow-delete)
-    '("p" . meow-yank)
-    '("P" . meow-yank-pop)
+    ;; '("p" . meow-yank)
+    ;; '("P" . meow-yank-pop)
     '("q" . meow-quit)
     '("Q" . kill-current-buffer)
     '("r" . meow-insert)
@@ -111,7 +114,7 @@
     '("?" . meow-visit)
 
     '(";" . evilnc-comment-or-uncomment-lines)
-    '(":" . comment-box)
+    '(":" . execute-extended-command)
 
     '("[" . indent-rigidly-left-to-tab-stop)
     '("]" . indent-rigidly-right-to-tab-stop)
@@ -120,6 +123,8 @@
     '("." . meow-end-of-thing)
     '("<" . meow-inner-of-thing)
     '(">" . meow-bounds-of-thing)
+
+    '("`" . comment-box)
 
     '("<f18>" . meow-keypad)
 
