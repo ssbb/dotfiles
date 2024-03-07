@@ -34,13 +34,12 @@
 (pixel-scroll-precision-mode t)
 
 (use-package display-line-numbers
-  :straight nil
+  :ensure nil
   :hook ((prog-mode html-mode yaml-mode conf-mode) . display-line-numbers-mode)
   :init
   (setq-default display-line-numbers-width 3))
 
 (use-package modus-themes
-  ;; :straight (:host github :repo "protesilaos/modus-themes")
   :bind (("<f5>" . modus-themes-toggle))
   :config
   (setq modus-themes-italic-constructs t

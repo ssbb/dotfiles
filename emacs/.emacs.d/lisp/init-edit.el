@@ -34,7 +34,7 @@
           er/mark-outside-pairs)))
 
 (use-package subword
-  :straight nil
+  :ensure nil
   :hook (prog-mode . subword-mode))
 
 (use-package multiple-cursors
@@ -44,7 +44,7 @@
          ("C-c C-<"     . mc/mark-all-like-this)))
 
 (use-package simple
-  :straight nil
+  :ensure nil
   :hook (((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
   :init
   (defun enable-trailing-whitespace ()
@@ -54,7 +54,7 @@
 
 
 (use-package elec-pair
-  :straight nil
+  :ensure nil
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 

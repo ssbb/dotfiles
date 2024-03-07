@@ -2,7 +2,7 @@
 ;;; Code:
 
 (use-package windmove
-  :straight nil
+  :ensure nil
   :config
   (windmove-default-keybindings 'super))
 

@@ -61,7 +61,9 @@
 (advice-add #'lsp--init-if-visible :around #'my-lsp--init-if-visible)
 
 (use-package lsp-tailwindcss
-  :straight (:host github :repo "merrickluo/lsp-tailwindcss")
+  :vc (:url "https://github.com/merrickluo/lsp-tailwindcss"
+            :branch "master")
+
   ;; :after lsp-mode
   :init
   (setq lsp-tailwindcss-add-on-mode t)

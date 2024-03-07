@@ -3,13 +3,13 @@
 
 ;; Highlight current line
 (use-package hl-line
-  :straight nil
+  :ensure nil
   :config
   (global-hl-line-mode 1))
 
 ;; Highlight parens
 (use-package paren
-  :straight nil
+  :ensure nil
   :config
   (show-paren-mode 1))
 

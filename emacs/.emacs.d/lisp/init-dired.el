@@ -2,7 +2,7 @@
 ;;; Code:
 
 (use-package dired
-  :straight nil
+  :ensrue nil
   :config
   (setq insert-directory-program "gls"
         dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))

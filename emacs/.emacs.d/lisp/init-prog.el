@@ -47,26 +47,6 @@
 
   (advice-add 'apheleia--create-rcs-patch :around #'ssbb/fix-apheleia-accidental-deletion))
 
-;; (use-package eldoc-box
-;;   :hook ((emacs-lisp-mode . eldoc-box-hover-at-point-mode)
-;;          (eglot-managed-mode . eldoc-box-hover-at-point-mode)))
-
-(use-package indent-bars
-  :straight (:host github :repo "jdtsmith/indent-bars")
-  :hook (prog-mode . indent-bars-mode))
-
-;; (use-package combobulate
-;;   :vc (:fetcher github :repo "mickeynp/combobulate")
-;;   :preface
-;;   (setq combobulate-key-prefix "C-c o")
-
-;;   :hook ((python-ts-mode . combobulate-mode)
-;;          (js-ts-mode . combobulate-mode)
-;;          (css-ts-mode . combobulate-mode)
-;;          (yaml-ts-mode . combobulate-mode)
-;;          (typescript-ts-mode . combobulate-mode)
-;;          (tsx-ts-mode . combobulate-mode)))
-
 (use-package flycheck
   :config
   (global-flycheck-mode))
@@ -77,7 +57,7 @@
   :bind (("C-c !" . consult-flycheck)))
 
 ;; (use-package outline
-;;   :straight nil
+;;   :ensure nil
 ;;   :hook (prog-mode . outline-minor-mode))
 
 ;; (use-package outshine

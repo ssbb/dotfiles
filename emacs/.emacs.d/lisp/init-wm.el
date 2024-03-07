@@ -6,7 +6,6 @@
 
 (use-package exwm
   :if (memq window-system '(x))
-  :straight (:host github :repo "emacs-exwm/exwm")
   :config
   (require 'exwm)
   (require 'exwm-config)

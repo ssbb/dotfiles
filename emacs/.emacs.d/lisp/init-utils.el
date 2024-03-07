@@ -19,7 +19,8 @@
 (use-package ag)
 
 (use-package asdf
-  :straight (:host github :repo "tabfugnic/asdf.el")
+  :vc (:url "https://github.com/tabfugnic/asdf.el"
+            :branch "main")
   :config
   (asdf-enable))
 
