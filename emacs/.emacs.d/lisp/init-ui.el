@@ -50,7 +50,7 @@
         modus-themes-bold-constructs t
         modus-themes-completions '((t . (extrabold)))
         modus-themes-prompts '(bold)
-        modus-themes-to-toggle '(modus-operandi modus-vivendi))
+        modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia))
 
   (setq modus-themes-common-palette-overrides
         `((fringe unspecified)
@@ -105,7 +105,7 @@
   ;; (setq modus-operandi-palette-overrides
   ;;       '((fg-main "#282828")))
 
-  (load-theme 'modus-operandi t)
+  (load-theme 'modus-operandi-tritanopia t)
 
   ;; (defun my/apply-theme (appearance)
   ;;   "Load theme, taking current system APPEARANCE into consideration."
@@ -116,7 +116,6 @@
 
   ;; (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
   )
-
 
 ;; User themes should live in .emacs.d/themes, not ~/.emacs.d
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
@@ -141,10 +140,10 @@
   ;; (doom-themes-org-config))
   )
 (use-package gruvbox-theme)
+(use-package base16-theme)
 
 ;; (use-package spacious-padding)
 ;; (use-package color-theme-sanityinc-tomorrow)
-
 
 (use-package posframe)
 

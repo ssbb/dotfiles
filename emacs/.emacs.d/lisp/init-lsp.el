@@ -33,7 +33,7 @@
     (add-hook 'hack-local-variables-hook #'lsp-deferred nil t))
 
   (add-hook 'elixir-ts-mode-hook #'lsp-after-local-variables)
-  (add-hook 'heex-ts-mode #'lsp-after-local-variables)
+  (add-hook 'heex-ts-mode-hook #'lsp-after-local-variables)
 
   ;; (add-hook 'hack-local-variables-hook
   ;;           (lambda () (when (derived-mode-p 'elixir-ts-mode) (lsp))))

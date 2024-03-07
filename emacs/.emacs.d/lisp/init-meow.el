@@ -14,9 +14,9 @@
           (?b . square)
           (?f . curly)
           (?g . angle)
-          (?t . string)
-          (?s . line)
-          (?r . buffer)))
+          (?s . string)
+          (?r . line)
+          (?t . buffer)))
 
   (setq meow--kbd-backward-line  "<up>"
         meow--kbd-forward-line   "<down>"
@@ -31,10 +31,10 @@
 
   (meow-define-keys 'leader
     (cons "p" project-prefix-map)
-    '(",n" . "H-n")
-    '(",i" . "H-i")
-    '(",u" . "H-j")
-    '(",e" . "H-e")
+    '(".n" . "H-n")
+    '(".i" . "H-i")
+    '(".u" . "H-u")
+    '(".e" . "H-e")
     '("b" . switch-to-buffer)
     ;; '("ol" . org-store-link)
     ;; '("oa" . org-agenda)
