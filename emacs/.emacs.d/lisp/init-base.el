@@ -14,6 +14,7 @@
 
 ;; Garbage collector hack
 (use-package gcmh
+  :vc (:url "https://github.com/emacsmirror/gcmh")
   :hook (emacs-startup . gcmh-mode))
 
 ;; Use UTF-8
