@@ -10,6 +10,7 @@ elixir-ts-mode
 (err "{:error, " p "}")
 (doc "@doc \"\"\"" n> r> n> "\"\"\"")
 (cc "# HACK CROSS-CONTEXT")
+(h "~H\"\"\"" n> r> n> "\"\"\"")
 
 prog-mode
 (ref (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "TODO refactor ")
@@ -25,6 +26,9 @@ emacs-lisp-mode
       r> n> n>
       "(provide 'init-" name ")" n> n>
       ";;; init-" name ".el ends here")
+
+js-ts-mode
+(log "console.log(" p ");")
 
 ;; Local Variables:
 ;; mode: lisp-data
