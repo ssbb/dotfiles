@@ -37,10 +37,19 @@
               indent-tabs-mode nil)
 
 (setq visible-bell t
-      inhibit-compacting-font-caches t ;; Don't compact font caches during GC
-      delete-by-moving-to-trash t      ;; Delete by moving to OS trash
-      make-backup-files nil            ;; Do not create backup files
-      auto-save-default nil)           ;; Disable auto save
+      inhibit-compacting-font-caches t  ;; Don't compact font caches during GC
+      delete-by-moving-to-trash t)      ;; Delete by moving to OS trash
+
+;; Write aux files to tmp
+
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+(setq lock-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; History
 (use-package savehist

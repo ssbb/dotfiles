@@ -39,6 +39,7 @@
     ;; '("ol" . org-store-link)
     ;; '("oa" . org-agenda)
     ;; '("oc" . org-capture)
+    '("/" . treemacs-select-window)
     '("o" . ace-window))
 
   (meow-define-keys 'motion
