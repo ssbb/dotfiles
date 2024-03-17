@@ -1,0 +1,8 @@
+[Unit]
+Description=geoclue agent service for redshift
+
+[Service]
+ExecStart=/usr/lib/geoclue-2.0/demos/agent
+
+[Install]
+WantedBy=default.target
