@@ -1,11 +1,13 @@
 ;;; init-dired.el -*- lexical-binding: t -*-
 ;;; Code:
 
-(use-package dired
-  :ensure nil
-  :config
-  (setq insert-directory-program "gls"
-        dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))
+;; (use-package dired
+;;   :ensure nil
+;;   :config
+;;   (let ((gls (executable-find "gls")))
+;;     (when gls (setq insert-directory-program gls)))
+
+;;   (setq dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))
 
 (use-package nerd-icons-dired
   :hook ((dired-mode . nerd-icons-dired-mode)))

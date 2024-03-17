@@ -70,79 +70,20 @@
           (border-mode-line-active bg-dim)
           (border-mode-line-inactive bg-dim)
 
-          ;; ;; Mimic Gruvbox
-          ;; (builtin red-faint)
-          ;; (comment fg-dim)
-          ;; (constant maroon)
-          ;; (fnname olive)
-          ;; (keyword red)
-          ;; (preprocessor fg-main)
-          ;; (docstring fg-dim)
-          ;; (string olive)
-          ;; (type yellow-warmer)
-          ;; (variable slate)
-
-          ;; ;; Mmimic Tomorrow theme. It's the same for both Day/Night variants.
-          ;; (builtin blue-faint)
-          ;; (comment fg-dim)
-          ;; (constant red-faint)
-          ;; (fnname slate)
-          ;; (keyword magenta-faint)
-          ;; (preprocessor magenta-faint)
-          ;; (docstring fg-dim)
-          ;; (string olive)
-          ;; (type yellow-warmer)
-          ;; (variable red)
-
           ;; Make the current line of `hl-line-mode' a fine shade of
           ;; gray (though also see my `lin' package).
           (bg-hl-line bg-dim)))
-  ;; ,@modus-themes-preset-overrides-faint))
-
-  ;; (setq modus-vivendi-palette-overrides
-  ;;       '((fg-main "#ebdbb2")))
-  ;; (setq modus-operandi-palette-overrides
-  ;;       '((fg-main "#282828")))
 
   (load-theme 'modus-operandi-tritanopia t)
 
-  ;; (defun my/apply-theme (appearance)
-  ;;   "Load theme, taking current system APPEARANCE into consideration."
-  ;;   (mapc #'disable-theme custom-enabled-themes)
-  ;;   (pcase appearance
-  ;;     ('light (load-theme 'modus-operandi t))
-  ;;     ('dark (load-theme 'modus-vivendi t))))
+  (defun my/apply-theme (appearance)
+    "Load theme, taking current system APPEARANCE into consideration."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'modus-operandi-tritanopia t))
+      ('dark (load-theme 'modus-vivendi-tritanopia t))))
 
-  ;; (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
-  )
-
-;; User themes should live in .emacs.d/themes, not ~/.emacs.d
-(setq custom-theme-directory (concat user-emacs-directory "themes/"))
-
-;; Third party themes add themselves to `custom-theme-load-path', but the themes
-;; living in $DOOMDIR/themes should always have priority.
-(setq custom-theme-load-path
-      (cons 'custom-theme-directory
-            (delq 'custom-theme-directory custom-theme-load-path)))
-
-(use-package ef-themes)
-(use-package doom-themes)
-(use-package doom-themes
-  :config
-  ;; (require 'my-gruvbox-dark-theme)
-
-  (setq doom-themes-padded-modeline -1)
-  ;; (load-theme 'my-gruvbox-dark t)
-
-  ;; (doom-themes-visual-bell-config)
-  ;; (doom-themes-treemacs-config)
-  ;; (doom-themes-org-config))
-  )
-(use-package gruvbox-theme)
-(use-package base16-theme)
-
-;; (use-package spacious-padding)
-;; (use-package color-theme-sanityinc-tomorrow)
+  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme))
 
 (use-package posframe)
 

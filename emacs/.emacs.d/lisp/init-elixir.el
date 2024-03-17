@@ -9,11 +9,11 @@
 ;;   :vc (:url "https://github.com/ssbb/heex-ts-mode"))
 
 ;; (add-to-list 'load-path "/Users/ssbb/Workspace/heex-ts-mode")
-;;(require 'heex-ts-mode)
+;; (require 'heex-ts-mode)
 
-(defun my/elixir-mod-name ()
-  ;; (interactive)
-  (file-name-base (buffer-file-name)))
+;; (defun my/elixir-mod-name ()
+;;   ;; (interactive)
+;;   (file-name-base (buffer-file-name)))
 
 (provide 'init-elixir)
 
