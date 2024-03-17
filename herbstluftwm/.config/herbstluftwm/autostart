@@ -98,6 +98,9 @@ hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c cycle
 hc keybind $Mod-i jumpto urgent
 
+# settings
+hc set default_frame_layout max
+
 # theme
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1

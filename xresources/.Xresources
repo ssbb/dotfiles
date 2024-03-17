@@ -9,4 +9,4 @@ Xft.lcdfilter: lcddefault
 
 XTerm.termName: xterm-256color
 xterm*faceName: Iosevka
-xterm*faceSize: 13
+xterm*faceSize: 14
