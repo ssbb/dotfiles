@@ -26,7 +26,7 @@
   (setq meow-visit-sanitize-completion t
         meow-keypad-self-insert-undefined nil
         meow-keypad-start-keys '((?c . ?c) (?x . ?x))
-        meow-keypad-leader-dispatch "C-c"
+        ;; meow-keypad-leader-dispatch "C-c"
         meow-use-clipboard t)
 
   (meow-define-keys 'leader
