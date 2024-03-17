@@ -20,7 +20,8 @@
         aw-dispatch-always t)
 
   (ace-window-display-mode)
-  (ace-window-posframe-mode)
+  (when window-system
+    (ace-window-posframe-mode))
 
   ;; Select widnow via `M-1'...`M-9'
   ;; (defun aw--select-window (number)
