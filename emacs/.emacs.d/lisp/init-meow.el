@@ -71,7 +71,7 @@
     ;; '("d" . meow-indent)
     '("e" . meow-next)
     '("E" . meow-next-expand)
-    '("f" . avy-goto-word-1)
+    '("f" . avy-goto-char-2)
     '("g" . meow-cancel-selection)
     '("G" . meow-grab)
     '("h" . meow-undo)

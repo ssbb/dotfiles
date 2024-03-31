@@ -4,6 +4,9 @@
 
 ;;; Code:
 
+(use-package screenshot
+  :vc (:url "https://github.com/tecosaur/screenshot"))
+
 (use-package helpful
   :bind
   (("C-c h f" . helpful-callable)
@@ -42,7 +45,7 @@
   )
 
 (use-package dts-mode
-  :mode ("\\.keymap\\'" "\\.dtsi\\'"))
+  :mode ("\\.keymap\\'" "\\.dtsi\\'" "\\.overlay\\'"))
 
 (use-package kconfig-mode
   :mode ("\\.defconfig\\'" "Kconfig" "Kconfig.board"))

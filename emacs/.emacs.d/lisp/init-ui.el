@@ -39,6 +39,9 @@
   :init
   (setq-default display-line-numbers-width 3))
 
+(use-package standard-themes)
+(use-package kanagawa-theme)
+
 (use-package modus-themes
   :bind (("<f5>" . modus-themes-toggle))
   :config
@@ -102,8 +105,8 @@
 (setq custom-safe-themes t)
 
 ;; Use Iosevka font
-(set-frame-font "Iosevka 14" nil t)
-(add-to-list 'default-frame-alist '(font . "Iosevka 14"))
+(set-frame-font "Iosevka Curly 14" nil t)
+(add-to-list 'default-frame-alist '(font . "Iosevka Curly 14"))
 
 (use-package nyan-mode
   :config

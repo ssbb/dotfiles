@@ -52,13 +52,16 @@
     (setq show-trailing-whitespace t)
     (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
 
-
 (use-package elec-pair
   :ensure nil
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
-(use-package avy)
+(use-package avy
+  :config
+  ;; Colemak DH
+  (setq avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o)
+        avy-all-windows nil))
 
 (provide 'init-edit)
 
