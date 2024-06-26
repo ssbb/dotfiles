@@ -5,7 +5,8 @@
 (setq vc-follow-symlinks nil)
 
 (use-package magit
-  :bind ("C-c v" . magit-status))
+  :bind (("C-c v" . magit-status)
+         ("C-x g" . magit-status)))
 
 ;; (use-package magit-todos
 ;;   :config

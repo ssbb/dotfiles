@@ -17,6 +17,7 @@
   (push (expand-file-name dir user-emacs-directory) load-path))
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file)
 
 (require 'init-const)
 (require 'init-funcs)
