@@ -1134,6 +1134,13 @@
          ("C-c v" . multi-vterm))
   :after vterm)
 
+(use-package dired
+  :ensure nil
+  :bind (:map dired-mode-map
+              ("q" . (lambda () (interactive) (quit-window t))))  ;; kill dired bauffer on `q'
+  :custom
+  (dired-kill-when-opening-new-dired-buffer t))
+
 (provide 'init)
 ;;; init.el ends here
 
