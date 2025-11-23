@@ -479,16 +479,16 @@
   ;; (meow-global-mode t)
   )
 
-(use-package meow-state-bridge
-  :after meow
-  :load-path "~/.emacs.d/site-lisp/"
-  :hook (meow-global-mode . meow-state-bridge-toggle)
-  :init
-  (setq meow-state-bridge-script-path "/Users/ssbb/bridge.py"
-        meow-state-bridge-debug t)
-  :config
-  (defun meow-state-bridge-toggle ()
-    (meow-state-bridge-mode (if meow-global-mode 1 -1))))
+;; (use-package meow-state-bridge
+;;   :after meow
+;;   :load-path "~/.emacs.d/site-lisp/"
+;;   :hook (meow-global-mode . meow-state-bridge-toggle)
+;;   :init
+;;   (setq meow-state-bridge-script-path "/Users/ssbb/bridge.py"
+;;         meow-state-bridge-debug t)
+;;   :config
+;;   (defun meow-state-bridge-toggle ()
+;;     (meow-state-bridge-mode (if meow-global-mode 1 -1))))
 
 ;;; Org & Markdown
 
@@ -1113,15 +1113,29 @@
   :config
   (atomic-chrome-start-server))
 
+(use-package eterm-256color)
+
 (use-package vterm
+  :custom
+  ;; TODO breaks multi-vterm ability to toggle dedicated buffer
+  ;; (vterm-buffer-name-string "*vterm* %s")
+  (vterm-shell "fish")
+  (vterm-term-environment-variable "eterm-color")
+  (vterm-kill-buffer-on-exit)
+
   :config
   ;; Disable hl line mode to avoid cursor blinking.
   (add-hook 'vterm-mode-hook
             (lambda ()
               (setq-local global-hl-line-mode nil))))
 
+(use-package multi-vterm
+  :bind (("C-c d" . multi-vterm-dedicated-toggle)
+         ("C-c v" . multi-vterm))
+  :after vterm)
 
 (provide 'init)
+;;; init.el ends here
 
 ;; Local Variables:
 ;; outline-minor-mode-cycle: t
