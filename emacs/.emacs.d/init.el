@@ -309,6 +309,19 @@
 
 (use-package meow
   :demand t
+  :custom
+  (meow-selection-command-fallback
+   '((meow-change . meow-change-char)
+     (meow-kill . meow-C-k)
+     (meow-save . kill-ring-save)
+     (meow-cancel-selection . keyboard-quit)
+     (meow-pop-selection . meow-pop-grab)
+     (meow-beacon-change . meow-beacon-change-char)
+     (meow-expand . meow-digit-argument)
+
+     ;; Fallback replace to yank.
+     (meow-replace . meow-yank)
+     (meow-replace-pop . meow-yank-pop)))
   :config
   (setq meow-char-thing-table
         ;; rofnd/square/curly/angle things maps to my keyboard SYM layer
@@ -347,7 +360,7 @@
   (meow-define-keys 'leader
     (cons "p" project-prefix-map)
     '("z" . meow-universal-argument)
-    '("l" . goto-line)
+    '("l" . consult-goto-line)
     '("q" . kill-buffer)
     '("b" . switch-to-buffer)
     '("w" . ace-window)
@@ -389,8 +402,8 @@
     '("E" . meow-next-expand)
     '("f"  . meow-back-word)
     '("F" . meow-back-symbol)
-    '("g"  . meow-yank)
-    '("G" . meow-yank-pop)
+    '("g"  . meow-replace)
+    '("G" . meow-replace-pop)
     '("h"  . meow-undo)
     '("H" . undo-redo)
     '("i" . meow-delete)
@@ -687,15 +700,7 @@
          (js-ts-mode . lsp)
          )
 
-  :commands lsp
-
-  :config
-  ;; Disable `lsp-mode' in `git-timemachine-mode'
-  (defun my-init-if-visible (fn &rest args)
-    (unless (bound-and-true-p git-timemachine-mode)
-      (apply fn args)))
-
-  (advice-add #'lsp--init-if-visible :around #'my-lsp--init-if-visible))
+  :commands lsp)
 
 (use-package consult-lsp
   :after (consult lsp-mode))
@@ -1079,8 +1084,6 @@
 (use-package magit
   :bind (("C-c v" . magit-status)
          ("C-x g" . magit-status)))
-
-(use-package git-timemachine)
 
 ;;; Utils
 
