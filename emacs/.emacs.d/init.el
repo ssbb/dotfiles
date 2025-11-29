@@ -76,6 +76,7 @@
 
 ;; Keep my filesystem clean
 (make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
+(make-directory (expand-file-name "tmp/locks/" user-emacs-directory) t)
 
 (setq backup-directory-alist
       `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
@@ -556,10 +557,12 @@
 
 ;;; Programming
 
-(use-package elixir-ts-mode)
+(use-package elixir-ts-mode
+  :mode ("\\.ex\\'" "\\.exs\\'" "mix\\.lock\\'"))
 
 (use-package heex-ts-mode
   :ensure t
+  :mode "\\.heex\\'"
   :vc (:url "https://github.com/ssbb/heex-ts-mode" :branch "custom-font-lock"))
 
 (use-package elm-mode)
@@ -888,7 +891,7 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  :after (consult embark)
+  ;; :after (consult embark)
   :hook (embark-collect-mode . consult-preview-at-point-mode)
   :bind (:map minibuffer-mode-map
               ("C-c C-o" . embark-export)))
@@ -1086,6 +1089,11 @@
          ("C-x g" . magit-status)))
 
 ;;; Utils
+
+(use-package tramp
+  :ensure nil
+  :config
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (use-package helpful
   :bind
