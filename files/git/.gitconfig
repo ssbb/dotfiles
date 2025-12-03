@@ -1,0 +1,6 @@
+[user]
+  name = Sviatoslav Bulbakha
+  email = mail@ssbb.me
+
+[protocol "file"]
+  allow = always
