@@ -12,6 +12,11 @@ end
 # Starship prompt
 starship init fish | source
 
+function fish-reload-config
+    source ~/.config/fish/**/*.fish
+    echo "Fish configuration reloaded."
+end
+
 # ASDF configuration code
 if command -q asdf
   if test -z $ASDF_DATA_DIR
@@ -53,6 +58,19 @@ function fish_prompt --description 'Write out the prompt; do not replace this. I
     # are correctly interpreted, use %b for printf.
     printf "%b" (string join "\n" (vterm_old_fish_prompt))
     vterm_prompt_end
+end
+
+function vterm_cmd --description 'Run an Emacs command among the ones been defined in vterm-eval-cmds.'
+    set -l vterm_elisp ()
+    for arg in $argv
+        set -a vterm_elisp (printf '"%s" ' (string replace -a -r '([\\\\"])' '\\\\\\\\$1' $arg))
+    end
+    vterm_printf '51;E'(string join '' $vterm_elisp)
+end
+
+function find_file
+    set -q argv[1]; or set argv[1] "."
+    vterm_cmd find-file (realpath "$argv")
 end
 
 if [ "$INSIDE_EMACS" = 'vterm' ]

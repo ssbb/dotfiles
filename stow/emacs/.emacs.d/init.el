@@ -46,6 +46,10 @@
 (defconst my/guix-system-p
   (file-directory-p "/gnu/store"))
 
+(use-package guix-dotfiles
+  :ensure nil
+  :bind (("C-c j" . guix-dotfiles-jump)))
+
 (use-package guix
   :ensure nil
   :defer t)
@@ -239,6 +243,36 @@
 ;;; EXWM
 
 (when (memq window-system '(x))
+  (defun my/audio-volume-up ()
+    "Increase volume by 5% asynchronously."
+    (interactive)
+    (start-process "volume-up" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"))
+
+  (defun my/audio-volume-down ()
+    "Decrease volume by 5% asynchronously."
+    (interactive)
+    (start-process "volume-down" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"))
+
+  (defun my/audio-mute-toggle ()
+    "Toggle mute."
+    (interactive)
+    (start-process "volume-mute" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"))
+
+  (defun my/mic-mute-toggle ()
+    "Toggle microphone."
+    (interactive)
+    (start-process "mic-mute" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"))
+
+  (defun my/brightness-up ()
+    "Increase brightness by 5% asynchronously using brillo."
+    (interactive)
+    (start-process "brightness-up" nil "brillo" "-A" "5"))
+
+  (defun my/brightness-down ()
+    "Decrease brightness by 5% asynchronously using brillo."
+    (interactive)
+    (start-process "brightness-down" nil "brillo" "-U" "5"))
+
   (use-package exwm
     :config
     (require 'exwm)
@@ -253,26 +287,44 @@
     (add-hook 'exwm-update-class-hook 'my/exwm-rename-buffer)
     (add-hook 'exwm-update-title-hook 'my/exwm-rename-buffer)
 
+    (setq exwm-input-simulation-keys
+          '(([?\C-b] . [left])
+            ([?\C-f] . [right])
+            ([?\C-p] . [up])
+            ([?\C-n] . [down])
+            ([?\C-a] . [home])
+            ([?\C-e] . [end])
+            ([?\C-d] . [delete])))
+
     (setq exwm-input-global-keys
-          `((,(kbd "<XF86Launch9>") . meow-keypad)
-            ([?\s-r] . exwm-reset)
+          `(([?\s-r] . exwm-reset)
             ([?\s-w] . exwm-workspace-switch)
-            ([?\s-&] . (lambda (command)
-                         (interactive (list (read-shell-command "$ ")))
-                         (start-process-shell-command command nil command)))
+            ([?\s-!] . consult-omni)
             ,@(mapcar (lambda (i)
                         `(,(kbd (format "s-%d" i)) .
                           (lambda ()
                             (interactive)
                             (exwm-workspace-switch-create ,i))))
-                      (number-sequence 1 9))))
+                      (number-sequence 1 9))
+            ([XF86AudioRaiseVolume] . my/audio-volume-up)
+            ([XF86AudioLowerVolume] . my/audio-volume-down)
+            ([XF86AudioMute]        . my/audio-mute-toggle)
+            ([XF86AudioMicMute]     . my/mic-mute-toggle)
+            ([XF86MonBrightnessUp]   . my/brightness-up)
+            ([XF86MonBrightnessDown] . my/brightness-down)
+            ([XF86Display] . my/toggle-dark-mode)))
 
-    (global-set-key (kbd "<XF86MonBrightnessUp>")
-                    (lambda () (interactive) (call-process "brillo" nil nil nil "-A" "5")))
-
-    (global-set-key (kbd "<XF86MonBrightnessDown>")
-                    (lambda () (interactive) (call-process "brillo" nil nil nil "-U" "5")))
-
+    (defun my/toggle-dark-mode ()
+      (interactive)
+      (let* ((current (string-trim
+                       (shell-command-to-string
+                        "gsettings get org.gnome.desktop.interface color-scheme")))
+             (new-scheme (if (string-match-p "dark" current)
+                             "prefer-light"
+                           "prefer-dark")))
+        (call-process "gsettings" nil nil nil
+                      "set" "org.gnome.desktop.interface" "color-scheme" new-scheme)
+        (message "Color scheme: %s" new-scheme)))
 
     (with-eval-after-load 'consult
       (defvar +consult-exwm-filter "\\`\\*WM*")
@@ -298,6 +350,13 @@
       (add-to-list 'consult-buffer-sources 'consult-source-exwm 'append))
 
     (exwm-wm-mode))
+
+  ;; (use-package gnome-dark-style
+  ;;   :custom
+  ;;   (gnome-light-theme 'modus-operandi-tritanopia)
+  ;;   (gnome-dark-theme 'modus-vivendi-tritanopia)
+  ;;   :config
+  ;;   (setopt gnome-dark-style-sync t))
 
   (use-package screenshot
     :vc (:url "https://github.com/tecosaur/screenshot"))
@@ -851,8 +910,13 @@
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; "C-+"
+  )
 
-)
+(use-package consult-desktop-app
+  :after consult
+  :ensure nil
+  :config
+  (add-to-list 'consult-buffer-sources 'consult--source-desktop-apps 'append))
 
 (use-package vertico
   :config
@@ -991,6 +1055,12 @@
 ;; Don't prompt to load theme on first load.
 (setq custom-safe-themes t)
 
+(use-package auto-dark
+  :if my/guix-system-p
+  :custom
+  (auto-dark-themes '((modus-vivendi-tritanopia) (modus-operandi-tritanopia)))
+  :init (auto-dark-mode))
+
 (use-package modus-themes
   :demand t
   :ensure t
@@ -1046,7 +1116,7 @@
 ;; Use Iosevka font
 ;; FIXME Move to some per-system variables?
 (if my/guix-system-p
-    (set-face-attribute 'default nil :font "Iosevka Curly" :height 120)
+    (set-face-attribute 'default nil :font "Iosevka Curly" :height 100)
   (progn
     (set-frame-font "Iosevka Curly 14" nil t)
     (add-to-list 'default-frame-alist '(font . "Iosevka Curly 14"))))
@@ -1151,9 +1221,21 @@
   ;; (vterm-buffer-name-string "*vterm* %s")
   (vterm-shell "fish")
   (vterm-term-environment-variable "eterm-color")
-  (vterm-kill-buffer-on-exit)
+  (vterm-kill-buffer-on-exit t)
 
   :config
+  ;; Force redraw buffer on theme change
+  (add-hook 'enable-theme-functions
+            (lambda (_theme)
+              (dolist (buf (buffer-list))
+                (with-current-buffer buf
+                  (when (derived-mode-p 'vterm-mode)
+                    (let* ((inhibit-read-only t)
+                           (height (window-body-height))
+                           (width (window-body-width)))
+                      (vterm--set-size vterm--term (1- height) width)
+                      (vterm--set-size vterm--term height width)))))))
+
   ;; Disable hl line mode to avoid cursor blinking.
   (add-hook 'vterm-mode-hook
             (lambda ()
