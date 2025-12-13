@@ -5,7 +5,7 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:export (font-nerd-symbols))
 
-(define-public font-nerd-symbols
+(define font-nerd-symbols
   (package
    (name "font-nerd-symbols-only")
    (version "3.4.0")

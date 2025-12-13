@@ -7,10 +7,12 @@
   #:use-module (nongnu system linux-initrd)
   #:use-module (ssbb services kanata)
   #:use-module (ssbb services bolt)
+  #:use-module (ssbb services authentication)
+  #:use-module (ssbb packages xorg)
   #:export (base-operating-system))
 
-(use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm)
-(use-package-modules shells cmake version-control fonts hardware video admin linux xorg rust-apps libusb nfs)
+(use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication)
+(use-package-modules shells cmake version-control fonts hardware video admin linux xorg rust-apps libusb nfs xdisorg freedesktop polkit)
 
 (define base-operating-system
   (operating-system
@@ -47,14 +49,17 @@
                     cmake
                     fish
                     xkeyboard-config
+                    polkit
                     brillo
                     libva-utils
                     bolt
                     intel-media-driver/nonfree
                     fwupd-nonfree
+                    fprintd
                     powertop
                     igt-gpu-tools
                     tlp
+                    bluez
                     %base-packages))
 
    (services
@@ -144,11 +149,30 @@
       (service ntp-service-type)
 
       (service x11-socket-directory-service-type)
-      (service startx-command-service-type)
+      (service startx-command-service-type
+               (xorg-configuration
+                (server xorg-server-tearfree)
+                (drivers '("modesetting"))
+                (extra-config (list "
+Section \"OutputClass\"
+    Identifier  \"Intel Graphics\"
+    MatchDriver \"i915\"
+    Driver      \"modesetting\"
+    Option      \"TearFree\" \"true\"
+EndSection
+"))))
+
+      (service screen-locker-service-type
+               (screen-locker-configuration
+                (name "xlock")
+                (program (file-append xlockmore "/bin/xlock"))))
 
       (service bolt-service-type)
       (service thermald-service-type)
       (service tlp-service-type)
+
+      (service fprintd-service-type)
+      (service fprintd-pam-service-type)
 
       (simple-service 'fwupd-polkit
                       polkit-service-type

@@ -12,8 +12,7 @@
   #:use-module (ssbb home services dotfiles)
   #:use-module (ssbb packages emacs)
   #:use-module (ssbb packages fonts)
-  #:use-module (ssbb packages fontutils)
-  )
+  #:use-module (ssbb packages fontutils))
 
 (use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells)
 
@@ -38,9 +37,12 @@
 
 (define home-config
   (home-environment
-   (packages (list emacs-lucid-xinput2 emacs-vterm emacs-multi-vterm xorg-server xauth xterm tree-sitter-elixir tree-sitter-heex font-iosevka-curly xrdb binutils
+   (packages (list emacs-lucid-xinput2 emacs-vterm emacs-multi-vterm xauth xterm tree-sitter-elixir tree-sitter-heex font-iosevka-curly xrdb binutils
                    font-google-noto font-google-noto-emoji font-liberation font-awesome colord-minimal xiccd font-nerd-symbols
+                   xdg-user-dirs
+                   ripgrep
                    drm-info
+                   emacs-exwm
                    fontconfig-minimal-custom
                    tree
                    stow
@@ -79,6 +81,8 @@
       (simple-service 'profile-env-vars-service
                       home-environment-variables-service-type
                       '(("PATH" . "$HOME/.local/bin:$PATH")
+                        ("FREETYPE_PROPERTIES" . "cff:no-stem-darkening=0 cff:darkening-parameters=500,400,1000,350,1500,325,2000,300 autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,400,1000,350,1500,325,2000,300")
+                        ("XDG_SESSION_TYPE" . "x11")
                         ("XDG_CURRENT_DESKTOP" . "exwm")
                         ("XDG_SESSION_DESKTOP" . "exwm")))
 
@@ -88,7 +92,6 @@
 
       (service home-dotfiles-service-type my-dotfiles-config)
       (service dotfiles-manifest-service-type my-dotfiles-config)
-
 
       (service home-dbus-service-type)
       (service home-x11-service-type)

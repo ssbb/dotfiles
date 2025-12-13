@@ -33,8 +33,3 @@
                      (tlp-configuration
                       (inherit config)
                       (runtime-pm-blacklist (list "08:00.0")))))))
-   ;; (startx-command-service-type config =>
-   ;;                              (xorg-configuration
-   ;;                               (inherit config)
-   ;;                               (server-arguments (cons* "-depth" "30"
-   ;;                                                        %default-xorg-server-arguments)))))))
