@@ -5,8 +5,8 @@
 
 ;;; Code:
 
-(defconst ssbb/full-name "Sviatoslav Bulbakha")
-(defconst ssbb/email "mail@ssbb.me")
+(defconst my/full-name "Sviatoslav Bulbakha")
+(defconst my/email "mail@ssbb.me")
 
 ;;; Stratup
 
@@ -40,8 +40,8 @@
 
 ;;; Base
 
-(setq user-full-name ssbb/full-name
-      user-mail-address ssbb/email)
+(setq user-full-name my/full-name
+      user-mail-address my/email)
 
 (defconst my/guix-system-p
   (file-directory-p "/gnu/store"))
@@ -221,21 +221,21 @@
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
-(defun ssbb/move-line-up ()
+(defun my/move-line-up ()
   "Move line up."
   (interactive)
   (transpose-lines 1)
   (forward-line -2))
 
-(defun ssbb/move-line-down ()
+(defun my/move-line-down ()
   "Move line down."
   (interactive)
   (forward-line 1)
   (transpose-lines 1)
   (forward-line -1))
 
-(keymap-global-set "M-<up>" 'ssbb/move-line-up)
-(keymap-global-set "M-<down>" 'ssbb/move-line-down)
+(keymap-global-set "M-<up>" 'my/move-line-up)
+(keymap-global-set "M-<down>" 'my/move-line-down)
 
 (keymap-global-set "<home>" 'move-beginning-of-line)
 (keymap-global-set "<end>" 'move-end-of-line)
@@ -519,14 +519,14 @@
     (interactive)
     (er/expand-region -1))
 
-  (defun ssbb/meow-hide-cursor ()
+  (defun my/meow-hide-cursor ()
     (progn
       (meow--set-cursor-type nil)))
 
   (add-to-list 'meow-update-cursor-functions-alist
                '((lambda () (and (meow-motion-mode-p)
                                  (eq major-mode 'vundo-mode)))
-                 . ssbb/meow-hide-cursor))
+                 . my/meow-hide-cursor))
 
   ;; Allow meow-keypad to take inputs when it's started.
   (add-hook 'meow-keypad-mode-hook
@@ -664,16 +664,16 @@
   ;; (add-to-list 'apheleia-mode-alist '(dts-mode . clang-format))
 
   ;; See https://github.com/raxod502/apheleia/issues/30
-  (defun ssbb/fix-apheleia-project-dir (orig-fn &rest args)
+  (defun my/fix-apheleia-project-dir (orig-fn &rest args)
     (let ((project (project-current)))
       (if (not (null project))
           (let ((default-directory (project-root project))) (apply orig-fn args))
         (apply orig-fn args))))
-  (advice-add 'apheleia-format-buffer :around #'ssbb/fix-apheleia-project-dir)
+  (advice-add 'apheleia-format-buffer :around #'my/fix-apheleia-project-dir)
 
   ;; sometimes apheleia erase the whole buffer, which is pretty annoying.
   ;; fix it by detecting this scenario and simply doing no-op
-  (defun ssbb/fix-apheleia-accidental-deletion
+  (defun my/fix-apheleia-accidental-deletion
       (orig-fn old-buffer new-buffer &rest rest)
     (if (and (=  0 (buffer-size new-buffer))
              (/= 0 (buffer-size old-buffer)))
@@ -681,7 +681,7 @@
         nil
       (apply orig-fn old-buffer new-buffer rest)))
 
-  (advice-add 'apheleia--create-rcs-patch :around #'ssbb/fix-apheleia-accidental-deletion))
+  (advice-add 'apheleia--create-rcs-patch :around #'my/fix-apheleia-accidental-deletion))
 
 ;; Tree-sitter
 (use-package treesit
@@ -727,17 +727,17 @@
 
   ;; (setq lsp-elixir-ls-version "v0.19.0")
 
-  ;; (defun ssbb/lsp-mode-setup-completion ()
+  ;; (defun my/lsp-mode-setup-completion ()
   ;;   (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
   ;;         '(orderless)))
 
-  (defun ssbb/lsp-setup ()
+  (defun my/lsp-setup ()
     (lsp-enable-which-key-integration))
 
-  (defun ssbb/lsp-format-setup ()
+  (defun my/lsp-format-setup ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
-  (defun ssbb/lsp-organize-setup ()
+  (defun my/lsp-organize-setup ()
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
   (defun lsp-after-local-variables ()
@@ -751,13 +751,13 @@
   ;;           (lambda () (when (derived-mode-p 'elixir-ts-mode) (lsp))))
 
   :hook ((lsp-mode . lsp-enable-which-key-integration)
-         ;; (lsp-completion-mode . ssbb/lsp-mode-setup-completion)
+         ;; (lsp-completion-mode . my/lsp-mode-setup-completion)
 
          ;; (elixir-ts-mode . lsp)
-         (elixir-ts-mode . ssbb/lsp-format-setup)
+         (elixir-ts-mode . my/lsp-format-setup)
 
          ;; (heex-ts-mode . lsp)
-         (heex-ts-mode . ssbb/lsp-format-setup)
+         (heex-ts-mode . my/lsp-format-setup)
 
          (js-ts-mode . lsp)
          )
@@ -805,10 +805,10 @@
 ;; (use-package corfu
 ;;   :defer nil
 ;;   :bind (:map corfu-map
-;;               ("M-m" . ssbb/corfu-move-to-minibuffer)
+;;               ("M-m" . my/corfu-move-to-minibuffer)
 ;;               ("SPC" . corfu-insert-separator))
 ;;   :config
-;;   (defun ssbb/corfu-move-to-minibuffer ()
+;;   (defun my/corfu-move-to-minibuffer ()
 ;;     (interactive)
 ;;     (when completion-in-region--data
 ;;       (let ((completion-extra-properties corfu--extra)
@@ -1257,10 +1257,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-
-;; Local Variables:
-;; outline-minor-mode-cycle: t
-;; outline-regexp: ";;; "
-;; eval: (outline-minor-mode)
-;; eval: (outline-hide-body)
-;; End:
