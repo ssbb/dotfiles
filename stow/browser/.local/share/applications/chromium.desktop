@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Chromium
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=env LD_LIBRARY_PATH="$HOME/.guix-home/profile/lib:$LD_LIBRARY_PATH" chromium --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks --enable-zero-copy --ignore-gpu-blocklist --ozone-platform-hint=x11 --ozone-platform=x11 %U
+StartupNotify=true
+Terminal=false
+Icon=chromium
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;

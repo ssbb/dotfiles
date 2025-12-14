@@ -1,0 +1,21 @@
+#!/bin/sh
+
+HOST=$(hostname)
+TARGET=$1
+
+roll_system() {
+    printf '\033[1;34m::\033[0m Rolling system config for \033[1m%s\033[0m\n' "$HOST"
+    sudo guix system -L ~/dotfiles/guix reconfigure ~/dotfiles/guix/hosts/${HOST}.scm
+}
+
+roll_home() {
+    printf '\033[1;34m::\033[0m Rolling home config for \033[1m%s\033[0m\n' "$HOST"
+    guix home -L ~/dotfiles/guix reconfigure ~/dotfiles/guix/home.scm
+}
+
+case "$TARGET" in
+    system) roll_system ;;
+    home)   roll_home ;;
+    both)   roll_system && roll_home ;;
+    *)      printf '\033[1;31mUsage:\033[0m %s <system|home|both>\n' "$0" >&2; exit 1 ;;
+esac
