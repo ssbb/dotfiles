@@ -57,7 +57,7 @@
 
   (defun ssbb/exwm-rename-buffer ()
     (exwm-workspace-rename-buffer
-     (concat "*EXWM* " exwm-class-name)))
+     (concat "*EXWM* " exwm-title)))
 
   (add-hook 'exwm-update-class-hook 'ssbb/exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'ssbb/exwm-rename-buffer)

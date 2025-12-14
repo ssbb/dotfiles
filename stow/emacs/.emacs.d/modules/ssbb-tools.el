@@ -63,7 +63,8 @@
   :bind (:map dired-mode-map
               ("q" . (lambda () (interactive) (quit-window t))))  ;; kill dired bauffer on `q'
   :custom
-  (dired-kill-when-opening-new-dired-buffer t))
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-mouse-drag-files t))
 
 (use-package diredfl
   :hook
