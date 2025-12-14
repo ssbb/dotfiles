@@ -2,6 +2,10 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+if test -x /opt/homebrew/bin/brew
+  /opt/homebrew/bin/brew shellenv | source
+end
+
 # Strart X
 if status --is-login
   if not set -q DISPLAY; and test "$XDG_VTNR" = 1
