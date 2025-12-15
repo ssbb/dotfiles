@@ -35,6 +35,7 @@
   (start-process "brightness-down" nil "brillo" "-U" "5"))
 
 (defun ssbb/toggle-dark-mode ()
+  "Toggle dark mode via DBus."
   (interactive)
   (let* ((current (string-trim
                    (shell-command-to-string

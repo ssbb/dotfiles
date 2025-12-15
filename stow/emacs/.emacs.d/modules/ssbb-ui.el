@@ -19,11 +19,9 @@
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 ;; FIXME Move to some per-system variables?
-(if ssbb/guix-system-p
-    (set-face-attribute 'default nil :font "Iosevka Curly" :height 100)
-  (progn
-    (set-frame-font "Iosevka Curly 14" nil t)
-    (add-to-list 'default-frame-alist '(font . "Iosevka Curly 14"))))
+(if (eq system-type 'darwin)
+    (set-face-attribute 'default nil :font "Iosevka Curly" :height 140)
+  (set-face-attribute 'default nil :font "Iosevka Curly" :height 100))
 
 (use-package dashboard
   :config
