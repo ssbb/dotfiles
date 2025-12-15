@@ -1,6 +1,8 @@
 (define-module (ssbb system)
   #:use-module (gnu)
   #:use-module (gnu system setuid)
+  #:use-module (guix utils)
+  #:use-module (ice-9 textual-ports)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu packages video)
   #:use-module (nongnu packages firmware)
@@ -13,6 +15,10 @@
 
 (use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication)
 (use-package-modules shells cmake version-control fonts hardware video admin linux xorg rust-apps libusb nfs xdisorg freedesktop polkit)
+
+(define (read-relative-file filename)
+  (let ((path (string-append (current-source-directory) "/" filename)))
+    (call-with-input-file path get-string-all)))
 
 (define base-operating-system
   (operating-system
@@ -153,14 +159,9 @@
                (xorg-configuration
                 (server xorg-server-tearfree)
                 (drivers '("modesetting"))
-                (extra-config (list "
-Section \"OutputClass\"
-    Identifier  \"Intel Graphics\"
-    MatchDriver \"i915\"
-    Driver      \"modesetting\"
-    Option      \"TearFree\" \"true\"
-EndSection
-"))))
+                (extra-config
+                 (list (read-relative-file "./files/xorg/intel_video.conf")
+                       (read-relative-file "./files/xorg/touchpad.conf")))))
 
       (service screen-locker-service-type
                (screen-locker-configuration
