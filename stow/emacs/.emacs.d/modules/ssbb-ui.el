@@ -4,19 +4,19 @@
 
 ;;; Code:
 
-(setopt custom-safe-themes t
-        use-file-dialog nil
-        use-dialog-box nil
-        inhibit-startup-screen t
-        frame-inhibit-implied-resize t  ;; Don't resize frame based on font (for exwm especially)
-        idle-update-delay 1.0)
+(setq custom-safe-themes t
+      use-file-dialog nil
+      use-dialog-box nil
+      inhibit-startup-screen t
+      frame-inhibit-implied-resize t  ;; Don't resize frame based on font (for exwm especially)
+      idle-update-delay 1.0)
 
 (tool-bar-mode -1)
 (set-scroll-bar-mode nil)
 (menu-bar-mode -1)
 
-(setopt split-width-threshold 160
-        split-height-threshold nil)
+(setq split-width-threshold 160
+      split-height-threshold nil)
 
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -44,8 +44,8 @@
 (use-package display-line-numbers
   :ensure nil
   :hook ((prog-mode html-mode yaml-mode conf-mode) . display-line-numbers-mode)
-  :init
-  (setq-default display-line-numbers-width 3))
+  :custom
+  (display-line-numbers-width 3))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -73,9 +73,8 @@
   (nyan-mode))
 
 (use-package doom-modeline
-  :config
-  (setq doom-modeline-height
-        (round (* (frame-char-height) 1.5)))
+  :custom
+  (doom-modeline-height (round (* (frame-char-height) 1.5)))
   :init
   (doom-modeline-mode 1))
 
@@ -128,7 +127,8 @@
 (use-package auto-dark
   :if (eq window-system 'x)
   :custom
-  (auto-dark-themes '((modus-vivendi-tritanopia) (modus-operandi-tritanopia)))
+  (auto-dark-themes '((modus-vivendi-tritanopia)
+                      (modus-operandi-tritanopia)))
   :init
   (auto-dark-mode))
 

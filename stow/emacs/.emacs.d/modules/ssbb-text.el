@@ -11,10 +11,8 @@
 
   :custom
   (org-log-done 'time)
-
   :config
-  (org-display-inline-images)
-  (add-to-list 'org-modules 'org-habit t))
+  (add-to-list 'org-modules 'org-habit))
 
 (use-package org-ql)
 

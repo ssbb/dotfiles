@@ -28,7 +28,7 @@
               tab-width 2
               indent-tabs-mode nil)
 
-(setopt save-interprogram-paste-before-kill t)
+(setq save-interprogram-paste-before-kill t)
 
 (use-package avy
   :bind (("C-:" . avy-goto-char))

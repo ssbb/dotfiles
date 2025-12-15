@@ -21,15 +21,16 @@
 
 (use-package dts-mode
   :mode ("\\.keymap\\'" "\\.dtsi\\'" "\\.overlay\\'")
+  :hook ((dts-mode . ssbb/dts-mode-setup))
   :config
-  (add-hook 'dts-mode-hook
-            (lambda () (setq-local tab-width 4))))
+  (defun ssbb/dts-mode-setup ()
+    (setq-local tab-width 4)))
 
 (use-package plantuml-mode
   :mode "\\.puml\\'"
+  :custom
+  (plantuml-indent-level 2)
   :config
-  (setq plantuml-indent-level 2)
-
   (eval-and-compile
     (defun hex-encode (str)
 		  (string-join
@@ -53,7 +54,7 @@
          (elm-mode . apheleia-mode)
          (dts-mode . apheleia-mode))
   :config
-  (add-to-list 'apheleia-mode-alist '(heex-ts-mode . mix-format))
+  ;; (add-to-list 'apheleia-mode-alist '(heex-ts-mode . mix-format))
   ;; (add-to-list 'apheleia-mode-alist '(dts-mode . clang-format))
 
   ;; See https://github.com/raxod502/apheleia/issues/30
@@ -165,11 +166,8 @@
   :after lsp-mode
   :vc (:url "https://github.com/merrickluo/lsp-tailwindcss"
             :branch "master")
-
-  ;; :after lsp-mode
-  :init
-  (setq lsp-tailwindcss-add-on-mode t)
-  ;; lsp-tailwindcss-skip-config-check t)
+  :custom
+  (lsp-tailwindcss-add-on-mode t)
 
   :config
   (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)

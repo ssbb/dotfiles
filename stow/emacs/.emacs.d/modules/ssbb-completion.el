@@ -4,19 +4,13 @@
 
 ;;; Code:
 
-(use-package emacs
-  :init
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
+(setq completion-cycle-threshold 3  ;; TAB cycle if there are only few candidates
+      tab-always-indend 'complete)
 
-  ;; Only list the commands of the current modes
-  (when (boundp 'read-extended-command-predicate)
-    (setq read-extended-command-predicate
-          #'command-completion-default-include-p))
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete))
+;; Only list the commands of the current modes
+(when (boundp 'read-extended-command-predicate)
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p))
 
 (use-package completion-preview
   :ensure nil
@@ -147,9 +141,6 @@
 ;; Use the `orderless' completion style.
 (use-package orderless
   :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
@@ -170,7 +161,6 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  ;; :after (consult embark)
   :hook (embark-collect-mode . consult-preview-at-point-mode)
   :bind (:map minibuffer-mode-map
               ("C-c C-o" . embark-export)))

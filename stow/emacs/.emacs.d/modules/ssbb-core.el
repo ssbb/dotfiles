@@ -4,15 +4,15 @@
 
 ;;; Code:
 
-(setopt user-full-name ssbb/full-name
-        user-mail-address ssbb/email
+(setq user-full-name ssbb/full-name
+      user-mail-address ssbb/email
 
-        use-short-answers t
-        vc-follow-symlinks t
-        visible-bell t
-        inhibit-compacting-font-caches t  ;; Don't compact font caches during GC
-        delete-by-moving-to-trash t       ;; Delete by moving to OS trash
-        make-backup-files t)
+      use-short-answers t
+      vc-follow-symlinks t
+      visible-bell t
+      inhibit-compacting-font-caches t  ;; Don't compact font caches during GC
+      delete-by-moving-to-trash t       ;; Delete by moving to OS trash
+      make-backup-files t)
 
 (column-number-mode t)
 (indent-tabs-mode nil)
@@ -28,16 +28,16 @@
 (make-directory (expand-file-name "tmp/locks/" user-emacs-directory) t)
 
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+        `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
 (setq auto-save-list-file-prefix
-      (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory))
+        (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory))
 
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+        `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
 
 (setq lock-file-name-transforms
-      `((".*" ,(expand-file-name "tmp/locks/" user-emacs-directory) t)))
+        `((".*" ,(expand-file-name "tmp/locks/" user-emacs-directory) t)))
 
 ;; Garbage collector hack
 (use-package gcmh
@@ -50,8 +50,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package asdf
-  :vc (:url "https://github.com/tabfugnic/asdf.el"
-            :branch "main")
+  :vc (:url "https://github.com/tabfugnic/asdf.el" :branch "main")
   :config
   (asdf-enable))
 

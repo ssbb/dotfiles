@@ -32,24 +32,22 @@
   (vterm-shell "fish")
   (vterm-term-environment-variable "eterm-color")
   (vterm-kill-buffer-on-exit t)
-
+  :hook (vterm-mode . ssbb/vterm-setup)
   :config
-  ;; Force redraw buffer on theme change
-  (add-hook 'enable-theme-functions
-            (lambda (_theme)
-              (dolist (buf (buffer-list))
-                (with-current-buffer buf
-                  (when (derived-mode-p 'vterm-mode)
-                    (let* ((inhibit-read-only t)
-                           (height (window-body-height))
-                           (width (window-body-width)))
-                      (vterm--set-size vterm--term (1- height) width)
-                      (vterm--set-size vterm--term height width)))))))
+  (defun ssbb/vterm-setup ()
+    (hl-line-mode -1))
 
-  ;; Disable hl line mode to avoid cursor blinking.
-  (add-hook 'vterm-mode-hook
-            (lambda ()
-              (setq-local global-hl-line-mode nil))))
+  (defun ssbb/vterm-refresh-on-theme (_theme)
+    (dolist (buf (buffer-list))
+      (when (eq (buffer-local-value 'major-mode buf) 'vterm-mode)
+        (with-current-buffer buf
+          (let* ((inhibit-read-only t)
+                 (height (window-body-height))
+                 (width (window-body-width)))
+            (vterm--set-size vterm--term (1- height) width)
+            (vterm--set-size vterm--term height width))))))
+
+  (add-hook 'enable-theme-functions #'ssbb/vterm-refresh-on-theme))
 
 (use-package multi-vterm
   :defer t
@@ -61,14 +59,18 @@
 (use-package dired
   :ensure nil
   :bind (:map dired-mode-map
-              ("q" . (lambda () (interactive) (quit-window t))))  ;; kill dired bauffer on `q'
+              ("q" . ssbb/dired-quit))
   :custom
   (dired-kill-when-opening-new-dired-buffer t)
-  (dired-mouse-drag-files t))
+  (dired-mouse-drag-files t)
+
+  :config
+  (defun ssbb/dired-quit ()
+    (interactive)
+    (quit-window t)))
 
 (use-package diredfl
-  :hook
-  ((dired-mode . diredfl-mode))
+  :hook ((dired-mode . diredfl-mode))
   :config
   (set-face-attribute 'diredfl-dir-name nil :bold t))
 
@@ -81,4 +83,4 @@
   :defer t)
 
 (provide 'ssbb-tools)
-;;; ssbb-sools.el ends here
+;;; ssbb-tools.el ends here
