@@ -70,7 +70,11 @@
           ([?\C-n] . [down])
           ([?\C-a] . [home])
           ([?\C-e] . [end])
-          ([?\C-d] . [delete])))
+          ([?\C-d] . [delete])
+          ([?\C-k] . [S-end delete])
+          ;; ([?\C-w] . [?\C-x])
+          ([?\M-w] . [?\C-c])
+          ([?\C-y] . [?\C-v])))
 
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
