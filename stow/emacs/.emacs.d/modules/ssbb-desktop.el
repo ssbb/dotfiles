@@ -49,11 +49,12 @@
 (use-package exwm
   :custom
   (exwm-workspace-number 4)
-  (exwm-workspace-index-map
-   (lambda (i) (number-to-string (1+ i))))
 
   :config
   (require 'exwm)
+
+  (setq exwm-workspace-index-map
+        (lambda (i) (number-to-string (1+ i))))
 
   (defun ssbb/exwm-rename-buffer ()
     (exwm-workspace-rename-buffer

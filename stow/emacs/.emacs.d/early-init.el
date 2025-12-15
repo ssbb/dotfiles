@@ -13,7 +13,10 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 
 (if (string= (getenv "XDG_CURRENT_DESKTOP") "exwm")
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+    (progn
+      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+      (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+
   (progn
     (add-to-list 'initial-frame-alist '(width . 128))
     (add-to-list 'initial-frame-alist '(height . 48))))

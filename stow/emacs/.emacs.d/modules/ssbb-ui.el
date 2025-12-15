@@ -8,6 +8,7 @@
         use-file-dialog nil
         use-dialog-box nil
         inhibit-startup-screen t
+        frame-inhibit-implied-resize t  ;; Don't resize frame based on font (for exwm especially)
         idle-update-delay 1.0)
 
 (tool-bar-mode -1)
