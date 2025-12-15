@@ -35,7 +35,7 @@
   :hook (vterm-mode . ssbb/vterm-setup)
   :config
   (defun ssbb/vterm-setup ()
-    (hl-line-mode -1))
+    (global-hl-line-mode -1))
 
   (defun ssbb/vterm-refresh-on-theme (_theme)
     (dolist (buf (buffer-list))
