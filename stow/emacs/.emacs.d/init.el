@@ -36,8 +36,8 @@
 (require 'ssbb-ui)
 (require 'ssbb-completion)
 (require 'ssbb-edit)
-(require 'ssbb-text)
-(require 'ssbb-dev)
+(require 'ssbb-prose)
+(require 'ssbb-prog)
 (require 'ssbb-tools)
 
 (when ssbb/enable-modal-editing

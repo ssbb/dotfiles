@@ -1,4 +1,4 @@
-;;; ssbb-text.el --- Markup and Writing configuration -*- lexical-binding: t -*-
+;;; ssbb-prose.el --- Markup and Writing configuration -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -21,5 +21,5 @@
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)))
 
-(provide 'ssbb-text)
-;;; ssbb-text.el ends here
+(provide 'ssbb-prose)
+;;; ssbb-prose.el ends here

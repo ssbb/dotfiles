@@ -36,13 +36,6 @@
   (avy-keys '(?a ?r ?s ?t ?n ?e ?i ?o))
   (avy-all-windows nil))
 
-(use-package subword
-  :ensure nil
-  :hook (prog-mode . subword-mode))
-
-(use-package evil-nerd-commenter
-  :bind ("M-;" . evilnc-comment-or-uncomment-lines))
-
 (use-package so-long
   :config
   (global-so-long-mode 1))

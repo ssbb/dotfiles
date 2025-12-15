@@ -1,8 +1,30 @@
-;;; ssbb-dev.el --- Development configuration -*- lexical-binding: t -*-
+;;; ssbb-prog.el --- Development configuration -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
 ;;; Code:
+
+(use-package subword
+  :ensure nil
+  :hook (prog-mode . subword-mode))
+
+(use-package display-line-numbers
+  :ensure nil
+  :hook ((prog-mode html-mode yaml-mode conf-mode) . display-line-numbers-mode)
+  :custom
+  (display-line-numbers-width 3))
+
+(use-package evil-nerd-commenter
+  :bind ("M-;" . evilnc-comment-or-uncomment-lines))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
+
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode))
 
 (use-package elixir-ts-mode
   :mode ("\\.ex\\'" "\\.exs\\'" "mix\\.lock\\'"))
@@ -173,5 +195,5 @@
   (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)
   (add-to-list 'lsp-tailwindcss-major-modes 'heex-ts-mode))
 
-(provide 'ssbb-dev)
-;;; ssbb-dev.el ends here
+(provide 'ssbb-prog)
+;;; ssbb-prog.el ends here
