@@ -105,9 +105,11 @@
   :custom
   (wgrep-auto-save-buffer t))
 
-(use-package guix
-  :ensure nil
-  :defer t)
+;; (use-package guix
+;;   :ensure nil
+;;   :defer t)
+
+(use-package transmission)
 
 (provide 'ssbb-tools)
 ;;; ssbb-tools.el ends here
