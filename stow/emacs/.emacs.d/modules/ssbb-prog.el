@@ -134,66 +134,12 @@
 
 (setq read-process-output-max (* 1024 1024))
 
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l"
-        ;; lsp-completion-provider nil
-        lsp-enable-file-watchers nil
-        lsp-lens-enable nil
-        lsp-headerline-breadcrumb-enable nil)
-
-  ;; (setq lsp-elixir-ls-version "v0.19.0")
-
-  ;; (defun ssbb/lsp-mode-setup-completion ()
-  ;;   (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-  ;;         '(orderless)))
-
-  (defun ssbb/lsp-setup ()
-    (lsp-enable-which-key-integration))
-
-  (defun ssbb/lsp-format-setup ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t))
-
-  (defun ssbb/lsp-organize-setup ()
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-  (defun lsp-after-local-variables ()
-    "Set up lsp after local variables have been loaded."
-    (add-hook 'hack-local-variables-hook #'lsp-deferred nil t))
-
-  (add-hook 'elixir-ts-mode-hook #'lsp-after-local-variables)
-  (add-hook 'heex-ts-mode-hook #'lsp-after-local-variables)
-
-  ;; (add-hook 'hack-local-variables-hook
-  ;;           (lambda () (when (derived-mode-p 'elixir-ts-mode) (lsp))))
-
-  :hook ((lsp-mode . lsp-enable-which-key-integration)
-         ;; (lsp-completion-mode . ssbb/lsp-mode-setup-completion)
-
-         ;; (elixir-ts-mode . lsp)
-         (elixir-ts-mode . ssbb/lsp-format-setup)
-
-         ;; (heex-ts-mode . lsp)
-         (heex-ts-mode . ssbb/lsp-format-setup)
-
-         (js-ts-mode . lsp)
-         )
-
-  :commands lsp)
-
-(use-package consult-lsp
-  :after (consult lsp-mode))
-
-(use-package lsp-tailwindcss
-  :after lsp-mode
-  :vc (:url "https://github.com/merrickluo/lsp-tailwindcss"
-            :branch "master")
-  :custom
-  (lsp-tailwindcss-add-on-mode t)
-
+(use-package eglot
+  :hook ((elixir-ts-mode . eglot-ensure))
   :config
-  (add-to-list 'lsp-tailwindcss-major-modes 'elixir-ts-mode)
-  (add-to-list 'lsp-tailwindcss-major-modes 'heex-ts-mode))
+  (add-to-list 'eglot-server-programs
+               '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio"))))
+
 
 (provide 'ssbb-prog)
 ;;; ssbb-prog.el ends here

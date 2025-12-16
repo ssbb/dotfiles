@@ -106,9 +106,6 @@
   (add-hook 'prog-mode-hook 'ssbb/tempel-setup-capf)
   (add-hook 'text-mode-hook 'ssbb/tempel-setup-capf)
 
-  ;; return tempel-expand as #1 function in capf after lsp-mode wipes it.
-  (add-hook 'lsp-completion-mode-hook 'ssbb/tempel-setup-capf)
-
   ;; Optionally make the Tempel templates available to Abbrev,
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
