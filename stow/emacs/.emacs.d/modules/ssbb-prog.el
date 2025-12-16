@@ -134,12 +134,43 @@
 
 (setq read-process-output-max (* 1024 1024))
 
+;; Required by eglot for snippet expansion
+(use-package yasnippet
+  :hook (eglot-managed-mode . yas-minor-mode))
+
 (use-package eglot
-  :hook ((elixir-ts-mode . eglot-ensure))
+  :hook ((elixir-ts-mode . eglot-ensure)
+         (eglot-managed-mode . ssbb/setup-eglot-buffer))
   :config
   (add-to-list 'eglot-server-programs
-               '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio"))))
+               '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio")))
 
+  (defun ssbb/eglot-format-buffer ()
+    ;; Server can be disabled already
+    (when (eglot-managed-p)
+      (eglot-format-buffer)))
+
+  (defun ssbb/setup-eglot-buffer ()
+    (add-hook 'before-save-hook #'ssbb/eglot-format-buffer nil t)))
+
+(use-package eldoc
+  :ensure nil
+  :custom
+  (eldoc-idle-delay 1.0))
+
+(use-package eldoc-box
+  :hook (eglot-managed-mode . eldoc-box-hover-mode)
+  :config
+  (defun ssbb/eldoc-box-skip-keywords (orig-fun &rest args)
+    "Skip eldoc-box for keyword faces."
+    (let ((face (get-text-property (point) 'face)))
+      (unless (if (listp face)
+                  (memq 'font-lock-keyword-face face)
+                (eq face 'font-lock-keyword-face))
+        (apply orig-fun args))))
+
+
+  (advice-add 'eldoc-box--eldoc-message-function :around #'ssbb/eldoc-box-skip-keywords))
 
 (provide 'ssbb-prog)
 ;;; ssbb-prog.el ends here

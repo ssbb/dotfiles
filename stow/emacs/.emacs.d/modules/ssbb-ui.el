@@ -61,8 +61,8 @@
   :hook (((embark-collect-mode) . hide-mode-line-mode)))
 
 (use-package nerd-icons)
-(use-package nerd-icons-dired
-  :hook ((dired-mode . nerd-icons-dired-mode)))
+;; (use-package nerd-icons-dired
+;;   :hook ((dired-mode . nerd-icons-dired-mode)))
 
 (use-package modus-themes
   :demand t

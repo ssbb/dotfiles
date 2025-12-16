@@ -61,8 +61,11 @@
   :bind (:map dired-mode-map
               ("q" . ssbb/dired-quit))
   :custom
+  (dired-listing-switches
+   "-l --almost-all --human-readable --group-directories-first --no-group")
   (dired-kill-when-opening-new-dired-buffer t)
   (dired-mouse-drag-files t)
+  (mouse-drag-and-drop-region-cross-program t)
 
   :config
   (defun ssbb/dired-quit ()
@@ -70,9 +73,33 @@
     (quit-window t)))
 
 (use-package diredfl
-  :hook ((dired-mode . diredfl-mode))
+  :hook ((dired-mode . diredfl-mode)
+         (dirvish-directory-view-mode . diredfl-mode))
   :config
   (set-face-attribute 'diredfl-dir-name nil :bold t))
+
+(use-package dirvish
+  :bind (("C-c f" . dirvish)
+         ("C-c b" . dirvish-side)
+         :map dirvish-mode-map
+         ("?" . dirvish-dispatch)
+         ("N" . dirvish-narrow)
+         ("TAB" . dirvish-subtree-toggle)
+         (";" . dired-up-directory))
+  :init
+  (dirvish-override-dired-mode)
+  :custom
+  (dirvish-side-width 50)
+  :config
+  (setq dirvish-mode-line-format
+        '(:left (sort symlink) :right (omit yank index)))
+  (setq dirvish-attributes
+        '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
+        dirvish-side-attributes
+        '(vc-state nerd-icons collapse file-size))
+  (setq dirvish-large-directory-threshold 20000)
+
+  (dirvish-side-follow-mode))
 
 (use-package wgrep
   :custom
