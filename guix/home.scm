@@ -42,6 +42,7 @@
                    xdg-user-dirs
                    ripgrep
                    drm-info
+                   (with-my-fontconfig mpv)
                    emacs-exwm
                    fontconfig-minimal-custom
                    tree
@@ -141,6 +142,13 @@
                                                (remove (cut string-prefix? "DISPLAY=" <>)
                                                        (default-environment-variables))))))
                              (stop #~(make-kill-destructor)))))
+
+      (simple-service 'transmission-symlinks
+                      home-activation-service-type
+                      #~(begin
+                          (let ((target (string-append (getenv "HOME") "/torrents")))
+                            (when (not (file-exists? target))
+                              (symlink "/var/lib/transmission-daemon/downloads" target)))))
 
       (service home-pipewire-service-type))
 

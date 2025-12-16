@@ -13,7 +13,7 @@
   #:use-module (ssbb packages xorg)
   #:export (base-operating-system))
 
-(use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication)
+(use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication file-sharing)
 (use-package-modules shells cmake version-control fonts hardware video admin linux xorg rust-apps libusb nfs xdisorg freedesktop polkit)
 
 (define (read-relative-file filename)
@@ -44,7 +44,7 @@
                   (group "users")
                   (home-directory "/home/ssbb")
                   (shell (file-append fish "/bin/fish"))
-                  (supplementary-groups '("wheel" "netdev" "audio" "video" "realtime" "lp" "tty" "input")))
+                  (supplementary-groups '("wheel" "netdev" "audio" "video" "realtime" "lp" "tty" "input" "transmission")))
                  %base-user-accounts))
 
    (groups (cons (user-group (system? #t) (name "realtime"))
@@ -185,6 +185,17 @@
 
       (udev-rules-service 'pipewire-add-udev-rules pipewire)
       (udev-rules-service 'brillo-add-udev-rules brillo)
+
+      (service transmission-daemon-service-type
+               (transmission-daemon-configuration
+                (incomplete-dir-enabled? #t)
+                (incomplete-dir "/var/lib/transmission-daemon/incomplete")
+                (watch-dir-enabled? #t)
+                (watch-dir "/var/lib/transmission-daemon/watch")
+
+                (rpc-enabled? #t)
+                (rpc-whitelist-enabled? #t)
+                (rpc-whitelist '("127.0.0.1" "::1"))))
 
       (service kanata-service-type
                (local-file "/home/ssbb/kanata.conf")))))))
