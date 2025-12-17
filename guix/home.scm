@@ -37,14 +37,36 @@
 
 (define home-config
   (home-environment
-   (packages (list emacs-lucid-xinput2 emacs-vterm emacs-multi-vterm xauth xterm tree-sitter-elixir tree-sitter-heex font-iosevka-curly xrdb binutils
-                   font-google-noto font-google-noto-emoji font-liberation font-awesome colord-minimal xiccd font-nerd-symbols
-                   xdg-user-dirs
-                   ripgrep
-                   drm-info
-                   (with-my-fontconfig mpv)
+   (packages (list emacs-lucid-xinput2
+                   emacs-vterm
+                   emacs-multi-vterm
                    emacs-exwm
+                   tree-sitter-elixir
+                   tree-sitter-heex
                    fontconfig-minimal-custom
+                   font-iosevka-curly
+                   font-nerd-symbols
+                   font-google-noto
+                   font-google-noto-emoji
+                   font-liberation
+                   font-awesome
+                   font-apple-sf-pro
+                   font-apple-new-york
+                   font-apple-symbols
+                   font-apple-color-emoji
+                   xrandr
+                   xsettingsd
+                   xrdb
+                   xdg-user-dirs
+                   colord-minimal
+                   xiccd
+                   gsettings-desktop-schemas
+                   xdg-desktop-portal
+                   xdg-desktop-portal-gtk
+                   (list glib "bin")
+                   binutils
+                   ripgrep
+                   (with-my-fontconfig mpv)
                    tree
                    stow
                    libva
@@ -52,20 +74,9 @@
                    v4l-utils
                    ungoogled-chromium
                    starship
-                   font-apple-sf-pro
-                   font-apple-new-york
-                   font-apple-symbols
-                   font-apple-color-emoji
-                   xrandr
-                   xsettingsd
                    kanata
                    htop
-                   (list glib "bin")
-                   gsettings-desktop-schemas
-                   xdg-desktop-portal
-                   xdg-desktop-portal-gtk
-                   dbus
-                   ))
+                   dbus))
 
    (services
     (append
