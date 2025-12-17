@@ -66,7 +66,7 @@
                    (list glib "bin")
                    binutils
                    ripgrep
-                   (with-my-fontconfig mpv)
+                   mpv
                    tree
                    stow
                    libva

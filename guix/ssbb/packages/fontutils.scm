@@ -2,12 +2,12 @@
   #:use-module (guix utils)
   #:use-module (guix packages)
   #:use-module (gnu packages fontutils)
-  #:export (fontconfig-minimal-custom
-            with-my-fontconfig))
+  #:export (fontconfig-minimal-custom))
 
 (define fontconfig-minimal-custom
   (package
    (inherit fontconfig)
+   (name "fontconfig-minimal-custom")
    (arguments
     (substitute-keyword-arguments
      (package-arguments fontconfig)
@@ -27,7 +27,3 @@
                                                         "69-unifont.conf"
                                                         "80-delicious.conf"
                                                         "90-synthetic.conf")))))))))))
-
-(define with-my-fontconfig
-  (package-input-rewriting
-   `((,fontconfig . ,fontconfig-minimal-custom))))
