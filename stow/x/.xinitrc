@@ -1,10 +1,8 @@
 #!/bin/sh
-
 xrdb -merge ~/.Xresources
 
 xsettingsd &
 xdg-user-dirs &
+redshift &
 
-dbus-update-activation-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP
-
-exec emacs
+exec dbus-launch --exit-with-session emacs

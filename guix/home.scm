@@ -2,25 +2,27 @@
   #:use-module (gnu)
   #:use-module (gnu home)
   #:use-module (gnu home services)
+  #:use-module (gnu home services mpv)
   #:use-module (gnu home services desktop)
   #:use-module (gnu home services sound)
   #:use-module (gnu home services shells)
   #:use-module (gnu home services dotfiles)
   #:use-module (gnu home services shepherd)
   #:use-module (gnu home services fontutils)
+  #:use-module (gnu home services gnupg)
   #:use-module (nongnu packages fonts)
   #:use-module (ssbb home services dotfiles)
   #:use-module (ssbb packages emacs)
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
 	 (directories '("../stow"))
 	 (layout 'stow)
-	 (packages '("emacs" "x" "vc" "browser"))))
+	 (packages '("emacs" "x" "vc" "browser" "redshift"))))
 
 (define (font-alias family prefer-list)
   `(alias
@@ -41,6 +43,10 @@
                    emacs-vterm
                    emacs-multi-vterm
                    emacs-exwm
+                   xauth ;; used by emacs-xelb to get auth info
+                   gnupg
+                   ;; redshift home service is a bit annoying that it can't recover on X restart
+                   redshift
                    tree-sitter-elixir
                    tree-sitter-heex
                    fontconfig-minimal-custom
@@ -67,6 +73,8 @@
                    binutils
                    ripgrep
                    mpv
+                   password-store
+                   pass-otp
                    tree
                    stow
                    libva
@@ -93,7 +101,7 @@
       (simple-service 'profile-env-vars-service
                       home-environment-variables-service-type
                       '(("PATH" . "$HOME/.local/bin:$PATH")
-                        ("FREETYPE_PROPERTIES" . "cff:no-stem-darkening=0 cff:darkening-parameters=500,400,1000,350,1500,325,2000,300 autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,400,1000,350,1500,325,2000,300")
+                        ;; ("FREETYPE_PROPERTIES" . "cff:no-stem-darkening=0 cff:darkening-parameters=500,400,1000,350,1500,325,2000,300 autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,400,1000,350,1500,325,2000,300")
                         ("XDG_SESSION_TYPE" . "x11")
                         ("XDG_CURRENT_DESKTOP" . "exwm")
                         ("XDG_SESSION_DESKTOP" . "exwm")))
@@ -108,13 +116,13 @@
       (service home-dbus-service-type)
       (service home-x11-service-type)
 
-      (service home-redshift-service-type
-               (home-redshift-configuration
-                (location-provider 'manual)
-                (latitude 41.645895)
-                (longitude 41.628414)
-                (daytime-temperature 6500)
-                (nighttime-temperature 4000)))
+      ;; (service home-redshift-service-type
+      ;;          (home-redshift-configuration
+      ;;           (location-provider 'manual)
+      ;;           (latitude 41.645895)
+      ;;           (longitude 41.628414)
+      ;;           (daytime-temperature 6500)
+      ;;           (nighttime-temperature 4000)))
 
       (simple-service 'additional-fonts-service
                       home-fontconfig-service-type
@@ -133,26 +141,26 @@
                                ,(font-edit "autohint" #f)
                                ,(font-edit "antialias" #t)
                                ,(font-edit "hinting" #f)
-                               ,(font-edit "rgba" 'none)
+                               ,(font-edit "rgba" 'rgb)
                                ,(font-edit "hintstyle" 'hintnone)
-                               ,(font-edit "lcdfilter" 'lcdnone))))
+                               ,(font-edit "lcdfilter" 'lcddefault))))
 
-      (simple-service 'xiccd-service
-                      home-shepherd-service-type
-                      (list (shepherd-service
-                             (provision '(xiccd))
-                             (documentation "Run xiccd for colord integration")
-                             (requirement '(x11-display dbus))
-                             (modules '((srfi srfi-1)
-                                        (srfi srfi-26)))
-                             (start #~(lambda _
-                                        (fork+exec-command
-                                         (list #$(file-append xiccd "/bin/xiccd"))
-                                         #:environment-variables
-                                         (cons (string-append "DISPLAY=" (getenv "DISPLAY"))
-                                               (remove (cut string-prefix? "DISPLAY=" <>)
-                                                       (default-environment-variables))))))
-                             (stop #~(make-kill-destructor)))))
+      ;; (simple-service 'xiccd-service
+      ;;                 home-shepherd-service-type
+      ;;                 (list (shepherd-service
+      ;;                        (provision '(xiccd))
+      ;;                        (documentation "Run xiccd for colord integration")
+      ;;                        (requirement '(x11-display dbus))
+      ;;                        (modules '((srfi srfi-1)
+      ;;                                   (srfi srfi-26)))
+      ;;                        (start #~(lambda _
+      ;;                                   (fork+exec-command
+      ;;                                    (list #$(file-append xiccd "/bin/xiccd"))
+      ;;                                    #:environment-variables
+      ;;                                    (cons (string-append "DISPLAY=" (getenv "DISPLAY"))
+      ;;                                          (remove (cut string-prefix? "DISPLAY=" <>)
+      ;;                                                  (default-environment-variables))))))
+      ;;                        (stop #~(make-kill-destructor)))))
 
       (simple-service 'transmission-symlinks
                       home-activation-service-type
@@ -160,6 +168,20 @@
                           (let ((target (string-append (getenv "HOME") "/torrents")))
                             (when (not (file-exists? target))
                               (symlink "/var/lib/transmission-daemon/downloads" target)))))
+
+      (service home-gpg-agent-service-type
+               (home-gpg-agent-configuration
+                (pinentry-program (file-append pinentry-emacs "/bin/pinentry-emacs"))
+                (ssh-support? #t)))
+
+      (service home-mpv-service-type
+               (make-home-mpv-configuration
+                #:global (make-mpv-profile-configuration
+                          #:fullscreen? #t
+                          #:hwdec '("auto")
+                          #:sub-font "Iosevka Curly"
+                          #:osd-font "Iosevka Curly"
+                          #:alang '("rus" "eng"))))
 
       (service home-pipewire-service-type))
 

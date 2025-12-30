@@ -136,5 +136,19 @@
   :ensure nil
   :bind (("C-c j" . guix-dotfiles-jump)))
 
+(use-package ednc
+  :config
+  (ednc-mode))
+
+(use-package ednc-popup
+  :vc (:url "https://codeberg.org/akib/emacs-ednc-popup.git")
+  :config
+  (add-hook 'ednc-notification-presentation-functions
+            #'ednc-popup-presentation-function))
+
+(use-package pinentry
+  :config
+  (pinentry-start))
+
 (provide 'ssbb-desktop)
 ;;; ssbb-desktop.el ends here

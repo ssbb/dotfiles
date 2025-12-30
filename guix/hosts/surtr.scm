@@ -1,4 +1,4 @@
-(define-module (hosts thinkbb)
+(define-module (hosts surtr)
   #:use-module (ssbb system)
   #:use-module (gnu)
   #:use-module (guix utils)
@@ -7,8 +7,15 @@
 
 (operating-system
  (inherit base-operating-system)
- (kernel-arguments '("modprobe.blacklist=mtk_t7xx"))
- (host-name "thinkbb")
+ (kernel-arguments
+  (append
+   '("xe.force_probe=!a7a0"
+     "i915.force_probe=a7a0"
+     "modprobe.blacklist=mtk_t7xx")
+   %default-kernel-arguments))
+
+
+ (host-name "surtr")
 
  (mapped-devices (list (mapped-device
                         (source (uuid "4a875275-dfd6-4cf9-8491-9d0147e5dc80"))

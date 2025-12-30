@@ -10,7 +10,9 @@
   #:use-module (ssbb services kanata)
   #:use-module (ssbb services bolt)
   #:use-module (ssbb services authentication)
+  #:use-module (ssbb services pm)
   #:use-module (ssbb packages xorg)
+  #:use-module (ssbb packages pm)
   #:export (base-operating-system))
 
 (use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication file-sharing)
@@ -25,7 +27,6 @@
    (kernel linux)
    (initrd microcode-initrd)
    (firmware (list linux-firmware sof-firmware))
-
    (host-name "placeholder")
    (locale "en_US.utf8")
    (timezone "Asia/Tbilisi")
@@ -63,11 +64,12 @@
                     fwupd-nonfree
                     fprintd
                     powertop
-                    igt-gpu-tools
+                    throttled
                     tlp
                     bluez
                     %base-packages))
 
+   ;; (name-service-switch %mdns-host-lookup-nss)
    (services
     (append
      (modify-services %base-services
@@ -76,12 +78,12 @@
                       (delete console-font-service-type))
 
      (list
-      (service console-font-service-type
-               (map (lambda (tty)
-                      (cons tty (file-append
-                                 font-terminus
-                                 "/share/consolefonts/ter-132b")))
-                    '("tty1" "tty2" "tty3")))
+      ;; (service console-font-service-type
+      ;;          (map (lambda (tty)
+      ;;                 (cons tty (file-append
+      ;;                            font-terminus
+      ;;                            "/share/consolefonts/ter-132b")))
+      ;;               '("tty1" "tty2" "tty3")))
 
       (service greetd-service-type
                (greetd-configuration
@@ -169,8 +171,15 @@
                 (program (file-append xlockmore "/bin/xlock"))))
 
       (service bolt-service-type)
-      (service thermald-service-type)
-      (service tlp-service-type)
+      ;; (service thermald-service-type)
+      (service throttled-service-type
+               (throttled-configuration
+                (ac-pl1-tdp-w 28)
+                (ac-pl2-tdp-w 28)))
+      (service tlp-service-type
+               (tlp-configuration
+                (cpu-energy-perf-policy-on-ac "balance_performance")
+                (cpu-energy-perf-policy-on-bat "balance_power")))
 
       (service fprintd-service-type)
       (service fprintd-pam-service-type)
