@@ -19,6 +19,9 @@
 (savehist-mode)
 (recentf-mode)
 
+;; don't ask to kill processes on exit
+(setq confirm-kill-processes nil)
+
 ;; Encoding
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)

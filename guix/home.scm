@@ -16,7 +16,7 @@
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
@@ -60,6 +60,7 @@
                    font-apple-new-york
                    font-apple-symbols
                    font-apple-color-emoji
+                   ncurses ;; vterm shell integration uses tput from ncurses
                    xrandr
                    xsettingsd
                    xrdb
@@ -101,7 +102,8 @@
       (simple-service 'profile-env-vars-service
                       home-environment-variables-service-type
                       '(("PATH" . "$HOME/.local/bin:$PATH")
-                        ;; ("FREETYPE_PROPERTIES" . "cff:no-stem-darkening=0 cff:darkening-parameters=500,400,1000,350,1500,325,2000,300 autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,400,1000,350,1500,325,2000,300")
+                        ("FREETYPE_PROPERTIES" . "truetype:interpreter-version=40")
+                        ;; ("FREETYPE_PROPERTIES" . "truetype:interpreter-version=40 cff:no-stem-darkening=0 autofitter:no-stem-darkening=0")
                         ("XDG_SESSION_TYPE" . "x11")
                         ("XDG_CURRENT_DESKTOP" . "exwm")
                         ("XDG_SESSION_DESKTOP" . "exwm")))
@@ -140,9 +142,9 @@
                                ,(font-edit "embeddedbitmap" #f)
                                ,(font-edit "autohint" #f)
                                ,(font-edit "antialias" #t)
-                               ,(font-edit "hinting" #f)
+                               ,(font-edit "hinting" #t)
                                ,(font-edit "rgba" 'rgb)
-                               ,(font-edit "hintstyle" 'hintnone)
+                               ,(font-edit "hintstyle" 'hintslight)
                                ,(font-edit "lcdfilter" 'lcddefault))))
 
       ;; (simple-service 'xiccd-service
