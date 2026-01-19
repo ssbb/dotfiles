@@ -47,10 +47,6 @@
 
 (use-package posframe)
 
-(use-package nyan-mode
-  :config
-  (nyan-mode))
-
 (use-package doom-modeline
   :custom
   (doom-modeline-height (round (* (frame-char-height) 1.5)))
@@ -139,6 +135,22 @@
 (use-package which-key
   :config
   (which-key-mode))
+
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '(:internal-border-width 15
+          :header-line-width 4
+          :mode-line-width 6
+          :custom-button-width 3
+          :tab-width 4
+          :right-divider-width 30
+          :scroll-bar-width 8
+          :fringe-width 8))
+
+  (setq spacious-padding-subtle-mode-line t)
+
+  (spacious-padding-mode t))
 
 (provide 'ssbb-ui)
 ;;; ssbb-ui.el ends here
