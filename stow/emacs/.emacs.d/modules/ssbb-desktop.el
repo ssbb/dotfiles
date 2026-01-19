@@ -150,5 +150,7 @@
   :config
   (pinentry-start))
 
+(display-battery-mode)
+
 (provide 'ssbb-desktop)
 ;;; ssbb-desktop.el ends here
