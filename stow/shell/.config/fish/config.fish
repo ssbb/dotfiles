@@ -36,7 +36,13 @@ if command -q asdf
   if not contains $_asdf_shims $PATH
       set -gx --prepend PATH $_asdf_shims
   end
+
   set --erase _asdf_shims
+
+  function asdfshell -a tool tool_version
+      set -l tool (echo $tool | tr a-z A-Z)
+      set -gx ASDF_{$tool}_VERSION $tool_version
+  end
 end
 
 # Emacs vterm
