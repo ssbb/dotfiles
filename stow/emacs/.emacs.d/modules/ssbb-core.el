@@ -70,5 +70,17 @@
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
 (global-set-key (kbd "<C-wheel-down>") 'ignore)
 
+(use-package desktop
+  :ensure nil
+  :custom
+  (desktop-save t)
+  (desktop-load-locked-desktop t)
+  :config
+  (make-directory (expand-file-name "tmp/desktop/" user-emacs-directory) t)
+  (setq desktop-dirname (expand-file-name "tmp/desktop/" user-emacs-directory))
+  (setq desktop-path    (list desktop-dirname))
+
+  (desktop-save-mode 1))
+
 (provide 'ssbb-core)
 ;;; ssbb-core.el ends here

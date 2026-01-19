@@ -152,5 +152,11 @@
 
   (spacious-padding-mode t))
 
+(use-package tab-bar
+  :ensure nil
+  :config
+  (tab-bar-mode 1)
+  (tab-bar-history-mode 1))
+
 (provide 'ssbb-ui)
 ;;; ssbb-ui.el ends here
