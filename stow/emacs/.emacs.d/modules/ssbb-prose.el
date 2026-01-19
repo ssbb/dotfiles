@@ -11,8 +11,10 @@
 
   :custom
   (org-log-done 'time)
+  (org-imenu-depth 100)
+  (org-id-method 'org)
   :config
-  (add-to-list 'org-modules 'org-habit))
+   (add-to-list 'org-modules 'org-habit))
 
 (use-package org-ql)
 
