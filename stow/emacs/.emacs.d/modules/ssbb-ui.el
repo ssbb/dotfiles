@@ -23,9 +23,10 @@
     (set-face-attribute 'default nil :font "Iosevka Curly" :height 140)
   (set-face-attribute 'default nil :font "Iosevka Curly" :height 100))
 
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook))
+;; FIXME conflicts with desktop-save mode.
+;; (use-package dashboard
+;;   :config
+;;   (dashboard-setup-startup-hook))
 
 (use-package ultra-scroll
   :vc (:url "https://github.com/jdtsmith/ultra-scroll")

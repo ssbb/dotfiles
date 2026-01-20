@@ -182,6 +182,5 @@
   :after consult
   :bind (("C-c t" . consult-todo)))
 
-
 (provide 'ssbb-completion)
 ;;; ssbb-completion.el ends here

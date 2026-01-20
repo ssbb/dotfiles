@@ -32,6 +32,7 @@
   (vterm-shell "fish")
   (vterm-term-environment-variable "eterm-color")
   (vterm-kill-buffer-on-exit t)
+  (vterm-clear-scrollback-when-clearing t)
   :hook (vterm-mode . ssbb/vterm-setup)
   :config
   (defun ssbb/vterm-setup ()
