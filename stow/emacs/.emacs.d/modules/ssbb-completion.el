@@ -117,7 +117,7 @@
   ;; For some commands and buffer sources it is useful to configure the
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
 
-  (setq consult-buffer-list-function #'consult--frame-buffer-list)
+  ;; (setq consult-buffer-list-function #'consult--frame-buffer-list)
 
   (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
