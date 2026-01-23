@@ -155,7 +155,13 @@
 
 (use-package tab-bar
   :ensure nil
+  :custom
+  (tab-bar-tab-hints t)
+  (tab-bar-select-tab-modifiers '(super))
   :config
+  (add-to-list 'tab-bar-format 'tab-bar-format-align-right t)
+  (add-to-list 'tab-bar-format 'tab-bar-format-global t)
+
   (tab-bar-mode 1)
   (tab-bar-history-mode 1))
 
