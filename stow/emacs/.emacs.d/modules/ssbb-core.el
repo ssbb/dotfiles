@@ -79,8 +79,27 @@
   (make-directory (expand-file-name "tmp/desktop/" user-emacs-directory) t)
   (setq desktop-dirname (expand-file-name "tmp/desktop/" user-emacs-directory))
   (setq desktop-path    (list desktop-dirname))
-
   (desktop-save-mode 1))
+
+(use-package project
+  :ensure nil
+  :config
+  (defun ssbb/project-tab-or-switch (dir)
+    "Switch to existing project tab or create one."
+    (let ((name (file-name-nondirectory (directory-file-name dir))))
+      (if (seq-find (lambda (tab) (string= (alist-get 'name tab) name))
+                    (tab-bar-tabs))
+          (tab-bar-switch-to-tab name)
+        (tab-bar-new-tab)
+        (tab-bar-rename-tab name))))
+
+  (defun ssbb/project-kill-tab (&rest _)
+    "Close tab after killing project buffers."
+    (when (> (length (tab-bar-tabs)) 1)
+      (tab-bar-close-tab)))
+
+  (advice-add 'project-switch-project :before #'ssbb/project-tab-or-switch)
+  (advice-add 'project-kill-buffers :after #'ssbb/project-kill-tab))
 
 (provide 'ssbb-core)
 ;;; ssbb-core.el ends here

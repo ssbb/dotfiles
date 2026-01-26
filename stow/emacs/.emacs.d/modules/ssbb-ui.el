@@ -51,6 +51,8 @@
 (use-package doom-modeline
   :custom
   (doom-modeline-height (round (* (frame-char-height) 1.5)))
+  (doom-modeline-battery nil)
+  (doom-modeline-time nil)
   :init
   (doom-modeline-mode 1))
 
