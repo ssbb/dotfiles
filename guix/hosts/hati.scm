@@ -10,14 +10,14 @@
  (host-name "hati")
 
  (mapped-devices (list (mapped-device
-                        (source (uuid ""))
+                        (source (uuid "4cafb22e-f961-4852-9a1d-1775af124a41"))
                         (target "cryptroot")
                         (type luks-device-mapping)
                         (arguments '(#:key-file "/keyfile.bin")))))
 
  (file-systems (cons* (file-system
                        (mount-point "/boot/efi")
-                       (device (uuid "" 'fat32))
+                       (device (uuid "A825-8BA3" 'fat32))
                        (type "vfat"))
                       (file-system
                        (mount-point "/")
