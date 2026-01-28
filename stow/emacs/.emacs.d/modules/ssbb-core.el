@@ -95,8 +95,9 @@
 
   (defun ssbb/project-kill-tab (&rest _)
     "Close tab after killing project buffers."
-    (when (> (length (tab-bar-tabs)) 1)
-      (tab-bar-close-tab)))
+    (if (> (length (tab-bar-tabs)) 1)
+        (tab-bar-close-tab)
+      (tab-bar-rename-tab nil)))
 
   (advice-add 'project-switch-project :before #'ssbb/project-tab-or-switch)
   (advice-add 'project-kill-buffers :after #'ssbb/project-kill-tab))
