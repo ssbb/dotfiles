@@ -64,7 +64,7 @@
                     fwupd-nonfree
                     fprintd
                     powertop
-                    ;; throttled
+                    throttled
                     tlp
                     bluez
                     %base-packages))
@@ -172,10 +172,10 @@
 
       (service bolt-service-type)
       ;; (service thermald-service-type)
-      ;; (service throttled-service-type
-      ;;          (throttled-configuration
-      ;;           (ac-pl1-tdp-w 28)
-      ;;           (ac-pl2-tdp-w 28)))
+      (service throttled-service-type
+               (throttled-configuration
+                (ac-pl1-tdp-w 28)
+                (ac-pl2-tdp-w 28)))
       (service tlp-service-type
                (tlp-configuration
                 (cpu-energy-perf-policy-on-ac "balance_performance")
@@ -207,4 +207,4 @@
                 (rpc-whitelist '("127.0.0.1" "::1"))))
 
       (service kanata-service-type
-               (local-file "/home/ssbb/kanata.conf")))))))
+               (local-file "files/kanata.conf"))))))
