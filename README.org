@@ -1,0 +1,46 @@
+* ssbb's dotfiles
+** Guix installation
+[[https://guix.gnu.org/manual/devel/en/html_node/Keyboard-Layout-and-Networking-and-Partitioning.html][Partition disk]]
+
+#+begin_src sh
+herd start cow-store /mnt
+
+git clone https://github.com/ssbb/dotfiles
+
+mkdir -p ~/.config/guix
+cp dotfiles/stow/guix/.config/guix/channels.scm .config/guix/
+
+guix pull
+guix hash
+
+guix archive --authorize < dotfiles/guix/ssbb/files/nonguix-signing-key.pub
+
+guix system -L ~/dotfiles/guix init \
+  --substitute-urls='https://ci.guix.gnu.org https://bordeaux.guix.gnu.org https://substitutes.nonguix.org' \
+  dotfiles/guix/hosts/host.scm \
+  /mnt
+#+end_src
+
+*** Keyfile
+#+begin_src sh
+dd bs=512 count=4 if=/dev/random iflag=fullblock | install -m 0600 /dev/stdin /mnt/keyfile.bin
+cryptsetup luksAddKey /dev/nvme0n1p2 /mnt/keyfile.bin
+echo /mnt/keyfile.bin | cpio -oH newc > /mnt/keyfile.cpio
+#+end_src
+
+Optionally reduce number of iterations for primary key
+#+begin_src sh
+cryptsetup luksChangeKey /dev/nvme0n1p2 --key-slot 0 --pbkdf pbkdf2 --pbkdf-force-iterations 500000
+#+end_src
+
+** Post-install
+#+begin_src sh
+guix shell stow
+
+git pull git@github.com:ssbb/dotfiles.git
+cd dotfiles/stow
+stow -t $HOME guix
+
+guix pull
+~/.local/bin/roll both
+#+end_src
