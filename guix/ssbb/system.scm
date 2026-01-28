@@ -10,9 +10,7 @@
   #:use-module (ssbb services kanata)
   #:use-module (ssbb services bolt)
   #:use-module (ssbb services authentication)
-  #:use-module (ssbb services pm)
   #:use-module (ssbb packages xorg)
-  #:use-module (ssbb packages pm)
   #:export (base-operating-system))
 
 (use-service-modules cups desktop networking dns ssh xorg avahi dbus admin pm authentication file-sharing)
@@ -64,7 +62,6 @@
                     fwupd-nonfree
                     fprintd
                     powertop
-                    throttled
                     tlp
                     bluez
                     %base-packages))
@@ -171,11 +168,7 @@
                 (program (file-append xlockmore "/bin/xlock"))))
 
       (service bolt-service-type)
-      ;; (service thermald-service-type)
-      (service throttled-service-type
-               (throttled-configuration
-                (ac-pl1-tdp-w 28)
-                (ac-pl2-tdp-w 28)))
+
       (service tlp-service-type
                (tlp-configuration
                 (cpu-energy-perf-policy-on-ac "balance_performance")

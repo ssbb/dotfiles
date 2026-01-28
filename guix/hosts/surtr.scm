@@ -1,5 +1,7 @@
 (define-module (hosts surtr)
   #:use-module (ssbb system)
+  #:use-module (ssbb services pm)
+  #:use-module (ssbb packages pm)
   #:use-module (gnu)
   #:use-module (guix utils)
   #:use-module (gnu services pm)
@@ -32,11 +34,19 @@
                        (device "/dev/mapper/cryptroot")
                        (type "ext4")
                        (dependencies mapped-devices)) %base-file-systems))
+ (packages (cons* throttled
+                  (operating-system-packages base-operating-system)))
 
  (services
-  (modify-services
-   (operating-system-user-services base-operating-system)
-   (tlp-service-type config =>
-                     (tlp-configuration
-                      (inherit config)
-                      (runtime-pm-blacklist (list "08:00.0")))))))
+  (append
+   (modify-services
+    (operating-system-user-services base-operating-system)
+    (tlp-service-type config =>
+                      (tlp-configuration
+                       (inherit config)
+                       (runtime-pm-blacklist (list "08:00.0")))))
+   (list
+    (service throttled-service-type
+             (throttled-configuration
+              (ac-pl1-tdp-w 28)
+              (ac-pl2-tdp-w 28)))))))
