@@ -207,4 +207,4 @@
                 (rpc-whitelist '("127.0.0.1" "::1"))))
 
       (service kanata-service-type
-               (local-file "files/kanata.conf"))))))
+               (local-file "files/kanata.conf")))))))
