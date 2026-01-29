@@ -1,7 +1,6 @@
 #!/bin/sh
 xrdb -merge ~/.Xresources
 
-xsettingsd &
 xdg-user-dirs &
 redshift &
 

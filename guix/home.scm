@@ -62,7 +62,6 @@
                    font-apple-color-emoji
                    ncurses ;; vterm shell integration uses tput from ncurses
                    xrandr
-                   xsettingsd
                    xrdb
                    xdg-user-dirs
                    colord-minimal

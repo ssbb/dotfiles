@@ -117,6 +117,15 @@
       "EXWM buffer source.")
     (add-to-list 'consult-buffer-sources 'consult-source-exwm 'append))
 
+  (setq exwm-xsettings-theme '("Adwaita" . "Adwaita-dark")
+        exwm-xsettings `(("Gtk/FontName" . "system-ui 10")
+                         ("Xft/RGBA" . "rgb")
+                         ("Xft/lcdfilter" . "lcddefault")
+                         ("Xft/Antialias" . 1)
+                         ("Xft/DPI" . ,(* 120 1024))
+                         ("Xft/Hinting" . 1)
+                         ("Xft/HintStyle" . "hintslight")))
+  (exwm-xsettings-mode 1)
   (exwm-wm-mode))
 
 (use-package screenshot
