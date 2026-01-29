@@ -81,5 +81,11 @@
   (setq desktop-path    (list desktop-dirname))
   (desktop-save-mode 1))
 
+(use-package server
+  :ensure nil
+  :config
+  (unless (server-running-p)
+    (server-start)))
+
 (provide 'ssbb-core)
 ;;; ssbb-core.el ends here

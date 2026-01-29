@@ -126,6 +126,7 @@
                          ("Xft/Hinting" . 1)
                          ("Xft/HintStyle" . "hintslight")))
   (exwm-xsettings-mode 1)
+  (exwm-background-mode 1)
   (exwm-wm-mode))
 
 (use-package screenshot
@@ -160,6 +161,17 @@
 
 (display-battery-mode)
 (display-time-mode)
+
+(use-package qutebrowser
+  :vc (:url "https://github.com/lrustand/qutebrowser.el" :rev "master")
+  :config
+  (setq qutebrowser-pass--username
+        (apply-partially #'auth-source-pass-get "login"))
+
+  (qutebrowser-rpc-ensure-installed)
+  (qutebrowser-theme-export-mode 1)
+  (global-qutebrowser-doom-modeline-mode 1)
+  (global-qutebrowser-exwm-mode))
 
 (provide 'ssbb-desktop)
 ;;; ssbb-desktop.el ends here

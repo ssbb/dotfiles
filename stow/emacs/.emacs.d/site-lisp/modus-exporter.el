@@ -252,7 +252,7 @@
 "ColorSelectionBackground=" bg-region "\n"
 "ColorSelection=" fg-main "\n")))))
 
-;;;; Windows terminal template 
+;;;; Windows terminal template
 
 (defun modus-themes-exporter-windows-terminal ()
   "Template for Windows Terminal."
