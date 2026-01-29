@@ -21,19 +21,6 @@
   :config
   (add-to-list 'org-modules 'org-habit))
 
-(use-package org-modern-indent
-  :vc (:url "https://github.com/jdtsmith/org-modern-indent")
-  :config
-  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
-
-(use-package org-modern
-  :custom
-  (org-modern-star 'replace)
-  (org-modern-hide-stars nil)
-  (org-modern-table nil)
-  :config
-  (global-org-modern-mode))
-
 (use-package org-ql)
 
 (use-package htmlize)
