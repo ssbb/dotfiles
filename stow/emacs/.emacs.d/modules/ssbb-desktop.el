@@ -1,5 +1,4 @@
 ;;; ssbb-desktop.el --- EXWM configuration -*- lexical-binding: t -*-
-
 ;;; Commentary:
 
 ;;; Code:
@@ -151,6 +150,7 @@
   (pinentry-start))
 
 (display-battery-mode)
+(display-time-mode)
 
 (provide 'ssbb-desktop)
 ;;; ssbb-desktop.el ends here
