@@ -66,7 +66,6 @@
                     bluez
                     %base-packages))
 
-   ;; (name-service-switch %mdns-host-lookup-nss)
    (services
     (append
      (modify-services %base-services
