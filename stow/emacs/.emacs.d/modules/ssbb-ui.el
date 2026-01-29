@@ -142,7 +142,7 @@
 (use-package spacious-padding
   :config
   (setq spacious-padding-widths
-        '(:internal-border-width 15
+        '(:internal-border-width 0
           :header-line-width 4
           :mode-line-width 6
           :custom-button-width 3
