@@ -22,7 +22,7 @@
  	(home-dotfiles-configuration
 	 (directories '("../stow"))
 	 (layout 'stow)
-	 (packages '("emacs" "x" "vc" "browser" "redshift"))))
+	 (packages '("emacs" "x" "vc" "browser" "redshift" "qutebrowser"))))
 
 (define (font-alias family prefer-list)
   `(alias
