@@ -47,14 +47,8 @@
     (message "Color scheme: %s" new-scheme)))
 
 (use-package exwm
-  :custom
-  (exwm-workspace-number 4)
-
   :config
   (require 'exwm)
-
-  (setq exwm-workspace-index-map
-        (lambda (i) (number-to-string (1+ i))))
 
   (defun ssbb/exwm-rename-buffer ()
     (exwm-workspace-rename-buffer
@@ -78,14 +72,7 @@
 
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
-          ([?\s-w] . exwm-workspace-switch)
           ([?\s-!] . consult-omni)
-          ,@(mapcar (lambda (i)
-                      `(,(kbd (format "s-%d" i)) .
-                        (lambda ()
-                          (interactive)
-                          (exwm-workspace-switch-create ,i))))
-                    (number-sequence 1 9))
           ([XF86AudioRaiseVolume] . ssbb/audio-volume-up)
           ([XF86AudioLowerVolume] . ssbb/audio-volume-down)
           ([XF86AudioMute]        . ssbb/audio-mute-toggle)
