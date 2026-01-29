@@ -168,9 +168,10 @@
       (simple-service 'transmission-symlinks
                       home-activation-service-type
                       #~(begin
-                          (let ((target (string-append (getenv "HOME") "/torrents")))
-                            (when (not (file-exists? target))
-                              (symlink "/var/lib/transmission-daemon/downloads" target)))))
+                          (let ((target (string-append (getenv "HOME") "/torrents"))
+                                (source "/var/lib/transmission-daemon/downloads"))
+                            (unless (false-if-exception (lstat target))
+                              (symlink source target)))))
 
       (service home-gpg-agent-service-type
                (home-gpg-agent-configuration
