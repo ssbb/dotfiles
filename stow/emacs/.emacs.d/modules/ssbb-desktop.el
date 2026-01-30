@@ -57,6 +57,8 @@
   (add-hook 'exwm-update-class-hook 'ssbb/exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'ssbb/exwm-rename-buffer)
 
+  (setq exwm-workspace-number 1)
+
   (setq exwm-input-simulation-keys
         '(([?\C-b] . [left])
           ([?\C-f] . [right])
