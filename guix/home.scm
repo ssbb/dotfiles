@@ -16,7 +16,7 @@
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
@@ -45,6 +45,7 @@
                    emacs-exwm
                    xauth ;; used by emacs-xelb to get auth info
                    gnupg
+                   polkit-gnome
                    ;; redshift home service is a bit annoying that it can't recover on X restart
                    redshift
                    tree-sitter-elixir
