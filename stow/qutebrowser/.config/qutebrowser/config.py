@@ -3,6 +3,8 @@ config.load_autoconfig(False)
 c.tabs.tabs_are_windows = True
 c.tabs.show = "never"
 
+c.statusbar.show = "never"
+
 c.new_instance_open_target = "window"
 
 config.bind("o", "emacs '(qutebrowser-launcher)'")

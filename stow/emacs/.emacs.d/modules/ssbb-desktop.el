@@ -146,8 +146,19 @@
   :config
   (pinentry-start))
 
-(display-battery-mode)
-(display-time-mode)
+(use-package battery
+  :custom
+  (battery-mode-line-format " Bat: %b%p%% ")
+  :config
+  (display-battery-mode))
+
+(use-package time
+  :ensure nil
+  :custom
+  (display-time-format "%a %b %d, %I:%M%p")
+  (display-time-default-load-average nil)
+  :config
+  (display-time-mode))
 
 (use-package qutebrowser
   :vc (:url "https://github.com/lrustand/qutebrowser.el" :rev "master")
