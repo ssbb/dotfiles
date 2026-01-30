@@ -19,6 +19,6 @@
 	            "0skirmz6rc0845960957b19kvlbfpg5k9gs6hq8agsmhlc6hk33z"))))
    (build-system font-build-system)
    (home-page "https://www.nerdfonts.com")
-   (synopsis "Iosevka Nerd ")
+   (synopsis "Nerd Fonts Symbols")
    (license license:expat)
-   (description "Nerd-Fonts is the iconic font aggregator, collection, and patcher. This is only the Iosevka font.")))
+   (description "Nerd-Fonts is the iconic font aggregator, collection, and patcher. This is only the Symbols.")))

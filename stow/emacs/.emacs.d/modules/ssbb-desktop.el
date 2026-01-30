@@ -57,6 +57,8 @@
   (add-hook 'exwm-update-class-hook 'ssbb/exwm-rename-buffer)
   (add-hook 'exwm-update-title-hook 'ssbb/exwm-rename-buffer)
 
+  (setq exwm-workspace-number 1)
+
   (setq exwm-input-simulation-keys
         '(([?\C-b] . [left])
           ([?\C-f] . [right])
@@ -73,6 +75,14 @@
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
           ([?\s-!] . consult-omni)
+          ;; s-N: Switch to certain tab
+          ;; it's handled by tab-bar-mode already but we repeat here to make them global
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        (lambda ()
+                          (interactive)
+                          (tab-bar-select-tab i))))
+                    (number-sequence 1 9))
           ([XF86AudioRaiseVolume] . ssbb/audio-volume-up)
           ([XF86AudioLowerVolume] . ssbb/audio-volume-down)
           ([XF86AudioMute]        . ssbb/audio-mute-toggle)
@@ -142,14 +152,10 @@
   (add-hook 'ednc-notification-presentation-functions
             #'ednc-popup-presentation-function))
 
-(use-package pinentry
-  :config
-  (pinentry-start))
-
 (use-package battery
   :after nerd-icons
   :init
-  (defun my/battery-mode-line ()
+  (defun ssbb/battery-mode-line ()
     (let* ((data (funcall battery-status-function))
            (status (alist-get ?L data))
            (charging (or (string= status "AC")
@@ -166,12 +172,11 @@
                   ((>= percent 20) (if charging "nf-md-battery_charging_20" "nf-md-battery_20"))
                   ((>= percent 10) (if charging "nf-md-battery_charging_10" "nf-md-battery_10"))
                   (t (if charging "nf-md-battery_charging_outline" "nf-md-battery_alert")))))
-      (format " %s %d%%%% " (nerd-icons-mdicon icon) percent)))
+      (format " %s %d%%%% " (nerd-icons-mdicon icon :v-adjust 0.1) percent)))
   :config
   (setq battery-mode-line-format "")
-  (setq global-mode-string
-        (append global-mode-string '((:eval (my/battery-mode-line)))))
-  (display-battery-mode 1))
+  (add-to-list 'global-mode-string '(:eval (ssbb/battery-mode-line)) t)
+  (display-battery-mode))
 
 (use-package time
   :ensure nil
@@ -191,6 +196,10 @@
   (qutebrowser-theme-export-mode 1)
   (global-qutebrowser-doom-modeline-mode 1)
   (global-qutebrowser-exwm-mode))
+
+(use-package pinentry
+  :config
+  (pinentry-start))
 
 (provide 'ssbb-desktop)
 ;;; ssbb-desktop.el ends here
