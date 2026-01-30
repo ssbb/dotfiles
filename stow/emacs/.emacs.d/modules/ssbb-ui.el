@@ -164,8 +164,7 @@
   (add-to-list 'tab-bar-format 'tab-bar-format-align-right t)
   (add-to-list 'tab-bar-format 'tab-bar-format-global t)
 
-  (tab-bar-mode 1)
-  (tab-bar-history-mode 1))
+  (tab-bar-mode 1))
 
 (provide 'ssbb-ui)
 ;;; ssbb-ui.el ends here
