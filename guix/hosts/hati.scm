@@ -6,7 +6,7 @@
   #:use-module (gnu services xorg))
 
 (operating-system
- (inherit base-operating-system)
+ (inherit (base-operating-system 'amd))
  (host-name "hati")
  (kernel-arguments
   (append

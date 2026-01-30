@@ -8,7 +8,7 @@
   #:use-module (gnu services xorg))
 
 (operating-system
- (inherit base-operating-system)
+ (inherit (base-operating-system 'intel))
  (kernel-arguments
   (append
    '("xe.force_probe=!a7a0"

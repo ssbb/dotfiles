@@ -20,7 +20,7 @@
   (let ((path (string-append (current-source-directory) "/" filename)))
     (call-with-input-file path get-string-all)))
 
-(define base-operating-system
+(define (base-operating-system gpu)
   (operating-system
    (kernel linux)
    (initrd microcode-initrd)
@@ -155,10 +155,10 @@
       (service x11-socket-directory-service-type)
       (service startx-command-service-type
                (xorg-configuration
-                (server xorg-server-tearfree)
-                (drivers '("modesetting"))
+                (server (if (eq? gpu 'intel) xorg-server-tearfree xorg-server))
+                (drivers (if (eq? gpu 'intel) '("modesetting") '()))
                 (extra-config
-                 (list (read-relative-file "./files/xorg/intel_video.conf")
+                 (list (read-relative-file "./files/xorg/video.conf")
                        (read-relative-file "./files/xorg/touchpad.conf")))))
 
       (service screen-locker-service-type
