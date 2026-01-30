@@ -147,10 +147,31 @@
   (pinentry-start))
 
 (use-package battery
-  :custom
-  (battery-mode-line-format " Bat: %b%p%% ")
+  :after nerd-icons
+  :init
+  (defun my/battery-mode-line ()
+    (let* ((data (funcall battery-status-function))
+           (status (alist-get ?L data))
+           (charging (or (string= status "AC")
+                         (string= status "on-line")))
+           (percent (string-to-number (or (alist-get ?p data) "0")))
+           (icon (cond
+                  ((>= percent 90) (if charging "nf-md-battery_charging_90" "nf-md-battery_90"))
+                  ((>= percent 80) (if charging "nf-md-battery_charging_80" "nf-md-battery_80"))
+                  ((>= percent 70) (if charging "nf-md-battery_charging_70" "nf-md-battery_70"))
+                  ((>= percent 60) (if charging "nf-md-battery_charging_60" "nf-md-battery_60"))
+                  ((>= percent 50) (if charging "nf-md-battery_charging_50" "nf-md-battery_50"))
+                  ((>= percent 40) (if charging "nf-md-battery_charging_40" "nf-md-battery_40"))
+                  ((>= percent 30) (if charging "nf-md-battery_charging_30" "nf-md-battery_30"))
+                  ((>= percent 20) (if charging "nf-md-battery_charging_20" "nf-md-battery_20"))
+                  ((>= percent 10) (if charging "nf-md-battery_charging_10" "nf-md-battery_10"))
+                  (t (if charging "nf-md-battery_charging_outline" "nf-md-battery_alert")))))
+      (format " %s %d%%%% " (nerd-icons-mdicon icon) percent)))
   :config
-  (display-battery-mode))
+  (setq battery-mode-line-format "")
+  (setq global-mode-string
+        (append global-mode-string '((:eval (my/battery-mode-line)))))
+  (display-battery-mode 1))
 
 (use-package time
   :ensure nil
