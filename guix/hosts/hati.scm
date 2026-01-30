@@ -8,7 +8,10 @@
 (operating-system
  (inherit base-operating-system)
  (host-name "hati")
-
+ (kernel-arguments
+  (append
+   '("amdgpu.dcdebugmask=0x10")
+   %default-kernel-arguments))
  (mapped-devices (list (mapped-device
                         (source (uuid "4cafb22e-f961-4852-9a1d-1775af124a41"))
                         (target "cryptroot")
