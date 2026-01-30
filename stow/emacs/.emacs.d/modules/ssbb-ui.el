@@ -139,21 +139,21 @@
   :config
   (which-key-mode))
 
-;; (use-package spacious-padding
-;;   :config
-;;   (setq spacious-padding-widths
-;;         '(:internal-border-width 0
-;;           :header-line-width 4
-;;           :mode-line-width 6
-;;           :custom-button-width 3
-;;           :tab-width 4
-;;           :right-divider-width 30
-;;           :scroll-bar-width 8
-;;           :fringe-width 8))
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '(:internal-border-width 0
+          :header-line-width 4
+          :mode-line-width 6
+          :custom-button-width 3
+          :tab-width 8
+          :right-divider-width 1
+          :scroll-bar-width 8
+          :fringe-width 8))
 
-;;   (setq spacious-padding-subtle-mode-line t)
+  ;; (setq spacious-padding-subtle-mode-line nil)
 
-;;   (spacious-padding-mode t))
+  (spacious-padding-mode t))
 
 (use-package tab-bar
   :ensure nil
