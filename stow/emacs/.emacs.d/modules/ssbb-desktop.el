@@ -73,6 +73,14 @@
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
           ([?\s-!] . consult-omni)
+          ;; s-N: Switch to certain tab
+          ;; it's handled by tab-bar-mode already but we repeat here to make them global
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        (lambda ()
+                          (interactive)
+                          (tab-bar-select-tab i))))
+                    (number-sequence 1 9))
           ([XF86AudioRaiseVolume] . ssbb/audio-volume-up)
           ([XF86AudioLowerVolume] . ssbb/audio-volume-down)
           ([XF86AudioMute]        . ssbb/audio-mute-toggle)
