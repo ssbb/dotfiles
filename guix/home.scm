@@ -16,7 +16,7 @@
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit engineering gtk)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
@@ -70,6 +70,9 @@
                    gsettings-desktop-schemas
                    xdg-desktop-portal
                    xdg-desktop-portal-gtk
+                   ;; gtk schemas does not appear in compiled schema file without including gtk excplicitly here
+                   ;; probably there is better way to do it though?
+                   gtk+
                    (list glib "bin")
                    binutils
                    ripgrep
@@ -86,6 +89,9 @@
                    starship
                    kanata
                    htop
+
+                   kicad kicad-symbols kicad-footprints kicad-packages3d kicad-templates
+
                    dbus))
 
    (services
