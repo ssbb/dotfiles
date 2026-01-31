@@ -155,7 +155,9 @@
 (use-package battery
   :after nerd-icons
   :init
-  (defun ssbb/battery-mode-line ()
+  (defvar ssbb/battery-mode-line-string "")
+
+  (defun ssbb/battery-update ()
     (let* ((data (funcall battery-status-function))
            (status (alist-get ?L data))
            (charging (or (string= status "AC")
@@ -172,10 +174,13 @@
                   ((>= percent 20) (if charging "nf-md-battery_charging_20" "nf-md-battery_20"))
                   ((>= percent 10) (if charging "nf-md-battery_charging_10" "nf-md-battery_10"))
                   (t (if charging "nf-md-battery_charging_outline" "nf-md-battery_alert")))))
-      (format " %s %d%%%% " (nerd-icons-mdicon icon :v-adjust 0.1) percent)))
+      (setq ssbb/battery-mode-line-string
+            (format " %s %d%%%% " (nerd-icons-mdicon icon :v-adjust 0.1) percent))))
+
   :config
   (setq battery-mode-line-format "")
-  (add-to-list 'global-mode-string '(:eval (ssbb/battery-mode-line)) t)
+  (add-to-list 'global-mode-string 'ssbb/battery-mode-line-string t)
+  (advice-add #'battery-update :after #'ssbb/battery-update)
   (display-battery-mode))
 
 (use-package time
