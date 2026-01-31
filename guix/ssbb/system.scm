@@ -3,6 +3,7 @@
   #:use-module (gnu system setuid)
   #:use-module (guix utils)
   #:use-module (ice-9 textual-ports)
+  #:use-module (ice-9 match)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu packages video)
   #:use-module (nongnu packages firmware)
@@ -49,7 +50,8 @@
    (groups (cons (user-group (system? #t) (name "realtime"))
                  %base-groups))
 
-   (packages (cons* font-terminus
+   (packages (append
+              (list font-terminus
 		                git
                     cmake
                     fish
@@ -58,13 +60,15 @@
                     brillo
                     libva-utils
                     bolt
-                    intel-media-driver/nonfree
                     fwupd-nonfree
                     fprintd
                     powertop
                     tlp
-                    bluez
-                    %base-packages))
+                    bluez)
+              (match gpu
+                ('intel (list intel-media-driver/nonfree))
+                ('amd '()))
+              %base-packages))
 
    (services
     (append
