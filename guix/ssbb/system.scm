@@ -1,6 +1,7 @@
 (define-module (ssbb system)
   #:use-module (gnu)
   #:use-module (gnu system setuid)
+  #:use-module (gnu system privilege)
   #:use-module (guix utils)
   #:use-module (ice-9 textual-ports)
   #:use-module (ice-9 match)
@@ -64,16 +65,24 @@
                     fprintd
                     powertop
                     tlp
+                    xsecurelock
                     bluez)
               (match gpu
                 ('intel (list intel-media-driver/nonfree))
                 ('amd '()))
               %base-packages))
 
+   (privileged-programs
+    (cons*
+     (privileged-program
+      (program (file-append xsecurelock "/libexec/xsecurelock/authproto_pam"))
+      (setuid? #t))
+      %default-privileged-programs))
+
    (services
     (append
      (modify-services %base-services
-                      (delete login-service-type)
+                      ;; (delete login-service-type)
                       (delete mingetty-service-type)
                       (delete console-font-service-type))
 
@@ -164,11 +173,6 @@
                 (extra-config
                  (list (read-relative-file "./files/xorg/video.conf")
                        (read-relative-file "./files/xorg/touchpad.conf")))))
-
-      (service screen-locker-service-type
-               (screen-locker-configuration
-                (name "xlock")
-                (program (file-append xlockmore "/bin/xlock"))))
 
       (service bolt-service-type)
 

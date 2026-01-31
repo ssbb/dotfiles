@@ -89,6 +89,8 @@
                    starship
                    kanata
                    htop
+                   xset
+                   xss-lock
 
                    kicad kicad-symbols kicad-footprints kicad-packages3d kicad-templates
 
