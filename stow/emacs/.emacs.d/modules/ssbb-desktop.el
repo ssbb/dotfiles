@@ -179,7 +179,7 @@
 
   :config
   (setq battery-mode-line-format "")
-  (add-to-list 'global-mode-string 'ssbb/battery-mode-line-string t)
+  (add-to-list 'global-mode-string '(:eval ssbb/battery-mode-line-string) t)
   (advice-add #'battery-update :after #'ssbb/battery-update)
   (display-battery-mode))
 
