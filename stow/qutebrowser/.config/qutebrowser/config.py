@@ -1,5 +1,10 @@
 config.load_autoconfig(False)
 
+c.qt.args = [
+    "ignore-gpu-blocklist",
+    "enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecodeLinuxGL"
+]
+
 c.tabs.tabs_are_windows = True
 c.tabs.show = "never"
 
