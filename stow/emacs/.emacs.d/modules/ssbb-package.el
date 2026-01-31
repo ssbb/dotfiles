@@ -13,12 +13,11 @@
   (setq package-enable-at-startup nil)
   (package-initialize))
 
-(require 'use-package)
-
 ;; Automatically install packages
 (setq use-package-always-ensure t
       use-package-enable-imenu-support t)
 
+(require 'use-package)
 (require 'use-package-ensure)
 
 (provide 'ssbb-package)
