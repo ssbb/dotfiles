@@ -30,4 +30,6 @@ config.bind(',p', "emacs '(qutebrowser-pass \"{url}\")'")
 config.bind(',P', "emacs '(qutebrowser-pass-password-only \"{url}\")'")
 config.bind(',o', "emacs '(qutebrowser-pass-otp \"{url}\")'")
 
+config.bind('<Ctrl-i>', "edit-text")
+
 config.source("emacs_theme.py")

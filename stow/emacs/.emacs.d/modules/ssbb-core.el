@@ -84,6 +84,7 @@
 (use-package server
   :ensure nil
   :config
+  (add-hook 'server-switch-hook #'with-editor-mode)
   (unless (server-running-p)
     (server-start)))
 
