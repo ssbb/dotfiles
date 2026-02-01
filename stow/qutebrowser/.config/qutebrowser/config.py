@@ -5,12 +5,19 @@ c.qt.args = [
     "enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecodeLinuxGL"
 ]
 
+c.editor.command = ["emacsclient", "+{line}:{column}", "{file}"]
+
+c.new_instance_open_target = "window"
+c.new_instance_open_target_window = "last-visible"
+
 c.tabs.tabs_are_windows = True
 c.tabs.show = "never"
 
 c.statusbar.show = "never"
 
-c.new_instance_open_target = "window"
+c.fonts.default_family = "monospace"
+
+c.hints.chars = "arstgneio"  # colemak dh
 
 config.bind("o", "emacs '(qutebrowser-launcher)'")
 config.bind("O", "emacs '(qutebrowser-launcher-tab)'")
