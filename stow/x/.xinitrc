@@ -1,6 +1,8 @@
 #!/bin/sh
 xrdb -merge ~/.Xresources
 
+xsetroot -cursor_name left_ptr
+
 ~/.guix-home/profile/libexec/polkit-gnome-authentication-agent-1 &
 xdg-user-dirs &
 redshift &
