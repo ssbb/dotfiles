@@ -46,6 +46,11 @@
                   "set" "org.gnome.desktop.interface" "color-scheme" new-scheme)
     (message "Color scheme: %s" new-scheme)))
 
+(defun ssbb/lock-screen ()
+  "Lock the screen via xset."
+  (interactive)
+  (start-process "lock" nil "xset" "s" "activate"))
+
 (use-package exwm
   :config
   (require 'exwm)
@@ -75,6 +80,7 @@
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
           ([?\s-!] . consult-omni)
+          ([?\s-l] . ssbb/lock-screen)
           ;; s-N: Switch to certain tab
           ;; it's handled by tab-bar-mode already but we repeat here to make them global
           ,@(mapcar (lambda (i)
