@@ -12,11 +12,10 @@
   #:use-module (gnu home services gnupg)
   #:use-module (nongnu packages fonts)
   #:use-module (ssbb home services dotfiles)
-  #:use-module (ssbb packages emacs)
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit engineering gtk)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit engineering gtk emacs)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
@@ -39,7 +38,7 @@
 
 (define home-config
   (home-environment
-   (packages (list emacs-lucid-xinput2
+   (packages (list emacs
                    emacs-vterm
                    emacs-multi-vterm
                    emacs-exwm
@@ -91,9 +90,9 @@
                    htop
                    xset
                    xss-lock
-
+                   xsetroot
                    kicad kicad-symbols kicad-footprints kicad-packages3d kicad-templates
-
+                   adwaita-icon-theme
                    dbus))
 
    (services
