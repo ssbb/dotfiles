@@ -154,23 +154,6 @@
                                ,(font-edit "hintstyle" 'hintslight)
                                ,(font-edit "lcdfilter" 'lcddefault))))
 
-      ;; (simple-service 'xiccd-service
-      ;;                 home-shepherd-service-type
-      ;;                 (list (shepherd-service
-      ;;                        (provision '(xiccd))
-      ;;                        (documentation "Run xiccd for colord integration")
-      ;;                        (requirement '(x11-display dbus))
-      ;;                        (modules '((srfi srfi-1)
-      ;;                                   (srfi srfi-26)))
-      ;;                        (start #~(lambda _
-      ;;                                   (fork+exec-command
-      ;;                                    (list #$(file-append xiccd "/bin/xiccd"))
-      ;;                                    #:environment-variables
-      ;;                                    (cons (string-append "DISPLAY=" (getenv "DISPLAY"))
-      ;;                                          (remove (cut string-prefix? "DISPLAY=" <>)
-      ;;                                                  (default-environment-variables))))))
-      ;;                        (stop #~(make-kill-destructor)))))
-
       (simple-service 'transmission-symlinks
                       home-activation-service-type
                       #~(begin
