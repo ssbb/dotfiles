@@ -6,7 +6,6 @@
 
 (setq user-full-name ssbb/full-name
       user-mail-address ssbb/email
-
       use-short-answers t
       vc-follow-symlinks t
       visible-bell t
@@ -17,7 +16,12 @@
 (column-number-mode t)
 (indent-tabs-mode nil)
 (savehist-mode)
-(recentf-mode)
+
+(use-package recentf
+  :custom
+  (recentf-exclude (list "/tmp/" "/scp:" "/ssh:" "/sudo:" "COMMIT_EDITMSG"))
+  :config
+  (recentf-mode))
 
 ;; don't ask to kill processes on exit
 (setq confirm-kill-processes nil)
