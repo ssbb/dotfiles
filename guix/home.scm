@@ -15,7 +15,7 @@
   #:use-module (ssbb packages fonts)
   #:use-module (ssbb packages fontutils))
 
-(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux chromium shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit engineering gtk emacs)
+(use-package-modules emacs-xyz tree-sitter xorg fonts gnome xdisorg freedesktop admin package-management video linux shellutils rust-apps glib shells gnupg password-utils ncurses web-browsers polkit engineering gtk emacs)
 
 (define my-dotfiles-config
  	(home-dotfiles-configuration
@@ -83,7 +83,6 @@
                    libva
                    wireplumber
                    v4l-utils
-                   ungoogled-chromium
                    qutebrowser
                    starship
                    kanata
