@@ -125,14 +125,6 @@
       (service home-dbus-service-type)
       (service home-x11-service-type)
 
-      ;; (service home-redshift-service-type
-      ;;          (home-redshift-configuration
-      ;;           (location-provider 'manual)
-      ;;           (latitude 41.645895)
-      ;;           (longitude 41.628414)
-      ;;           (daytime-temperature 6500)
-      ;;           (nighttime-temperature 4000)))
-
       (simple-service 'additional-fonts-service
                       home-fontconfig-service-type
                       (list (font-alias "serif" '("New York" "Apple Color Emoji"))
