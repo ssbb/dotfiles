@@ -199,7 +199,14 @@
 
 (use-package qutebrowser
   :vc (:url "https://github.com/lrustand/qutebrowser.el" :rev "master")
+  :bind ("C-c o" . ssbb/browse-url)
   :config
+  (defun ssbb/browse-url (arg)
+    (interactive "P")
+    (if arg
+        (qutebrowser-launcher-private)
+      (qutebrowser-launcher)))
+
   (setq qutebrowser-pass--username
         (apply-partially #'auth-source-pass-get "login"))
 

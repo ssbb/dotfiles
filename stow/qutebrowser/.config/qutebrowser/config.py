@@ -19,6 +19,13 @@ c.fonts.default_family = "monospace"
 
 c.hints.chars = "arstgneio"  # colemak dh
 
+c.url.default_page = "https://www.google.com"
+c.url.searchengines = {
+    "DEFAULT": "https://www.google.com/search?udm=14&q={}",
+    "g": "https://www.google.com/search?udm=14&q={}",
+    "y": "https://www.youtube.com/results?search_query={}",
+}
+
 config.bind("o", "emacs '(qutebrowser-launcher)'")
 config.bind("O", "emacs '(qutebrowser-launcher-tab)'")
 config.bind("wo", "emacs '(qutebrowser-launcher-window)'")
