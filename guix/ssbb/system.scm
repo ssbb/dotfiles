@@ -178,6 +178,8 @@
 
       (service tlp-service-type
                (tlp-configuration
+                (start-charge-thresh-bat0 75)
+                (stop-charge-thresh-bat0 80)
                 (cpu-energy-perf-policy-on-ac "balance_performance")
                 (cpu-energy-perf-policy-on-bat "balance_power")))
 
