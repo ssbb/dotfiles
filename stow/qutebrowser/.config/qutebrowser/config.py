@@ -2,7 +2,7 @@ config.load_autoconfig(False)
 
 c.qt.args = [
     "ignore-gpu-blocklist",
-    "enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecodeLinuxGL"
+    "enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecodeLinuxGL",
 ]
 
 c.editor.command = ["emacsclient", "+{line}:{column}", "{file}"]

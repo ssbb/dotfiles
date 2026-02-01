@@ -52,14 +52,18 @@
                    fontconfig-minimal-custom
                    font-iosevka-curly
                    font-nerd-symbols
+                   font-microsoft-web-core-fonts
                    font-google-noto
                    font-google-noto-emoji
+                   font-google-noto-serif-cjk
+                   font-google-noto-sans-cjk
+                   font-google-roboto
                    font-liberation
                    font-awesome
-                   font-apple-sf-pro
-                   font-apple-new-york
-                   font-apple-symbols
-                   font-apple-color-emoji
+                   ;; font-apple-sf-pro
+                   ;; font-apple-new-york
+                   ;; font-apple-symbols
+                   ;; font-apple-color-emoji
                    ncurses ;; vterm shell integration uses tput from ncurses
                    xrandr
                    xrdb
@@ -110,7 +114,6 @@
                       home-environment-variables-service-type
                       '(("PATH" . "$HOME/.local/bin:$PATH")
                         ("FREETYPE_PROPERTIES" . "truetype:interpreter-version=40")
-                        ;; ("FREETYPE_PROPERTIES" . "truetype:interpreter-version=40 cff:no-stem-darkening=0 autofitter:no-stem-darkening=0")
                         ("XDG_SESSION_TYPE" . "x11")
                         ("XDG_CURRENT_DESKTOP" . "exwm")
                         ("XDG_SESSION_DESKTOP" . "exwm")))
@@ -127,15 +130,11 @@
 
       (simple-service 'additional-fonts-service
                       home-fontconfig-service-type
-                      (list (font-alias "serif" '("New York" "Apple Color Emoji"))
-                            (font-alias "ui-serif" '("New York"))
-                            (font-alias "sans-serif" '("SF Pro Text" "Apple Color Emoji"))
-                            (font-alias "ui-sans-serif" '("SF Pro Display"))
-                            (font-alias "monospace" '("Iosevka Curly"))
-                            (font-alias "ui-monospace" '("Iosevka Curly"))
-                            (font-alias "-apple-system" '("SF Pro Text"))
-                            (font-alias "system-ui" '("SF Pro Text"))
-                            (font-alias "emoji" '("Apple Color Emoji"))
+                      (list (font-alias "serif" '("Noto Serif" "Noto Color Emoji" "Noto Emoji"))
+                            (font-alias "sans-serif" '("Noto Sans" "Noto Color Emoji" "Noto Emoji"))
+                            (font-alias "sans" '("Noto Sans" "Noto Color Emoji" "Noto Emoji"))
+                            (font-alias "monospace" '("Iosevka Curly" "Noto Mono" "Noto Color Emoji" "Noto Emoji"))
+                            (font-alias "mono" '("Iosevka Curly" "Noto Mono" "Noto Color Emoji" "Noto Emoji"))
 
                             `(match (@ (target "font"))
                                ,(font-edit "embeddedbitmap" #f)
