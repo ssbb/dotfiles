@@ -8,6 +8,7 @@ xdg-user-dirs &
 redshift &
 
 xset s 300
+xset dpms 300 300 300
 
 XSECURELOCK_FONT='monospace' XSECURELOCK_PASSWORD_PROMPT=asterisks XSECURELOCK_SHOW_DATETIME=1 XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0 xss-lock -l -- xsecurelock &
 
