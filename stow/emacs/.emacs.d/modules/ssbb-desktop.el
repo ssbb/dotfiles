@@ -49,7 +49,7 @@
 (defun ssbb/lock-screen ()
   "Lock the screen via xset."
   (interactive)
-  (start-process "lock" nil "xset" "s" "activate"))
+  (start-process "lock" nil "loginctl" "lock-session"))
 
 (use-package exwm
   :config
