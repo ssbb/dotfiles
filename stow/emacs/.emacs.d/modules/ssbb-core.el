@@ -17,6 +17,9 @@
 (indent-tabs-mode nil)
 (savehist-mode)
 
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets
+      uniquify-min-dir-content 2)
+
 (use-package recentf
   :custom
   (recentf-exclude (list "/tmp/" "/scp:" "/ssh:" "/sudo:" "COMMIT_EDITMSG"))
