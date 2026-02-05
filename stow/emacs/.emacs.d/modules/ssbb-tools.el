@@ -1,4 +1,4 @@
-;;; ssbb-tools.el --- Tools configuration -*- lexical-binding: t -*-
+;; ssbb-tools.el --- Tools configuration -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -74,33 +74,26 @@
     (quit-window t)))
 
 (use-package diredfl
-  :hook ((dired-mode . diredfl-mode)
-         (dirvish-directory-view-mode . diredfl-mode))
+  :hook ((dired-mode . diredfl-mode))
   :config
   (set-face-attribute 'diredfl-dir-name nil :bold t))
 
-(use-package dirvish
-  :bind (("C-c f" . dirvish)
-         ("C-c b" . dirvish-side)
-         :map dirvish-mode-map
-         ("?" . dirvish-dispatch)
-         ("N" . dirvish-narrow)
-         ("TAB" . dirvish-subtree-toggle)
-         (";" . dired-up-directory))
-  :init
-  (dirvish-override-dired-mode)
+(use-package dired-preview
   :custom
-  (dirvish-side-width 50)
+  (dired-preview-delay 0.7)
+  (dired-preview-ignored-extensions-regexp
+   (concat "\\."
+           "\\(gz\\|"
+           "zst\\|"
+           "tar\\|"
+           "xz\\|"
+           "rar\\|"
+           "zip\\|"
+           "iso\\|"
+           "epub"
+           "\\)"))
   :config
-  (setq dirvish-mode-line-format
-        '(:left (sort symlink) :right (omit yank index)))
-  (setq dirvish-attributes
-        '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
-        dirvish-side-attributes
-        '(vc-state nerd-icons collapse file-size))
-  (setq dirvish-large-directory-threshold 20000)
-
-  (dirvish-side-follow-mode))
+  (dired-preview-global-mode))
 
 (use-package wgrep
   :custom
