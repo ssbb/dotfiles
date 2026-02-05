@@ -9,6 +9,8 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+(setq package-install-upgrade-built-in t)
+
 (unless (bound-and-true-p package--initialized)
   (setq package-enable-at-startup nil)
   (package-initialize))

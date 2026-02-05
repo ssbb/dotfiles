@@ -121,7 +121,15 @@ If ‘apheleia-formatter’ is set explicitly, do nothing. Intended for
                (eglot-server-capable :documentFormattingProvider))
       (setq-local apheleia-formatter 'eglot)))
 
-  (add-hook 'eglot-managed-mode-hook #'ssbb/apheleia-prefer-eglot-h))
+  (add-hook 'eglot-managed-mode-hook #'ssbb/apheleia-prefer-eglot-h)
+
+  (defun my/set-elixir-formatter ()
+    (setq-local apheleia-formatter 'mix-format))
+
+  ;; Elixir LSPs recompile frequently, causing formatting hangs.
+  ;; Since they just proxy to `mix format`, skip the extra layer.
+  (add-hook 'elixir-ts-mode-hook #'my/set-elixir-formatter)
+  (add-hook 'heex-ts-mode-hook #'my/set-elixir-formatter))
 
 ;; Tree-sitter
 (use-package treesit
@@ -163,7 +171,10 @@ If ‘apheleia-formatter’ is set explicitly, do nothing. Intended for
   :hook (eglot-managed-mode . yas-minor-mode))
 
 (use-package eglot
+  :ensure t
   :hook (elixir-ts-mode . eglot-ensure)
+  :custom
+  (eglot-code-action-indicator "●")
   :config
   (add-to-list 'eglot-server-programs
                '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio"))))
@@ -185,7 +196,7 @@ If ‘apheleia-formatter’ is set explicitly, do nothing. Intended for
         (apply orig-fun args))))
 
 
-  (advice-add 'eldoc-box--eldoc-message-function :around #'ssbb/eldoc-box-skip-keywords))
+(advice-add 'eldoc-box--eldoc-message-function :around #'ssbb/eldoc-box-skip-keywords))
 
 (provide 'ssbb-prog)
 ;;; ssbb-prog.el ends here
