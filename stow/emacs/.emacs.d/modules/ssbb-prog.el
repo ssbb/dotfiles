@@ -74,11 +74,10 @@
   :hook ((js-ts-mode . apheleia-mode)
          (c-ts-mode . apheleia-mode)
          (elm-mode . apheleia-mode)
-         (dts-mode . apheleia-mode))
+         (dts-mode . apheleia-mode)
+         (elixir-ts-mode . apheleia-mode)
+         (heex-ts-mode . apheleia-mode))
   :config
-  ;; (add-to-list 'apheleia-mode-alist '(heex-ts-mode . mix-format))
-  ;; (add-to-list 'apheleia-mode-alist '(dts-mode . clang-format))
-
   ;; See https://github.com/raxod502/apheleia/issues/30
   (defun ssbb/fix-apheleia-project-dir (orig-fn &rest args)
     (let ((project (project-current)))
@@ -97,7 +96,32 @@
         nil
       (apply orig-fn old-buffer new-buffer rest)))
 
-  (advice-add 'apheleia--create-rcs-patch :around #'ssbb/fix-apheleia-accidental-deletion))
+  (advice-add 'apheleia--create-rcs-patch :around #'ssbb/fix-apheleia-accidental-deletion)
+
+  (cl-defun apheleia-indent-eglot-managed-buffer
+      (&key buffer scratch callback &allow-other-keys)
+    "Copy BUFFER to SCRATCH, then format scratch, then call CALLBACK."
+    (with-current-buffer scratch
+      (setq-local eglot--cached-server
+                  (with-current-buffer buffer
+                    (eglot-current-server)))
+      (let ((buffer-file-name (buffer-local-value 'buffer-file-name buffer)))
+        (eglot-format-buffer))
+      (funcall callback)))
+
+  (add-to-list 'apheleia-formatters
+               '(eglot . apheleia-indent-eglot-managed-buffer))
+
+  (defun ssbb/apheleia-prefer-eglot-h ()
+    "Hook to prefer LSP-based formatting when available.
+If ‘apheleia-formatter’ is set explicitly, do nothing. Intended for
+‘eglot-managed-mode-hook’."
+    (when (and (null apheleia-formatter)
+               (eglot-managed-p)
+               (eglot-server-capable :documentFormattingProvider))
+      (setq-local apheleia-formatter 'eglot)))
+
+  (add-hook 'eglot-managed-mode-hook #'ssbb/apheleia-prefer-eglot-h))
 
 ;; Tree-sitter
 (use-package treesit
@@ -139,19 +163,10 @@
   :hook (eglot-managed-mode . yas-minor-mode))
 
 (use-package eglot
-  :hook ((elixir-ts-mode . eglot-ensure)
-         (eglot-managed-mode . ssbb/setup-eglot-buffer))
+  :hook (elixir-ts-mode . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs
-               '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio")))
-
-  (defun ssbb/eglot-format-buffer ()
-    ;; Server can be disabled already
-    (when (eglot-managed-p)
-      (eglot-format-buffer)))
-
-  (defun ssbb/setup-eglot-buffer ()
-    (add-hook 'before-save-hook #'ssbb/eglot-format-buffer nil t)))
+               '((elixir-mode elixir-ts-mode heex-ts-mode) . ("expert-lsp" "--stdio"))))
 
 (use-package eldoc
   :ensure nil
