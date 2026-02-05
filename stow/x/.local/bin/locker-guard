@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Fullscreen window titles that should inhibit locking
+FULLSCREEN_INHIBIT_TITLES=(
+    "YouTube"
+)
+
+check_audio() {
+    pactl list sink-inputs 2>/dev/null | grep -q "Corked: no"
+}
+
+check_fullscreen() {
+    id=$(xdotool getactivewindow 2>/dev/null) || return 1
+
+    # Check if fullscreen
+    xprop -id "$id" _NET_WM_STATE 2>/dev/null | grep -q "FULLSCREEN" || return 1
+
+    # Check title
+    title=$(xdotool getwindowname "$id" 2>/dev/null)
+    for pattern in "${FULLSCREEN_INHIBIT_TITLES[@]}"; do
+        if echo "$title" | grep -qi "$pattern"; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+check_audio && exit 1
+check_fullscreen && exit 1
+
+exec "$@"
