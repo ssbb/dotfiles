@@ -104,6 +104,13 @@
 ;;   :ensure nil
 ;;   :defer t)
 
+(use-package pdf-tools
+  :ensure nil
+  :magic ("%PDF" . pdf-view-mode)
+  :hook (pdf-view-mode . pdf-view-roll-minor-mode)
+  :config
+  (pdf-tools-install t))
+
 (use-package transmission)
 
 (provide 'ssbb-tools)

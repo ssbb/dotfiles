@@ -42,6 +42,7 @@
                    emacs-vterm
                    emacs-multi-vterm
                    emacs-exwm
+                   emacs-pdf-tools
                    xauth ;; used by emacs-xelb to get auth info
                    gnupg
                    polkit-gnome
